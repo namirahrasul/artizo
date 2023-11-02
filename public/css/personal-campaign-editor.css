@@ -1,0 +1,102 @@
+@import 'home.css';
+
+      input[type="submit"] {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #555;
+    }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #6a5050;
+        border-radius: 5px;
+    }
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding-top: 80px;
+         background-color: #163d7b /* Optional: Adding a background color to the margin area */
+        }
+
+    .content {
+            background-color: #ffffff; /* Optional: Adding a background color to the content area */
+            padding: 20px; /* Add padding to create space between content and margin */
+        }
+    .hed{
+      text-align: left;
+      color: rgba(21, 44, 176, 0.89) ;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+
+    .subhed{
+      color: rgb(17, 115, 171);
+      font-weight: bold;
+    }
+
+    .base{
+      color: rgb(3, 3, 88);
+      text-align: center;
+      font-size: 40px;
+      font-weight: bold;
+    }
+.star{
+  color: red;
+  
+}
+    .basicsss
+    {
+      
+      color: rgb(30, 103, 127);
+      text-align: center;
+      font-size: 40px;
+      font-weight: bold;
+    }
+
+    .pclass{
+            color: rgb(96, 156, 206);
+            font-size: large;
+            font-weight: bold;
+        }
+    .imp{
+      text-align: left;
+      color: rgb(12, 149, 113) ;
+      font-size: 25px;
+      font-weight: bold;
+    }

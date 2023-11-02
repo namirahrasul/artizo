@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('head.ejs', { title: 'Gig' , stylesheet: '/css/view-prelaunch.css' }) %>
+
+  <body>
+
+    <%- include('navbar.ejs', { user: user }) %>
+      <div id="app">
+        <div class="bg-dark text-body p-5 mt-lg-4" style="height:30rem;">
+          <div class="container p-5  mb-1" style="height:12rem;">
+            <div class="row justify-content-between align-items-center">
+              <div class="col-8 offset-2">
+                <h1 class="text-center  fw-bold" id="campaign-title">
+                  <%=gig.title%>
+                </h1>
+                <p class="d-none" id="campid">
+                  <%=gig.gig_id%>
+                </p>
+              </div>
+              <div class="col-2 text-end">
+                <div class=" d-flex">
+                <% if(user) {%>
+                  <button id="goToDonationPage" class="btn btn-success btn-lg me-4">Submit Offer</button>
+                  <button id="followButton" class="btn btn-warning btn-lg " @click="toggleFollow">{{ isFollowing ?
+                    'Unfollow' : 'Follow' }}</button>
+                    <% } %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class=" rounded bg-white p-lg-4 mt-lg-4 " style="height:12rem;">
+            <div class="container p-2 ">
+              <div class="row justify-content-between">
+                <div class="col-2">
+                  <p class="fs-3">Tk: <%=gig.hourly_rate%> / hour</p>
+                </div>
+                <div class="col-2">
+                  <p class="fs-3">
+                    <%=gig.no_followers%> Followers
+                  </p>
+                </div>
+                <div class="col-2">
+                  <p class="fs-3">
+                    <%=gig.no_customers%> Customers
+                  </p>
+                </div>
+                <div class="col-2  align-content-end">
+                  <p class="fs-3">
+                    Rating: <%=gig.rating%>
+                  </p>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="col-1">
+                  <img class="img-fluid rounded-circle p-2" src="/uploads/<%=gig.profile_img%>" alt="profile-image" />
+                </div>
+                <div class="col-2">
+                  <p class="fs-4 mb-3 text-black fw-bold lead">
+                    <%=gig.name%>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="p-4  bg-body">
+          <div class="container-fluid">
+            <div class="row p-3 ">
+              <div class="col-lg-6 p-5" style="padding-top: 20rem">
+
+                <p class="fs-4 mb-3 text-black lead">
+                  <%=gig.description%>
+                </p>
+              </div>
+
+              <div class="col-lg-6">
+                <img class="img-fluid align-content-end pb-0" src="/uploads/<%=gig.gig_img%>" alt="main-image" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <% if(gig.gig_video) { %>
+          <div class="p-5 bg-warning h-75 d-flex align-items-center justify-content-center">
+            <div class="container row">
+              <h2 class="text-black display-4 pb-4 text-center">Watch to Learn More</h2>
+              <div class="ratio ratio-16x9 mb-lg-5">
+                <iframe src="<%=gig.gig_video%>" title="YouTube video" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+          <% } %>
+
+
+            <div class="container-fluid p-4 bg-danger">
+              <div class="d-flex flex-column align-items-center justify-content-center">
+                <h2 class="text-white display-4 pb-2">About Me</h2>
+                <div class=" rounded container-fluid bg-white p-lg-4 mt-lg-4 ">
+                  <div class="container-fluid p-3 ">
+                    <% if(gig.bio_description) { %>
+                      <div class="row">
+                        <%=gig.bio_description%>
+                      </div>
+                      <% } %>
+                        <% if(gig.work_description) { %>
+                          <div class="row">
+                            <%=gig.work_description%>
+                          </div>
+                          <% } %>
+                            <div class="row">
+                              <div class="col-6">
+                                <% if(gig.occupation){%>
+                                  <p>Occupation: <%=gig.occupation%>
+                                  </p>
+                                  <% } %>
+                                    <% if(gig.years_of_experience){ %>
+                                      <p>Years of Experience: <%=gig.years_of_experience%>
+                                      </p>
+                                      <% } %>
+                              </div>
+                              <div class="col-6">
+                                <% if(gig.institute_name && gig.institute_country){ %>
+                                  <p>Studied at: <%=gig.institute_name%>, <%=gig.institute_country%>
+                                  </p>
+                                  <% } %>
+                                    <% if(gig.graduation_year){ %>
+                                      <p>Graduated in: <%=gig.graduation_year%>
+                                      </p>
+                                      <% } %>
+                                        <% if(gig.study_field){ %>
+                                          <p>Field of study: <%=gig.study_field%>
+                                          </p>
+                                          <% } %>
+
+                              </div>
+
+                            </div>
+                            <% if (gig.institute_certificate) { %>
+                              <div class="row align-items-center">
+                                <h3><a href="/uploads/<%= gig.institute_certificate %>" target="_blank">Institutional
+                                    Certificate</a></h3>
+                              </div>
+                              <% } else { %>
+                                <h3 class="d-none"></h3>
+
+                                <% } %>
+                                  <% if (gig.resume) { %>
+                                    <div class="row align-items-center">
+                                      <h3><a href="/uploads/<%= gig.resume %>" target="_blank">My Resume</a></h3>
+                                    </div>
+                                    <% } else { %>
+                                      <h3 class="d-none"></h3>
+
+                                      <% } %>
+
+                                        <% if (gig.certifications_achievements) { %>
+                                          <div class="row align-items-center">
+                                            <h3><a href="/uploads/<%= gig.certifications_achievements%>"
+                                                target="_blank"> My Certifications & Achievements</a></h3>
+                                          </div>
+                                          <% } else { %>
+                                            <h3 class="d-none"></h3>
+                                            <% } %>
+
+                                              <% if (gig.testimonials) { %>
+                                                <div class="row align-items-center">
+                                                  <h3><a href="/uploads/<%= gig.testimonials%>" target="_blank">Customer
+                                                      Testimonials</a></h3>
+                                                </div>
+                                                <% } else { %>
+                                                  <h3 class="d-none"></h3>
+                                                  <% } %>
+
+
+                                                    <% if (gig.previous_work) { %>
+                                                      <div class="row align-items-center">
+                                                        <h3><a href="/uploads/<%= gig.previous_work%>"
+                                                            target="_blank">My Previous Works</a></h3>
+                                                      </div>
+                                                      <% } else { %>
+                                                        <h3 class="d-none"></h3>
+                                                        <% } %>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="container-fluid p-5 w-75">
+              <div class="row welcome text-sm-start align-items-center">
+                <div class="col-6">
+                  <h2 class="display-4 pb-4 text-black-50">
+                    Contact Us
+                  </h2>
+                </div>
+                <div class="col-6 d-flex justify-content-center align-items-center">
+                  <a href="gig.fb_url" class="btn btn-danger btn-lg mx-3">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                  <a href="gig.twitter_url" class="btn btn-danger btn-lg mx-3">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                  <a href="gig.yt_url" class="btn btn-danger btn-lg mx-3">
+                    <i class="fab fa-youtube"></i>
+                  </a>
+                  <a href="gig.website_url" class="btn btn-danger btn-lg mx-3">
+                    <i class="fas fa-globe"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+      </div>
+      <%- include('footer.ejs') %>
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+          integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+          crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+          crossorigin="anonymous"></script>
+        <script>
+          const hourly_rate = parseFloat('<%= gig.hourly_rate %>');
+          const gig_id = '<%= gig.gig_id %>';
+          const amountRaised = 5000;
+          new Vue({
+            el: '#app',
+            data: {
+              isFollowing: false,
+              hourlyRate: hourly_rate,// Set the initial amount raised here
+              following: gig_id,
+            },
+            methods: {
+              toggleFollow() {
+                this.isFollowing = !this.isFollowing
+                this.sendData();
+              },
+              sendData() {
+                // Use the inputValue from the data
+                const data = { test: this.following };
+
+                fetch("/follow/submit", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(data),
+                })
+                  .then((response) => response.json())
+                  // .then((responseData) => {
+                  //   console.log(responseData);
+                  // })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+              },
+            },
+            computed: {
+
+            },
+          })
+
+        </script>
+
+
+
+  </body>
+
+</html>
