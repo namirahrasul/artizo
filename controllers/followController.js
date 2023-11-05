@@ -1,7 +1,8 @@
 const express = require('express')
 
 const sessionStore = require('../models/sessionStore') // Import the sessionStore setup
-const router= express.Router()
+const router = express.Router()
+const profileModel = require('../models/profileModel.js')
 
 // Controller function to get a specific record by id
 const followModel = require('../models/followModel')
@@ -73,7 +74,8 @@ async function getHiredGigsProfile(req, res) {
 }
 
 async function getProfile(req, res) {
-  res.render('profile', { user: req.session.user });
+  const user = await profileModel.getProfile(req.session.user.email)
+  res.render('profile', { user: user });
 }
 async function editProfile(req, res) {
   res.render('edit-profile', { user: req.session.user });

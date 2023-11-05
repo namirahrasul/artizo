@@ -4,13 +4,13 @@ const sessionStore = require('../models/sessionStore') // Import the sessionStor
 const router = express.Router()
 
 // Controller function to get a specific record by id
-const projectModel = require('../models/gigModel')
+const gigModel = require('../models/gigModel')
 
 router.post('/search', async (req, res) => {
     try {
         // console.log(req.body)
         const { search } = req.body
-        const campaigns = await projectModel.searchCampaign(search);
+        const campaigns = await gigModel.searchCampaign(search);
         // console.log(campaigns)
         res.render('browse-campaigns', {
             user: req.session.user,

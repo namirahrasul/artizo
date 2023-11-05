@@ -13,7 +13,7 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-6">
-            <form id="user" action="/file/submit-prelaunch" method="post" enctype="multipart/form-data">
+            <form id="user" action="/profile/submit" method="post" enctype="multipart/form-data">
               <hr />
               <p class="base"><b>Profile </b></p>
               <hr />
@@ -23,29 +23,25 @@
               <hr />
               <p class="para"></p>
               <div class="col-md-50 position-relative">
-                <label class="hed" for="campaignTitle">Name</label><label class="star hed">*</label>
+                <label class="hed" for="name">Name</label>
 
-                <input type="text" class="form-control" id="title" name="title"
-                  placeholder="What is the title of your project?" required />
+                <input type="text" class="form-control" id="name" name="name" />
 
                 <br />
-                <label class="hed" for="description">Email</label><label class="star hed">*</label>
+                <label class="hed" for="new_email">Email</label>
                 <br>
-                <input name="city" id="description" required />
+                <input name="new_email" id="new_email" />
                 <br />
                 <br />
 
-
-                <label class="hed" for="campaignTitle">Password</label>
-
-                <input type="password" class="form-control" id="tagline" name="tagline" />
-
-                <br>
-
-
-                <label class="hed" for="description">Description</label><label class="star hed">*</label> <br>
+                <label class="hed" for="bio_description">Description</label> <br>
                 <p><small>Tell us about you.</small></p><br>
-                <textarea name="description" id="description" cols="50" rows="6" required></textarea>
+                <textarea name="bio_description" id="bio_description" cols="50" rows="6"></textarea>
+                <br />
+                <br />
+                <label class="hed" for="resume">Profile Picture</label>
+                <br>
+                <input type="file" name="file1" id="profile_img" />
                 <br />
                 <br />
               </div>
@@ -57,65 +53,57 @@
               </p>
               <div class="col-md-50 position-relative">
 
-                <label class="hed" for="description">Occupation</label><label class="star hed">*</label>
+                <label class="hed" for="occupation">Occupation</label>
                 <br>
-                <input type="text" name="city" id="description" required />
+                <input type="text" name="occupation" id="occupation" />
                 <br />
                 <br />
-                <label class="hed" for="description">Years of Experience</label><label class="star hed">*</label>
+                <label class="hed" for="years_of_experience">Years of Experience</label>
                 <br>
-                <input type="number" name="city" id="description" required />
+                <input type="number" name="years_of_experience" id="years_of_experience" />
                 <br />
                 <br />
-                <label class="hed" for="description">Resume</label><label class="star hed">*</label>
+                <label class="hed" for="resume">Resume</label>
                 <br>
-                <input type="file" name="city" id="description" required />
+                <input type="file" name="file2" id="resume" />
                 <br />
                 <br />
 
-                <label class="hed" for="description">Description</label> <br>
+                <label class="hed" for="work_description">Description of your Work</label> <br>
                 <br>
-                <textarea name="description" id="description" cols="50" rows="6" required></textarea>
+                <textarea name="work_description" id="work_description" cols="50" rows="6"></textarea>
                 <br />
                 <br />
               </div>
-
-
-
-
-
-
-
-
               <p class="base">Education</p>
               <hr />
               <p>
                 <b>Tell us about your highest level of education</b>
               </p>
               <div class="col-md-50 position-relative">
-                <label class="hed" for="description">Name of Educational Institute</label>
+                <label class="hed" for="institute_name">Name of Educational Institute</label>
                 <br>
-                <input type="text" name="city" id="description" />
+                <input type="text" name="institute_name" id="institute_name" />
                 <br />
                 <br />
-                <label class="hed" for="description">Country of Educational Institute</label>
+                <label class="hed" for="institute_country">Country of Educational Institute</label>
                 <br>
-                <input type="text" name="city" id="description" />
+                <input type="text" name="institute_country" id="institute_country" />
                 <br />
                 <br />
-                <label class="hed" for="description">Year of Graduation</label>
+                <label class="hed" for="graduation_year">Year of Graduation</label>
                 <br>
-                <input type="number" name="city" id="description" />
+                <input type="number" name="graduation_year" id="graduation_year" />
                 <br />
                 <br />
-                <label class="hed" for="description">Field of study</label>
+                <label class="hed" for="study_field">Field of study</label>
                 <br>
-                <input type="text" name="city" id="description" />
+                <input type="text" name="study_field" id="study_field" />
                 <br />
                 <br />
-                <label class="hed" for="description">Relevant Certificates</label>
+                <label class="hed" for="institute_certificate">Relevant Certificates</label>
                 <br>
-                <input type="file" name="city" id="description" />
+                <input type="file" name="file3" id="institute_certificate" />
                 <br />
                 <br />
               </div>
@@ -132,25 +120,25 @@
 
               <br />
               <div class="col-md-50 position-relative">
-                <label class="hed" for="campaignTitle">Facebook URL</label>
+                <label class="hed" for="fb_url">Facebook URL</label>
                 <input type="text" class="form-control" id="fb_url" name="fb_url"
                   placeholder="https://www.facebook.com/projectName" />
               </div>
               <br />
               <div class="col-md-50 position-relative">
-                <label class="hed" for="campaignTitle">Twitter URL</label>
+                <label class="hed" for="twitter_url">Twitter URL</label>
                 <input type="text" class="form-control" id="twitter_url" name="twitter_url"
                   placeholder="https://www.twitter.com/projectName" />
               </div>
               <br />
               <div class="col-md-50 position-relative">
-                <label class="hed" for="campaignTitle">YouTube URL</label>
+                <label class="hed" for="yt_url">YouTube URL</label>
                 <input type="text" class="form-control" id="yt_url" name="yt_url"
                   placeholder="https://www.youtube.com/projectName" />
               </div>
               <br />
               <div class="col-md-50 position-relative">
-                <label class="hed" for="campaignTitle">Website URL</label>
+                <label class="hed" for="website_url">Website URL</label>
                 <input type="text" class="form-control" id="website_url" name="website_url"
                   placeholder="https://www.projectName.com/" />
               </div>

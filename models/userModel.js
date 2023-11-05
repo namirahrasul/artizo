@@ -195,6 +195,8 @@ async function changePassword(email, password) {
   })
 }
 
+
+
 module.exports = {
   storeVerificationToken,
   calculateExpirationTimestamp,

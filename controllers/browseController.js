@@ -4,12 +4,12 @@ const sessionStore = require('../models/sessionStore') // Import the sessionStor
 const router = express.Router()
 
 // Controller function to get a specific record by id
-const projectModel = require('../models/gigModel')
+const gigModel = require('../models/gigModel')
 
 async function sortByLowestHourlyRate(req, res) {
   try {
 
-    const gigs = await projectModel.sortGigHourlyRate();
+    const gigs = await gigModel.sortGigHourlyRate();
     console.log("hourly rate lowest gigs", gigs)
     res.render('browse-gigs', {
       user: req.session.user,
@@ -23,7 +23,7 @@ async function sortByLowestHourlyRate(req, res) {
 }
 async function sortByMostFollowers(req, res) {
   try {
-    const gigs = await projectModel.sortGigFollowers();
+    const gigs = await gigModel.sortGigFollowers();
     console.log("most follwers gigs", gigs)
     res.render('browse-gigs', {
       user: req.session.user,
@@ -37,7 +37,7 @@ async function sortByMostFollowers(req, res) {
 }
 async function sortByMostCustomers(req, res) {
   try {
-    const gigs = await projectModel.sortGigCustomers();
+    const gigs = await gigModel.sortGigCustomers();
     console.log("most customers gigs", gigs)
     res.render('browse-campaigns', {
       user: req.session.user,
@@ -51,7 +51,7 @@ async function sortByMostCustomers(req, res) {
 }
 async function sortByHighestRating(req, res) {
   try {
-    const gigs = await projectModel.sortGigRating();
+    const gigs = await gigModel.sortGigRating();
     console.log("highest rating gigs", gigs)
     res.render('browse-campaigns', {
       user: req.session.user,
@@ -103,9 +103,9 @@ async function filterByCategory(req, res) {
     var maxFollowers;
     var maxAmountRaised;
     var maxBackers;
-    const maxFollowersResult = await projectModel.getMaxFollowers();
-    const maxAmountRaisedResult = await projectModel.getMaxAmountRaised();
-    const maxBackersResult = await projectModel.getMaxBackers();
+    const maxFollowersResult = await gigModel.getMaxFollowers();
+    const maxAmountRaisedResult = await gigModel.getMaxAmountRaised();
+    const maxBackersResult = await gigModel.getMaxBackers();
     // console.log("maxFollowerResult ", maxFollowersResult, " maxAmountRaisedResult ",maxAmountRaisedResult," maxBackersResult ",maxBackersResult)
     // Handle "Below 500" and "Above 1000" options differently
     if (minFollowers === 0) {
@@ -144,9 +144,9 @@ async function filterByCategory(req, res) {
     console.log("minFollowers:", minFollowers, "maxFollowers:", maxFollowers, "minAmountRaised:", minAmountRaised, "maxAmountRaised:", maxAmountRaised, "minBackers:", minBackers, "maxBackers:", maxBackers);
     // var campaigns;
     // if (is_business && is_personal && is_prelaunch)
-    //   campaigns = await projectModel.filterAllCategory(minFollowers, maxFollowers, minAmountRaised, maxAmountRaised, minBackers, maxBackers)
+    //   campaigns = await gigModel.filterAllCategory(minFollowers, maxFollowers, minAmountRaised, maxAmountRaised, minBackers, maxBackers)
     // else
-    const campaigns = await projectModel.filterCampaignCategory(is_prelaunch, is_personal, is_business, minFollowers, maxFollowers, minAmountRaised, maxAmountRaised, minBackers, maxBackers);
+    const campaigns = await gigModel.filterCampaignCategory(is_prelaunch, is_personal, is_business, minFollowers, maxFollowers, minAmountRaised, maxAmountRaised, minBackers, maxBackers);
     console.log("campaigns", campaigns)
     res.render('browse-campaigns', {
       user: req.session.user,

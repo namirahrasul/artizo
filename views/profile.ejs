@@ -85,12 +85,15 @@
       </div>
       <% if (user.institute_certificate) { %>
        <div class="row">
-        <h3><a href="/uploads/<%= user.institute_certificate %>" target="_blank">Institutional
-          Certificate</a></h3>
+        <h4 class="col-3">Institutional Certificate: </h4>
+        <p><a href="/uploads/<%= user.institute_certificate %>" target="_blank">My
+          Certificate</a></p>
        </div>
        <% } else { %>
-        <h3 class="row">No institutional certificates added</h3>
-
+          <div class="row">
+            <h4 class="col-3">Institutional Certificate: </h4>
+            <p>No institutional certificates added</p>
+            </div>
         <% } %>
          <div class="row">
           <h4 class="col-3">Work Description: </h4>
@@ -112,12 +115,15 @@
           </p>
          </div>
          <% if (user.resume) { %>
-          <div class="row align-items-center">
-           <h3><a href="/uploads/<%= user.resume %>" target="_blank">Resume</a></h3>
+          <div class="row">
+            <h4 class="col-3">Resume: </h4>
+            <p><a href="/uploads/<%= user.resume %>" target="_blank">Resume</a></p>
           </div>
           <% } else { %>
-           <h3 class="row">No resumes added</h3>
-
+          <div class="row">
+            <h4 class="col-3">Resume: </h4>
+            <p>No resumes added</p>
+          </div>
            <% } %>
             <div class="row">
              <h4 class="col-3">Facebook URL: </h4>

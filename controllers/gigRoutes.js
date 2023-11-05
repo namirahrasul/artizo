@@ -30,7 +30,7 @@ router.post(
       { name: 'file4', maxCount: 1 },
     ]),
   ],
-  (req, res) => {
+  async (req, res) => {
     // res.send("Hello World");
     console.log(req.body)
     console.log(req.files)
@@ -58,7 +58,7 @@ router.post(
 
     // const imagePath = req.file.path
     // Insert the data into the MySQL table
-    fileModel.insertGig(
+    await createModel.insertGig(
       req,
       email,
       title,
@@ -73,7 +73,7 @@ router.post(
       rocket,
       nagad,
       upay,
-      (err, result) => {
+      async (err, result) => {
         if (err) {
           console.error('Error inserting data:', err)
           return res.status(500).send('Error submitting the form.')
@@ -81,7 +81,7 @@ router.post(
 
         }
         const gig_id = result.insertId
-        fileModel.insertDoc(
+        await createModel.insertDoc(
           req,
           email,
           gig_id,

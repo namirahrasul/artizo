@@ -10,6 +10,7 @@ const userModel = require('../models/userModel') // Import userModel functions
 
 const followController = require('./followController')
 const followRoutes = require('./followRoutes')
+const profileRoutes = require('./profileRoutes')
 
 const path = require('path')
 // router.use("/uploads", express.static(path.join(__dirname, "../uploads")))
@@ -82,6 +83,9 @@ router.use('/auth', authController)
 router.use('/gig', gigRoutes)
 router.use('/browse', browseRoutes)
 router.use('/follow', followRoutes)
+router.use('/profile', profileRoutes)
+
+
 
 
 

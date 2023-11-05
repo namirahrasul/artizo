@@ -51,47 +51,86 @@
 
 
                 <section class="filter-section left">
-                    <form id="filter-form" action="/filter" method="get">
+                    <form id="filter-form" action="/browse/filter" method="get">
                         <br>
                         <div>
                             <input type="hidden" name="input" id="input" value="">
                             <h3 class="hed3">Category</h3>
                             <input v-model="selectedType" type="radio" id="type_prelaunch" name="type"
-                                value="prelaunch">
-                            <label for="type_prelaunch"><b>Prelaunch</b></label><br>
+                                value="graphics_and_design">
+                            <label for="graphics+and_design"><b>Graphics & Design</b></label><br>
 
-                            <input type="radio" v-model="selectedType" id="type_personal" name="type" value="personal">
-                            <label for="type_personal"><b>Personal Campaign </b></label><br>
+                            <input type="radio" v-model="selectedType" id="digital_marketing" name="type"
+                                value="digital_marketing">
+                            <label for="digital_marketing"><b>Digital Marketing</b></label><br>
 
                             <input type="radio" v-model="selectedType" id="type_business" name="type" value="business">
-                            <label for="type_business"><b>Business Campaign</b></label><br>
+                            <label for="type_business"><b>Programming & Tech</b></label><br>
+                            <input v-model="selectedType" type="radio" id="type_prelaunch" name="type"
+                                value="prelaunch">
+                            <label for="type_prelaunch"><b>Music & Audio</b></label><br>
+
+                            <input type="radio" v-model="selectedType" id="type_personal" name="type" value="personal">
+                            <label for="type_personal"><b>Video & Animation</b></label><br>
+
+                            <input type="radio" v-model="selectedType" id="type_business" name="type" value="business">
+                            <label for="type_business"><b>Writing & Translation</b></label><br>
+
+                            <input v-model="selectedType" type="radio" id="type_prelaunch" name="type"
+                                value="prelaunch">
+                            <label for="type_prelaunch"><b>Business</b></label><br>
+
+                            <input type="radio" v-model="selectedType" id="type_personal" name="type" value="personal">
+                            <label for="type_personal"><b>Lifestyle</b></label><br>
+
+                            <input type="radio" v-model="selectedType" id="type_business" name="type" value="business">
+                            <label for="type_business"><b>Data Analysis</b></label><br>
+
+                            <input type="radio" v-model="selectedType" id="type_business" name="type" value="business">
+                            <label for="type_business"><b>Photography</b></label><br>
+
+                            <input type="radio" v-model="selectedType" id="type_business" name="type" value="business">
+                            <label for="type_business"><b>Other</b></label><br>
                         </div>
 
                         <br>
                         <div>
-                            <h3 class="hed3">Number of Backers</h3>
-                            <input type="radio" v-model="selectedBackers" id="backers1" name="backers" value="0">
-                            <label for="backers1"><b>Below 500</b></label><br>
-
-                            <input type="radio" v-model="selectedBackers" id="backers2" name="backers" value="500">
-                            <label for="backers2"><b>500 - 1000</b></label><br>
-
-                            <input type="radio" v-model="selectedBackers" id="backers3" name="backers" value="1001">
-                            <label for="backers3"><b>Above 1000</b></label><br>
-                        </div>
-                        <br>
-                        <div>
-                            <h3 class="hed3">Amount Raised</h3>
+                            <h3 class="hed3">Hourly Rate</h3>
                             <input type="radio" v-model="selectedAmount" id="amount1" name="amount" value="0">
-                            <label for="amount1"><b>Below 5,000</b></label><br>
+                            <label for="amount1"><b>Below 500</b></label><br>
 
                             <input type="radio" v-model="selectedAmount" id="amount2" name="amount" value="5000">
-                            <label for="amount2"><b>5000 - 10,000</b></label><br>
+                            <label for="amount2"><b>500 - 1000</b></label><br>
 
                             <input type="radio" v-model="selectedAmount" id="amount3" name="amount" value="10001">
-                            <label for="amount3"><b>Above 10000</b></label><br>
+                            <label for="amount3"><b>Above 1000</b></label><br>
                         </div>
                         <br>
+                        <div>
+                            <h3 class="hed3">Rating</h3>
+                            <input type="radio" v-model="selectedAmount" id="amount1" name="amount" value="0">
+                            <label for="amount1"><b>Below 4 stars</b></label><br>
+
+                            <input type="radio" v-model="selectedAmount" id="amount2" name="amount" value="5000">
+                            <label for="amount2"><b>4 - 4.5 stars</b></label><br>
+
+                            <input type="radio" v-model="selectedAmount" id="amount3" name="amount" value="10001">
+                            <label for="amount3"><b>Above 4.5 stars</b></label><br>
+                        </div>
+                        <br>
+                        <div>
+                            <h3 class="hed3">Number of Customers</h3>
+                            <input type="radio" v-model="selectedBackers" id="backers1" name="backers" value="0">
+                            <label for="backers1"><b>Below 50</b></label><br>
+
+                            <input type="radio" v-model="selectedBackers" id="backers2" name="backers" value="500">
+                            <label for="backers2"><b>50 - 100</b></label><br>
+
+                            <input type="radio" v-model="selectedBackers" id="backers3" name="backers" value="1001">
+                            <label for="backers3"><b>Above 100</b></label><br>
+                        </div>
+                        <br>
+
                         <div>
                             <h3 class="hed3">Number of Followers</h3>
                             <input v-model="selectedFollowers" type="radio" id="no_followers_0" name="followers"
@@ -121,49 +160,59 @@
                     <div class="container mt-4 vh-100">
                         <div>
                             <p class="gap"></p>
-                          <% if(gigs.length==0) { %>
-                                                <p>No results found</p>
-                            <% } else {%>
+                            <% if(gigs.length==0) { %>
+                                <p>No results found</p>
+                                <% } else {%>
 
-                            <% for (let i=0; i < gigs.length; i +=3) { %>
-                                <div class="row mb-3 g-5">
-                                    <% for (let j=i; j < i + 3 && j < gigs.length; j++) { %>
+                                    <% for (let i=0; i < gigs.length; i +=3) { %>
+                                        <div class="row mb-3 g-5">
+                                            <% for (let j=i; j < i + 3 && j < gigs.length; j++) { %>
 
-                                        <div class="col-md-4 mb-lg-5 mr ">
-                                            <div class="card">
-                                                <div class="card-body d-flex flex-column justify-content-between">
-                                                    <div class="campaign-info">
-                                                        <div class="card-img-container">
-                                                            <img src="/uploads/<%= gigs[j].gig_img %>"
-                                                                alt="campaign image" class="img-fluid mb-2">
+                                                <div class="col-md-4 mb-lg-5 mr ">
+                                                    <div class="card">
+                                                        <div
+                                                            class="card-body d-flex flex-column justify-content-between">
+                                                            <div class="campaign-info">
+                                                                <div class="card-img-container">
+                                                                    <img src="/uploads/<%= gigs[j].gig_img %>"
+                                                                        alt="campaign image" class="img-fluid mb-2">
+                                                                </div>
+                                                                <h5 class="card-title fs-sm-3">
+                                                                    <%= gigs[j].title %>
+                                                                </h5>
+                                                                <br>
+                                                            </div>
+                                                            <div class="card-actions">
+
+
+
+                                                                <a href="/browse-gigs/<%= gigs[j].id %>"
+                                                                    class="btn btn-dark mb-2 mt-2">Learn More</a>
+                                                                <p class="text-center fs-sm-5">
+
+                                                                    <i class="fas fa-star"
+                                                                        style="padding-right:.2rem;"></i>
+                                                                    <%= gigs[j].rating %>/5
+                                                                        <i class="fas fa-money-bill "
+                                                                            style="padding-right:.2rem;"></i> Tk
+                                                                        <%= gigs[j].hourly_rate %> / hour
+                                                                            <i class="fas fa-users"
+                                                                                style="padding-right:.2rem;"></i>
+                                                                            <%= gigs[j].no_customers %> customers
+                                                                                <i class="fas fa-thumbs-up"
+                                                                                    style="padding-right:.2rem;"></i>
+                                                                                <%= gigs[j].no_followers %> followers
+                                                                </p>
+
+                                                            </div>
                                                         </div>
-                                                        <h5 class="card-title fs-sm-3">
-                                                            <%= gigs[j].title %>
-                                                        </h5>
-                                                        <br>
-                                                    </div>
-                                                    <div class="card-actions">
-
-
-
-                                                            <a href="/browse-gigs/<%= gigs[j].id %>"
-                                                                class="btn btn-dark mb-2 mt-2">Learn More</a>
-                                                            <p class="text-center fs-sm-5">
-                                                                <i class="fas fa-thumbs-up "
-                                                                    style="padding-right:.2rem;"></i>
-                                                                <%= gigs[j].rating %>
-                                                                <%= gigs[j].hourly_rate %>
-                                                            </p>
-
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
 
+                                                <% } %>
+                                        </div>
                                         <% } %>
-                                </div>
-                                <% } %>
-                           <% } %>
+                                            <% } %>
                         </div>
                     </div>
 
