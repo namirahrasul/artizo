@@ -153,21 +153,27 @@ router.post(
   [
     upload.fields([
       { name: 'file1', maxCount: 1 },
-      
+
     ]),
   ],
   async (req, res) => {
-   
+
     // res.send("Hello World");
     console.log("req.body ", req.body)
     console.log("req.files", req.files)
 
     const { name, email, password } = req.body;
-    
 
-  
+
+
     // Access uploaded files
-    const profile_img = req.files.file1[0].filename
+    var profile_img;
+    if (req.files.file1[0].filename === undefined) {
+      profile_img = null;
+    }
+    else {
+      profile_img = req.files.file1[0].filename;
+    }
     console.log("name", name)
     console.log("email", email)
     console.log("password", password)
@@ -185,26 +191,26 @@ router.post(
           console.error('Error inserting data:', err)
           return res.status(500).send('Error submitting the form.')
           console.log('error submitting the form')
-          
+
         }
         console.log('Data inserted successfully:', result)
-      
-    console.log("insert user result:", insertUserResult)
-    const verificationToken = uuidv4()
 
-    // Store the token in the database
-    const storeVerificationTokenResult = await userModel.storeVerificationToken(email, verificationToken)
-    console.log("storeVerificationToken result:", storeVerificationTokenResult)
+        console.log("insert user result:", insertUserResult)
+        const verificationToken = uuidv4()
 
-    // Send an email with the verification link (using nodemailer)
-    const sendVerificationEmailResult = await sendVerificationEmail(email, name, verificationToken)
-    console.log("sendVerificationEmail result:", sendVerificationEmailResult)
+        // Store the token in the database
+        const storeVerificationTokenResult = await userModel.storeVerificationToken(email, verificationToken)
+        console.log("storeVerificationToken result:", storeVerificationTokenResult)
 
-    // Redirect to a verification page or display a message
+        // Send an email with the verification link (using nodemailer)
+        const sendVerificationEmailResult = await sendVerificationEmail(email, name, verificationToken)
+        console.log("sendVerificationEmail result:", sendVerificationEmailResult)
+
+        // Redirect to a verification page or display a message
         res.redirect('/verification')
       }
     )
-  
+
   }
 )
 
