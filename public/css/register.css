@@ -42,7 +42,7 @@ header {
 }
 
 .side-image {
-  background-image: url('../images/register/signup1.svg');
+  background-image: url('../images/register/work.svg');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -141,7 +141,7 @@ img {
 }
 
 .submit:hover {
-  background: #e44014;
+  background: #5D2C3F;
   color: #fff;
 }
 

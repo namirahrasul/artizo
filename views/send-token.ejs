@@ -7,7 +7,7 @@
     <div class="wrapper bg-dark">
       <div class="container-fluid main">
 
-        <div class="row g-3" >
+        <div class="row g-1">
           <div class="col-md-6 side-image">
             <!----Image here---->
             <img src="" alt="">
@@ -15,10 +15,10 @@
 
           <div class="col-md-6 right">
             <div class="logo">
-            <img src="/images/forgot-password/logo1.png" alt="">
+            <img src="/images/forgot-password/logo.png" alt="">
             </div>
             <div class="input-box">
-              <header>Reset your password</header>
+              <header class="pp">Reset your password</header>
 
               <form id="send-token-form" action="/auth/send-token" method="post">
                 <!-- Email input -->
@@ -55,6 +55,5 @@
 
       </div>
     </div>
-    <%- include('footer.ejs') %>
  </body>
  </html>

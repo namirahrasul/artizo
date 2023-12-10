@@ -7,25 +7,29 @@
       <div class="notifcontainer">
         <div class="notifnav ">
           <ul>
-            <li>
-              <a href="#" class="notiflogo notifa">
-                <img src="/uploads/<%=user.profile_img%>" alt="">
-                <span class="notifnav-item ">Dashboard</span>
+            <li><a href="#" class="notiflogo notifa">
+                <% if (profile.profile_img){ %>
+                  <img src="/uploads/<%=profile.profile_img%>" alt="Profile">
+                  <% } else { %>
+                    <img src="/images/default.jpg" alt="Profile">
+                    <% } %>
+                      <span class="notifnav-item">DashBoard</span>
               </a>
             </li>
             <li>
               <a href="/profile" class="notifa">
-                <i class="fas fa-user"></i>
-                <span class="notifnav-item prof">Profile</span>
+                <i class="fas fa-bell"></i>
+                <span class="notifnav-item">Profile</span>
               </a>
             </li>
+          
             <li>
               <a href="/notification" class="notifa">
                 <i class="fas fa-bell"></i>
-                <span class="notifnav-item">Notification</span>
+                <span class="notifnav-item">Notifications</span>
               </a>
             </li>
-            <li><a href="/MyGigs" class="notifa">
+            <li><a href="/MyGigs" class="notifa notifa-active">
                 <i class="fas fa-thumbs-up"></i>
                 <span class="notifnav-item">My Gigs</span>
               </a></li>
@@ -33,84 +37,103 @@
                 <i class="fas fa-thumbs-up"></i>
                 <span class="notifnav-item">Followed Gigs</span>
               </a></li>
-
+          
+            <li><a href="/client-offers" class="notifa">
+                <i class="fas fa-user"></i>
+                <span class="notifnav-item">Offered Gigs</span>
+              </a></li>
+          
+            <li><a href="/running-gigs" class="notifa">
+                <i class="fas fa-user"></i>
+                <span class="notifnav-item">Running Gigs</span>
+              </a></li>
+          
             <li><a href="/HiredGigs" class="notifa">
                 <i class="fas fa-user"></i>
                 <span class="notifnav-item">Hired Gigs</span>
               </a></li>
+            <% if(user.is_admin) { %>
+              <li><a href="/unapproved-gigs" class="notifa">
+                  <i class="fas fa-users"></i>
+                  <span class="notifnav-item">Approve Gigs</span>
+                </a></li>
+              <li><a href="/reported-gigs" class="notifa">
+                  <i class="fas fa-users"></i>
+                  <span class="notifnav-item">Reported Gigs</span>
+                </a></li>
+              <li><a href="/delete-requests" class="notifa">
+                  <i class="fas fa-users"></i>
+                  <span class="notifnav-item">Delete Requests</span>
+                </a></li>
+              <li><a href="/edit-requests" class="notifa">
+                  <i class="fas fa-users"></i>
+                  <span class="notifnav-item">Edit Requests</span>
+                </a></li>
+              <li><a href="/users" class="notifa">
+                  <i class="fas fa-users"></i>
+                  <span class="notifnav-item">Users</span>
+                </a></li>
+              <li><a href="/register-admin" class="notifa">
+                  <i class="fas fa-users"></i>
+                  <span class="notifnav-item">Add Admin</span>
+                </a></li>
+              <% } %>
           </ul>
         </div>
 
-        <section class="main">
-          <div class="main-skills">
-            <div class="profile-card">
-              <h3 class="main-skills-h3">Name:</h3>
-              <h3 class="main-skills-Heda5">
-                <%= user.name %>
-              </h3>
-            </div>
-            <div class="profile-card">
-              <h3 class="main-skills-h3">Email:</h3>
-              <h3 class="main-skills-Heda5">
-                <%= user.email %>
-              </h3>
-            </div>
-          </div>
-          <section class="main-course">
-            <div class="course-box">
-              <div class="course">
-                <div class="col-md-12">
-                  <span class="data-title"><b class="boldName"><u></u>My Gigs</b></span>
-                  <% if(gigs.length==0) { %>
-                    <p>No gigs created</p>
-                    <% } else {%>
+        <div class="main-skills">
 
-                      <% for (let i=0; i < gigs.length; i +=3) { %>
-                        <div class="row mb-3 g-5">
-                          <% for (let j=i; j < i + 3 && j < gigs.length; j++) { %>
+          <div class="profile-card">
 
-                            <div class="col-md-4 mb-lg-5 mr ">
-                              <div class="card">
-                                <div class="card-body d-flex flex-column justify-content-between">
-                                  <div class="campaign-info">
-                                    <div class="card-img-container">
-                                      <img src="/uploads/<%= gigs[j].gig_img %>" alt="campaign image"
-                                        class="img-fluid mb-2">
-                                    </div>
-                                    <h5 class="card-title fs-sm-3">
-                                      <%= gigs[j].title %>
-                                    </h5>
-                                    <br>
-                                  </div>
-                                  <div class="card-actions">
+            <span class="data-title"><b class="boldName"><u></u>My Gigs</b></span>
+            <% if(gigs.length==0) { %>
+              <p>No gigs created</p>
+              <% } else {%>
 
+                <% for (let i=0; i < gigs.length; i +=3) { %>
+                  <div class="row mb-3 g-5">
+                    <% for (let j=i; j < i + 3 && j < gigs.length; j++) { %>
 
-
-                                    <a href="/browse-gigs/<%= gigs[j].id %>" class="btn btn-dark mb-2 mt-2">Learn
-                                      More</a>
-                                    <p class="text-center fs-sm-5">
-                                      <i class="fas fa-thumbs-up " style="padding-right:.2rem;"></i>
-                                      <%= gigs[j].rating %>
-                                        <%= gigs[j].hourly_rate %>
-                                    </p>
-
-                                  </div>
-                                </div>
+                      <div class="col-md-4 mb-lg-5 mr ">
+                        <div class="card">
+                          <div class="card-body d-flex flex-column justify-content-between">
+                            <div class="campaign-info">
+                              <div class="card-img-container">
+                                <img src="/uploads/<%= gigs[j].gig_img %>" alt="campaign image" class="img-fluid mb-2">
                               </div>
+                              <h5 class="card-title fs-sm-3">
+                                <%= gigs[j].title %>
+                              </h5>
+                              <br>
                             </div>
+                            <div class="card-actions">
 
-                            <% } %>
+
+
+                              <a href="/browse-gigs/<%= gigs[j].id %>" class="btn btn-dark mb-2 mt-2">Learn
+                                More</a>
+                              <p class="text-center fs-sm-5">
+                                <i class="fas fa-thumbs-up " style="padding-right:.2rem;"></i>
+                                <%= gigs[j].rating %>
+                                  <%= gigs[j].hourly_rate %>
+                              </p>
+
+                            </div>
+                          </div>
                         </div>
-                        <% } %>
-                          <% } %>
-                </div>
-              </div>
-            </div>
-          </section>
-        </section>
+                      </div>
+
+                      <% } %>
+                  </div>
+                  <% } %>
+                    <% } %>
+          </div>
+
+        </div>
+
+
+
       </div>
-
-
       <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

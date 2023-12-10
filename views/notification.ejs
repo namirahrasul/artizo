@@ -5,23 +5,30 @@
   <body>
     <%- include('navbar.ejs', { user: user }) %>
       <div class="notifcontainer">
-        <div class="notifnav">
+        <div class="notifnav ">
           <ul>
             <li><a href="#" class="notiflogo notifa">
-                <img src="/uploads/<%=user.profile_img%>" alt="">
-                <span class="notifnav-item">DashBoard</span>
+                <% if (profile.profile_img){ %>
+                  <img src="/uploads/<%=profile.profile_img%>" alt="Profile">
+                  <% } else { %>
+                    <img src="/images/default.jpg" alt="Profile">
+                    <% } %>
+                      <span class="notifnav-item">DashBoard</span>
               </a>
             </li>
-
-            <li><a href="/profile" class="notifa">
-                <i class="fas fa-user"></i>
-                <span class="notifnav-item prof">Profile</span>
-              </a></li>
-
-            <li><a href="/notification" class="notifa">
+            <li>
+              <a href="/profile" class="notifa">
                 <i class="fas fa-bell"></i>
-                <span class="notifnav-item">Notification</span>
-              </a></li>
+                <span class="notifnav-item">Profile</span>
+              </a>
+            </li>
+          
+            <li>
+              <a href="/notification" class="notifa notifa-active">
+                <i class="fas fa-bell"></i>
+                <span class="notifnav-item">Notifications</span>
+              </a>
+            </li>
             <li><a href="/MyGigs" class="notifa">
                 <i class="fas fa-thumbs-up"></i>
                 <span class="notifnav-item">My Gigs</span>
@@ -30,67 +37,71 @@
                 <i class="fas fa-thumbs-up"></i>
                 <span class="notifnav-item">Followed Gigs</span>
               </a></li>
+          
+            <li><a href="/client-offers" class="notifa">
+                <i class="fas fa-user"></i>
+                <span class="notifnav-item">Offered Gigs</span>
+              </a></li>
+          
+            <li><a href="/running-gigs" class="notifa">
+                <i class="fas fa-user"></i>
+                <span class="notifnav-item">Running Gigs</span>
+              </a></li>
+          
             <li><a href="/HiredGigs" class="notifa">
                 <i class="fas fa-user"></i>
                 <span class="notifnav-item">Hired Gigs</span>
               </a></li>
+            <% if(user.is_admin==true) { %>
+              <li><a href="/unapproved-gigs" class="notifa">
+                  <i class="fas fa-users"></i>
+                  <span class="notifnav-item">Approve Gigs</span>
+                </a></li>
+              <li><a href="/reported-gigs" class="notifa">
+                  <i class="fas fa-users"></i>
+                  <span class="notifnav-item">Reported Gigs</span>
+                </a></li>
+              <li><a href="/delete-requests" class="notifa">
+                  <i class="fas fa-users"></i>
+                  <span class="notifnav-item">Delete Requests</span>
+                </a></li>
+              <li><a href="/edit-requests" class="notifa">
+                  <i class="fas fa-users"></i>
+                  <span class="notifnav-item">Edit Requests</span>
+                </a></li>
+              <li><a href="/users" class="notifa">
+                  <i class="fas fa-users"></i>
+                  <span class="notifnav-item">Users</span>
+                </a></li>
+              <li><a href="/register-admin" class="notifa">
+                  <i class="fas fa-users"></i>
+                  <span class="notifnav-item">Add Admin</span>
+                </a></li>
+              <% } %>
           </ul>
         </div>
 
-        <section class="main">
+        <div class="main-skills">
 
+          <div class="profile-card">
 
-
-          <div class="main-skills">
-
-            <div class="profile-card">
-              <h3 class="main-skills-h3">Name: </h3>
-              <h3 class="main-skills-Heda5">
-                <%=user.name%>
-              </h3>
-
-            </div>
-            <div class="profile-card">
-              <h3 class="main-skills-h3">Email: </h3>
-              <h3 class="main-skills-Heda5">
-                <%=user.email%>
-              </h3>
-            </div>
-
+            <span class="data-title"><b class="boldName"><u></u>Notifications</b></span>
+            <% if(notification.length==0) { %>
+              <p>No notifications yet</p>
+              <% } else {%>
+                <% for (let i=0; i < notification.length; i++) { %>
+                  <p>
+                    <%=notification[i].description%>
+                        <%=notification[i].time%>
+                  </p>
+                  <% } %>
+                    <% } %>
           </div>
 
+        </div>
 
-          <section class="main-course">
-            <!-- <h1><b>My Story</b></h1> -->
-            <div class="course-box">
-              <ul>
-                <!-- <li class="active"><a href="Notification.html">Notifications</a></li> -->
-                <!-- <li><a href="FollowedCampaigns.html">Followed Campaigns </a></li>
-            <li><a href="DonatedCampaigns.html">Donated Campaigns</a></li> -->
 
-              </ul>
-              <div class="course">
 
-                <div class="activity-data">
-                  <div class="data names">
-                    <span class="data-title"><b class="boldName"><u></u>Notifications</b></span>
-                    <div class="col-md-12">
-                      <% if(notification.length==0) { %>
-                        <p>No notifications yet</p>
-                        <% } else {%>
-                          <% for (let i=0; i < notification.length; i++) { %>
-                            <p>
-                              <%=notification[i].name%> followed your gig <%=notification[i].title%> on
-                                  <%=notification[i].dd%> at <%=notification[i].tt%>
-                            </p>
-                            <% } %>
-                              <% } %>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          </section>
-        </section>
       </div>
       <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
@@ -101,5 +112,3 @@
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
   </body>
-
-</html>

@@ -149,7 +149,7 @@ router.post('/forgot-password', async (req, res) => {
 
 
 router.post(
-  '/submit-user',
+  '/register-user',
   [
     upload.fields([
       { name: 'file1', maxCount: 1 },
@@ -213,5 +213,108 @@ router.post(
 
   }
 )
+
+router.post(
+  '/register-admin',
+  [
+    upload.fields([
+      { name: 'file1', maxCount: 1 },
+
+    ]),
+  ],
+  async (req, res) => {
+
+    // res.send("Hello World");
+    console.log("req.body ", req.body)
+    console.log("req.files", req.files)
+
+    const { name, email, password } = req.body;
+
+
+
+    // Access uploaded files
+    var profile_img;
+    if (req.files.file1[0].filename === undefined) {
+      profile_img = null;
+    }
+    else {
+      profile_img = req.files.file1[0].filename;
+    }
+    console.log("name", name)
+    console.log("email", email)
+    console.log("password", password)
+    console.log("profile_img", profile_img)
+
+    // Insert the data into the MySQL table
+    const insertUserResult = await userModel.insertAdmin(
+      req,
+      name,
+      email,
+      password,
+      profile_img,
+      async (err, result) => {
+        if (err) {
+          console.error('Error inserting data:', err)
+          return res.status(500).send('Error submitting the form.')
+          console.log('error submitting the form')
+
+        }
+        console.log('Data inserted successfully:', result)
+
+        console.log("insert user result:", insertUserResult)
+        const verificationToken = uuidv4()
+
+        // Store the token in the database
+        const storeVerificationTokenResult = await userModel.storeVerificationToken(email, verificationToken)
+        console.log("storeVerificationToken result:", storeVerificationTokenResult)
+
+        // Send an email with the verification link (using nodemailer)
+        const sendVerificationEmailResult = await sendVerificationEmail(email, name, verificationToken)
+        console.log("sendVerificationEmail result:", sendVerificationEmailResult)
+
+        // Redirect to a verification page or display a message
+        res.redirect('/verification')
+      }
+    )
+
+  }
+)
+
+async function sendBlockedUserEmail(email, reason) {
+  try {
+
+    const mailOptions = {
+      from: process.env.GMAIL_USER, // Change to your verified sender email
+      to: email,
+      subject: 'User Blocked',
+      html: `<p>Hello user,</p>
+             <p>We have investigated your account and blockd it due to violation of website policies</p>
+             <b>Reason of action: </b>
+             <p>${reason}</p>
+             <p>If you think this is a mistake, please reply to this email.</p>`,
+    }
+
+    const info = await transporter.sendMail(mailOptions)
+    console.log('Verification email sent:', info.response)
+  } catch (error) {
+    console.error('Error sending verification email:', error)
+    throw error
+  }
+}
+
+router.post('/block-user/:userEmail', async (req, res) => {
+
+  const email = req.params.userEmail;
+  const reason = req.body.reason;
+  try {
+    await adminModel.blockUser(email, reason);
+    await sendBlockedUserEmail(email, reason);
+    res.redirect('/users');
+
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.render('error-page', { error })
+  }
+})
 
 module.exports = router

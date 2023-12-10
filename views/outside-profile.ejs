@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<%- include('head.ejs', { title: 'User Profile' , stylesheet: '/css/outside-profile.css' }) %>
+
+  <!-- <head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+ 
+ <link rel="stylesheet" href="outside-profile.css">
+
+
+ <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"> 
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  integrity="..." crossorigin="anonymous" />
+
+ <title>User BIO</title>
+</head> -->
+
+  <body>
+    <%- include('navbar.ejs', { user: user }) %>
+
+      <div class="container" style="margin-top: 8rem;">
+
+
+
+        <div class="dash-content">
+
+
+          <div class="main-skills">
+
+            <% if (!profile.profile_img){ %>
+              <img src="/images/notif/default.jpg" alt="Profile" class="resizeImage">
+              <% } else { %>
+                <img src="/uploads/<%=user.profile_img%>" alt="Profile" class="resizeImage">
+                <% } %>
+
+                  <!-- <h3>Full Name: </h3> -->
+                  <h3 class="Heda5">
+                    <%=profile.name%>
+                  </h3>
+
+
+
+                  <!-- <h3>Email: </h3> -->
+                  <h3 class="Heda5">
+                    <%=profile.email%>
+                  </h3>
+
+
+                  <!-- <h3>Email: </h3> -->
+                  <h3 class="Heda5 phone"><a href="https://wa.me/<%=profile.phone%>?text=Hello%20there!" target="_blank"><%=profile.phone%></a></h3>
+
+          </div>
+
+          <br>
+          <div class="activity marginLessgo">
+
+
+            <div class="BioDescription">
+
+              <div>
+                <%=profile.bio_description%>
+              </div>
+            </div>
+
+
+            <br>
+          </div>
+          <div class="boxes">
+            <div class="box box1 bg-danger">
+              <i class="fas fa-pen"></i>
+              <span class="text ">Created Campaigns</span>
+              <span class="number"><%=created.count%></span>
+            </div>
+            <div class="box box2 bg-warning">
+              <i class="fas fa-heart"></i>
+              <span class="text">Followed Campaigns</span>
+              <span class="number"><%=followed.count%></span>
+            </div>
+            <div class="box box3 bg-dark-subtle">
+              <i class="fas fa-donate"></i>
+              <span class="text">Donated Campaigns</span>
+              <span class="number"><%=backed.count%></span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+  </body>
+
+</html>

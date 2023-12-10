@@ -10,11 +10,11 @@ router.post('/search', async (req, res) => {
     try {
         // console.log(req.body)
         const { search } = req.body
-        const campaigns = await gigModel.searchCampaign(search);
+        const gigs = await gigModel.searchGig(search);
         // console.log(campaigns)
-        res.render('browse-campaigns', {
+        res.render('browse-gigs', {
             user: req.session.user,
-            campaigns: campaigns,
+            gigs: gigs,
             // lastSearch: search
         })
     } catch (error) {

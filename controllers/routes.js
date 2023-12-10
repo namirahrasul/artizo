@@ -11,6 +11,9 @@ const userModel = require('../models/userModel') // Import userModel functions
 const followController = require('./followController')
 const followRoutes = require('./followRoutes')
 const profileRoutes = require('./profileRoutes')
+const profileController = require('./profileController')
+
+const adminController = require('./adminController')
 
 const path = require('path')
 // router.use("/uploads", express.static(path.join(__dirname, "../uploads")))
@@ -78,6 +81,7 @@ router.get('/browse-gigs', gigController.getBrowseGigs
 router.get('/browse-gigs/:gigId', gigController.getSingleGig)
 
 
+
 // Include authentication routes from authController
 router.use('/auth', authController)
 router.use('/gig', gigRoutes)
@@ -98,10 +102,34 @@ router.get('/filter', browseController.filterByCategory)
 
 
 // testing
-router.get('/profile', followController.getProfile);
-router.get('/edit-profile', followController.editProfile)
-router.get('/notification', followController.getNotifications)
-router.get('/MyGigs', followController.getMyGigsProfile)
-router.get('/FollowedGigs', followController.getFollowedGigsProfile)
-router.get('/HiredGigs', followController.getHiredGigsProfile)
+router.get('/profile', profileController.getProfile);
+router.get('/edit-profile', profileController.editProfile)
+router.get('/notification', profileController.getNotifications)
+router.get('/MyGigs', profileController.getMyGigsProfile)
+router.get('/FollowedGigs', profileController.getFollowedGigsProfile)
+router.get('/HiredGigs', profileController.getHiredGigsProfile)
+router.get('/running-gigs', profileController.getRunningGigsProfile)
+router.get('/client-offers', profileController.getAllGigOfferOfFreelancer)
+router.get('/user/:email', profileController.getOutsideProfile)
+
+router.get('/about', browseController.getAboutPage)
+router.get('/services', browseController.getServicesPage)
+
+
+router.get('/users', adminController.getUsers)
+router.get('/unapproved-gigs', adminController.getNotApprovedGigsAdmin)
+router.get('/register-admin', adminController.AddAdmin)
+
+
+
+router.get('/report/:gigId', adminController.getReportForm)
+router.get('/reported-gigs', adminController.getReportedGigs)
+router.get('/view-report/:rid', adminController.viewGigReport)
+router.get('/edit-gig/:gigId', profileController.getEditGigForm)
+router.get('/delete-form/:gigId', adminController.getDeleteForm)
+router.get('/delete-requests', adminController.getAllDeleteRequests)
+router.get('/edit-requests', adminController.getAllEditRequests)
+router.get('/delete-request/:did', adminController.viewDeleteRequest)
+router.get('/block-user/:email', adminController.getUserBlockForm)
+
 module.exports = router

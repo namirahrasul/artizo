@@ -1,0 +1,409 @@
+@import 'home.css';
+
+.notifcontainer{
+  margin-top: 90px;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  display: flex;
+}
+
+body{
+  background: #dfe9f5;
+}
+
+.notifnav{
+  display: flex;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  height: 250vh;
+  left: 0;
+  background: #fff;
+  width: 280px;
+  overflow: none;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+  margin-top: -10px;
+}
+
+
+
+
+.prof{
+  margin-left:20px;
+}
+.notiflogo{
+  text-align: center;
+  display: flex;
+  margin: 10px 0 0 10px;
+}
+
+.notiflogo img{
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-right: 60px;
+}
+
+.notiflogo span{
+  font-weight: bold;
+  padding-left: 15px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.notifa{
+  position: relative;
+  color: rgb(85, 83, 83);
+  font-size: 14px;
+  display: block;
+  width: auto;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.notifnav .fas{
+  position: relative;
+  width: 70px;
+  height: 40px;
+  top: 14px;
+  font-size: 20px;
+  text-align: left;
+}
+
+.notifnav-item{
+  position: relative;
+  top: 12px;
+  margin-left:-45px;
+
+}
+
+.notifa:hover{
+  background: #eee;
+}
+.notifnav  ul li{
+  list-style-type: none;
+  margin-left:0px; /* Adjust the margin to add space between list items */
+  color: rgb(0, 0, 0);
+}
+
+.notifnav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column; /* Change to a vertical layout */
+}
+
+
+ .profile-card {
+  width: 500px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.profile-card img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+
+
+/* Main Section */
+ .main{
+  position: relative;
+  padding: 20px;
+  width: 100%;
+} 
+
+.main-skills{
+  display: flex;
+  margin-top: 20px;
+  margin-left: 60px;
+  align-items: space-between;
+  justify-items: center;
+}
+
+.main-skills-h3{
+  margin: 10px;
+  font-size: 22px;
+  text-align: lcenter;
+  color: rgb(15, 49, 100);
+}
+
+.main-skills-Heda5{
+  font-size: 22px;
+  text-align: center;
+  color: #197d9f;
+  margin: 10px;
+  font-weight:700;
+
+}
+
+
+
+
+.main-course{
+  margin-top:20px ;
+ 
+}
+.course-box{
+  width: 100%;
+  padding: 10px 10px 30px 10px;
+  margin-top: 10px;
+  background: #ffffff;
+  border-radius: (125, 125, 125)0px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+.course-box .course{
+  display: flex;
+} */
+.box{
+  width: 100%;
+  /* width: 33%; */
+  padding: 10px;
+  margin: 60px;
+  border-radius: 10px;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.box p{
+  font-size: 12px;
+  margin-top: 5px;
+}
+.box button{
+  background: #000;
+  color: #fff;
+  padding: 7px 10px;
+  border-radius: 10px;
+  margin-top: 3rem;
+  cursor: pointer;
+}
+.box button:hover{
+  background: rgba(25, 25, 25, 0.851);
+}
+.box i{
+  font-size: 7rem;
+  float: right;
+  margin: -20px 20px 20px 0;
+}
+
+
+/* Notification................................................... */
+
+
+ 
+.dash-content .activity .activity-data{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.activity .activity-data{
+    display: flex;
+}
+.activity-data .data{
+    display: flex;
+    flex-direction: column;
+    margin: 0 15px;
+}
+.activity-data .data-title{
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+.activity-data .data .data-list{
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 20px;
+    white-space: nowrap;
+    color: var(--text-color);
+}
+
+@media (max-width: 1000px) {
+    .activity .activity-data{
+        overflow-X: scroll;
+    }
+}
+
+.boldName{
+    font-size: 30px;
+    color: #1d7fb7;
+}
+
+.dashss{
+    color: rgb(255, 0, 0);
+} 
+
+.unapproved-dropdown {
+  position: relative; /* Required for positioning children */
+}
+
+.unapproved-dropdown .unapproved-dropdown-menu {
+  position: absolute;
+  top: 100%; /* Position below the button */
+  left: 0;
+  display: none; /* Initially hide the dropdown */
+}
+
+/* Show the dropdown when the parent is hovered */
+.unapproved-dropdown:hover .unapproved-dropdown-menu {
+  display: block;
+}
+.borderInfo{
+  background-color: #f5f5f5;
+  padding: 15px; /* Increase padding for more space inside the box */
+  margin: 10px; /* Increase margin for better spacing between boxes */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adjust box shadow for a subtle effect */
+  border: 2px solid #ccc; /* Add a solid border */
+  border-radius: 5px; 
+  width: 98%;
+}
+
+/* .borderInfo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+} */
+
+
+
+.padID{
+  /* background-color: violet; */
+  width: 9%;
+  text-align: left;
+  font-weight: bold;
+}
+.padTitle{
+  /* background-color: red; */
+  width: 20%;
+  text-align: left;
+  font-weight: bold;
+
+
+}
+
+.padCreator{
+  /* background-color: rgb(255, 0, 225); */
+  width: 20%;
+  text-align: left;
+  padding-left: 2%;
+  font-weight: bold;
+
+
+}
+
+.padView{
+  /* background-color: rgb(0, 106, 255); */
+  width: 14%;
+  text-align: left;
+
+}
+
+.padDocuments{
+  /* background-color: aqua; */
+  width: 12%;
+  text-align: left;
+
+}
+
+.padApprove{
+  /* background-color: rgb(255, 247, 0); */
+  width: 10%;
+  text-align: left;
+
+}
+
+.padDecline{
+  /* background-color: rgb(174, 0, 255); */
+  width: 10%;
+  text-align: left;
+
+}
+
+.viewButtonApprove{
+  background-color: green;
+  width: 100%;
+  height: 80%;
+  font-weight: bold;
+}
+
+.viewButtonApprove:hover{
+  background-color: rgb(0, 252, 0);
+  color: rgb(0, 0, 0);
+}
+
+
+.viewButtonDecline{
+  background-color: rgb(170, 0, 0);
+  width: 100%;
+  height: 80%;
+  font-weight: bold;
+}
+
+.viewButtonDecline:hover{
+  background-color: rgb(252, 0, 0);
+  color: rgb(0, 0, 0);
+}
+
+.viewButton{
+  margin-left: 25%;
+  width: 70%;
+  height: 80%;
+  font-weight: bold;
+  padding-top: 5px;
+  
+}
+
+.viewButton:hover{
+  background-color: rgb(255, 0, 0);
+  color: black;
+}
+
+.emailLeft{
+  padding-left: 1%;
+}
+
+.creatorh4{
+  padding-left: 9%;
+}
+
+.viewh4{
+  padding-left: 16%;
+}
+
+.docButton{
+  margin-left: 4%;
+  margin-right: 40%;
+  width: 100%;
+  height: 90%;
+  font-weight: bold;
+  background-color: #000;
+  color: white;
+  /* border: 2px solid; */
+
+}
+
+.docButton:hover{
+  background-color: rgb(255, 0, 0);
+  color: black;
+}
+
+
+.approveButtonCheck{
+  padding-left: 5%;
+}
+
+.hedsUp{
+  font-weight: bold;
+  color: #005571;
+}
+
+
+

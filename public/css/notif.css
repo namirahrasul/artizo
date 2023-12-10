@@ -8,18 +8,22 @@
   text-decoration: none;
   box-sizing: border-box;
   display: flex;
+  
 }
 
 body{
-  background: #dfe9f5;
+  background: #9aaba9;;
 }
 
+/* .notifa:hover{
+  background-color: #ccc;
+} */
 .notifnav{
   display: flex;
   position: relative;
   top: 0;
   bottom: 0;
-  height: 250vh;
+  height: 400vh;
   left: 0;
   background: #fff;
   width: 280px;
@@ -65,6 +69,11 @@ body{
   text-decoration: none;
 }
 
+.notifa-active{
+
+  color: rgb(16, 103, 103);
+}
+
 .notifnav .fas{
   position: relative;
   width: 70px;
@@ -101,7 +110,7 @@ body{
   bottom: 0;
 }
  .profile-card {
-  width: 500px;
+  width: 800px;
   background-color: rgb(255, 255, 255);
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -114,7 +123,7 @@ body{
 .profile-card img {
   max-width: 100%;
   height: auto;
-  margin-bottom: 10px;
+  
 }
 
 .profile-card button {
@@ -271,7 +280,7 @@ body{
   display: flex;
 }
 .course-box ul li{
-  margin: 10px;
+  
   color: rgb(0, 0, 0);
   cursor: pointer;
 }
@@ -292,8 +301,9 @@ body{
   box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
 }
 .box p{
-  font-size: 12px;
-  margin-top: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  
 }
 .box button{
   background: #000;
@@ -357,4 +367,55 @@ body{
 
 .dashss{
     color: red;
+}
+
+/* ...................................................................... */
+
+
+.ButtonEdited {
+  background-color: rgb(13, 87, 89);
+  color: white; /* Text color for better contrast */
+  height: 50px; /* Adjust the height as needed */
+  width: 200px; /* Adjust the width as needed */
+  text-align: center;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px; /* Adjust the font size */
+  
+  margin-left: 50px;
+  margin-top: 30px;
+  margin-right: 40px;
+  margin-bottom: 30px;
+
+  padding-top: 10px;
+  
+  
+}
+
+.ButtonEdited:hover{
+  background-color: rgb(0, 0, 0);
+}
+
+
+.leftAlign{
+  text-align: left;
+}
+
+.row.box{
+  border: 1%;
+  width: 80%;
+  
+}
+
+.information{
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.blue{
+  color: rgb(9, 118, 118);
+  font-weight: bold;
+  width: 70%;
 }

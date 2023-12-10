@@ -109,7 +109,125 @@ async function getProfile(email) {
   throw error;
  }
 }
+
+async function getMyGigs(email) {
+ try {
+  const sql = `SELECT * FROM gigs INNER JOIN users  ON gigs.email = users.email where gigs.email=(?)`
+  const [rows, fields] = await pool.execute(sql, [email])
+  return rows
+ } catch (error) {
+  throw error
+ }
+}
+
+async function getHiredGigsClient(email) {
+ try {
+  const sql = `SELECT * FROM hired where client=(?) ORDER BY hired_date DESC`
+  const [rows, fields] = await pool.execute(sql, [email])
+  return rows
+ } catch (error) {
+  throw error
+ }
+}
+
+async function getHiredGigsFreelancer(email) {
+ try {
+  const sql = `SELECT * FROM hired INNER JOIN gigs ON gig_id=gigs.id where gigs.email=(?) ORDER BY hired_date DESC`
+  const [rows, fields] = await pool.execute(sql, [email])
+  return rows
+ } catch (error) {
+  throw error
+ }
+}
+
+async function getNotReviewedOffers(email) {
+ try {
+  const sql = `SELECT * FROM offers INNER JOIN gigs ON gig_id=gigs.id where gigs.email=(?) and reviewed=0 ORDER BY time DESC`
+  const [rows, fields] = await pool.execute(sql, [email])
+  return rows
+ } catch (error) {
+  throw error
+ }
+}
+async function getNotif(notif) {
+ try {
+  const [rows, fields] = await pool.execute(`SELECT * FROM notifs WHERE email = ?  ORDER BY time DESC`, [notif])
+  return rows
+ } catch (error) {
+  throw error
+ }
+}
+
+async function getProfileImg(email) {
+ try {
+  const sql = `SELECT profile_img FROM users WHERE email = ?`;
+  const [rows, fields] = await pool.execute(sql, [email]);
+  return rows[0]; // This will contain information about the affected rows
+
+ }
+ catch (error) {
+  throw error;
+
+ }
+}
+
+async function getCountOfFollowedGigs(email) {
+
+ try {
+  const sql = `SELECT COUNT(*) AS count FROM follow WHERE follower = ? `;
+  const [rows, fields] = await pool.execute(sql, [email]);
+  return rows[0]; // This will contain information about the affected rows
+ }
+ catch (error) {
+  throw error;
+ }
+}
+
+async function getCountOfCreatedGigs(email) {
+
+ try {
+  const sql = `SELECT COUNT(*) AS count FROM gigs WHERE email = ? and is_approved = 1 and is_deleted=0`;
+  const [rows, fields] = await pool.execute(sql, [email]);
+  return rows[0]; // This will contain information about the affected rows
+ }
+ catch (error) {
+  throw error;
+ }
+}
+async function getCountOfHiredGigs(email) {
+
+ try {
+  const sql = `SELECT COUNT(*) AS count FROM hired WHERE client = ?  `;
+  const [rows, fields] = await pool.execute(sql, [email]);
+  return rows[0]; // This will contain information about the affected rows
+ }
+ catch (error) {
+  throw error;
+ }
+}
+
+async function getAllClientOffersByEmail(email) {
+ try {
+  const sql = `SELECT users.name as client_name,gigs.title as gig_name , offers.description, offers.hours,offers.client, offers.material,offers.comments,offers.time FROM  users INNER JOIN offers ON users.email=offers.client INNER JOIN gigs 
+ON offers.gig_id=gigs.id   where gigs.email='n.rsl.136@gmail.com' and offers.is_reviewed=0 ORDER BY offers.time DESC`
+  const [rows, fields] = await pool.execute(sql, [email])
+  return rows
+ } catch (error) {
+  throw error
+ }
+}
+
 module.exports = {
  updateProfile,
  getProfile,
+ getMyGigs,
+ getHiredGigsClient,
+ getHiredGigsFreelancer,
+ getNotReviewedOffers,
+ getNotif,
+ getProfileImg,
+ getCountOfFollowedGigs,
+ getCountOfCreatedGigs,
+ getCountOfHiredGigs,
+ getAllClientOffersByEmail
 };

@@ -29,11 +29,11 @@
         </div>
         <div class="col-md-6 right">
           <div class="logo">
-            <img src="/images/register/logo1.png" alt="Oikko Logo" >
+            <img src="/images/register/logo.png" alt="Oikko Logo" >
           </div>
           <div class="input-box">
             <header style="margin-top: 60px;">Create your account</header>
-            <form id="register-form" action="/auth/submit-user" method="POST" enctype="multipart/form-data">
+            <form id="register-form" action="/auth/register-user" method="POST" enctype="multipart/form-data">
               <div class="form-outline mb-4">
                 <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required />
               </div>
@@ -72,8 +72,6 @@
         </div>
       </div>
     </div>
-
-    <%- include('footer.ejs') %>
 
       <script>
         const app = Vue.createApp({

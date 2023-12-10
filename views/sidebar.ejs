@@ -1,0 +1,73 @@
+<ul>
+  <li><a href="#" class="notiflogo notifa">
+      <% if (profile.profile_img){ %>
+        <img src="/uploads/<%=profile.profile_img%>" alt="Profile">
+        <% } else { %>
+          <img src="/images/default.jpg" alt="Profile">
+          <% } %>
+            <span class="notifnav-item">DashBoard</span>
+    </a>
+  </li>
+  <li>
+    <a href="/profile" class="notifa">
+      <i class="fas fa-bell"></i>
+      <span class="notifnav-item">Profile</span>
+    </a>
+  </li>
+
+  <li>
+    <a href="/notification" class="notifa">
+      <i class="fas fa-bell"></i>
+      <span class="notifnav-item">Notifications</span>
+    </a>
+  </li>
+  <li><a href="/MyGigs" class="notifa">
+      <i class="fas fa-thumbs-up"></i>
+      <span class="notifnav-item">My Gigs</span>
+    </a></li>
+  <li><a href="/FollowedGigs" class="notifa">
+      <i class="fas fa-thumbs-up"></i>
+      <span class="notifnav-item">Followed Gigs</span>
+    </a></li>
+
+  <li><a href="/client-offers" class="notifa">
+      <i class="fas fa-user"></i>
+      <span class="notifnav-item">Offered Gigs</span>
+    </a></li>
+
+  <li><a href="/running-gigs" class="notifa">
+      <i class="fas fa-user"></i>
+      <span class="notifnav-item">Running Gigs</span>
+    </a></li>
+
+  <li><a href="/HiredGigs" class="notifa">
+      <i class="fas fa-user"></i>
+      <span class="notifnav-item">Hired Gigs</span>
+    </a></li>
+  <% if(user.is_admin==true) { %>
+    <li><a href="/unapproved-gigs" class="notifa">
+        <i class="fas fa-users"></i>
+        <span class="notifnav-item">Approve Gigs</span>
+      </a></li>
+    <li><a href="/reported-gigs" class="notifa">
+        <i class="fas fa-users"></i>
+        <span class="notifnav-item">Reported Gigs</span>
+      </a></li>
+    <li><a href="/delete-requests" class="notifa">
+        <i class="fas fa-users"></i>
+        <span class="notifnav-item">Delete Requests</span>
+      </a></li>
+    <li><a href="/edit-requests" class="notifa">
+        <i class="fas fa-users"></i>
+        <span class="notifnav-item">Edit Requests</span>
+      </a></li>
+    <li><a href="/users" class="notifa">
+        <i class="fas fa-users"></i>
+        <span class="notifnav-item">Users</span>
+      </a></li>
+    <li><a href="/register-admin" class="notifa">
+        <i class="fas fa-users"></i>
+        <span class="notifnav-item">Add Admin</span>
+      </a></li>
+    <% } %>
+</ul>

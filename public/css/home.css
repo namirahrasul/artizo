@@ -3,17 +3,75 @@
     width: 120px;
 }
 
+.proud{
+    margin-top: 40px;
+    animation: bounce 2s infinite;
+}
+
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+.showcase{
+    background-color: #DFEDDC;
+}
+
+.watch{
+    margin-bottom: -50px;
+    background-color: grey;
+}
+
+.watch:hover{
+    background-color: greenyellow;
+}
+
+.writing{
+    color: black;
+}
+
+.writing:hover{
+    color: green;
+    transform: translate(2px,-2px);
+}
+
+.italic-word{
+    font-style: italic;
+}
+
 .ss{
     position: relative;
 }
 
-/* .bb{
-
+.up{
+    font-style: oblique;
+    margin-top: -10px;
 }
 
-.ss:hover{
+.up:hover{
+    transform: translate(2px,-2px);
+    color:green;
+}
 
-} */
+.boxes{
+    background-color: #FCFAEB;
+}
+
+.life{
+    background-color: #f9eaa6;
+}
+
+.bb{
+    margin-top: 40px;
+}
 
 nav{
   height: fit-content;
@@ -25,7 +83,7 @@ nav{
     content: '';
     height: 2px;
     width: 100%;
-    background-color: red;
+    background-color: yellow;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -53,12 +111,51 @@ nav{
 
 .card-text{
     font-weight: 500;
+    font-style: italic;
+}
+
+.card{
+    background-color: rgb(181, 21, 69);
+}
+
+.talent{
+    height: auto;
+    width: 60px;
+}
+
+.earning{
+    height: auto;
+    width: 60px;
+}
+
+.yy{
+    margin-top: -12px;
+}
+
+.cc{
+    margin-top: 18px;
+}
+
+.pp{
+    margin-top: 27px;
+}
+
+.third{
+    background-color: #EBDDDA;
+}
+
+.newsletter{
+    background-color: #DFEDDC;
 }
 
 @media(min-width: 768px) {
     .news-input{
         width: 50%;
     }
+}
+
+.team{
+    background-color: #2C6777;
 }
 
 .bi{

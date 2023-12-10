@@ -41,14 +41,14 @@ header{
 }
 
 .side-image{
-    background-image: url("../images/login/login.svg");
+    background-image: url("../images/login/side.svg");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
     position: relative;
     border-radius: 10px 0 0 10px;
     object-fit: cover;
-    transform: scale(1);
+    transform: scale(0.9);
     overflow: visible;
 }
 
@@ -142,7 +142,7 @@ img{
 }
 
 .submit:hover{
-    background: #E44014;
+    background: #5D2C3F;
     color: #fff;
 }
 

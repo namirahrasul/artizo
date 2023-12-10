@@ -97,40 +97,40 @@
             <div class="container-fluid p-4 bg-danger">
               <div class="d-flex flex-column align-items-center justify-content-center">
                 <h2 class="text-white display-4 pb-2">About Me</h2>
-                <div class=" rounded container-fluid bg-white p-lg-4 mt-lg-4 ">
+                <div class=" rounded container-fluid bg-white p-lg-4 mt-lg-4 fs-4 mb-3 text-black lead">
                   <div class="container-fluid p-3 ">
                     <% if(gig.bio_description) { %>
-                      <div class="row">
+                      <div class="row mb-5">
                         <%=gig.bio_description%>
                       </div>
                       <% } %>
                         <% if(gig.work_description) { %>
-                          <div class="row">
+                          <div class="row mb-5">
                             <%=gig.work_description%>
                           </div>
                           <% } %>
                             <div class="row">
                               <div class="col-6">
                                 <% if(gig.occupation){%>
-                                  <p>Occupation: <%=gig.occupation%>
+                                  <p><b>Occupation: </b><%=gig.occupation%>
                                   </p>
                                   <% } %>
                                     <% if(gig.years_of_experience){ %>
-                                      <p>Years of Experience: <%=gig.years_of_experience%>
+                                      <p><b>Years of Experience: </b><%=gig.years_of_experience%>
                                       </p>
                                       <% } %>
                               </div>
                               <div class="col-6">
                                 <% if(gig.institute_name && gig.institute_country){ %>
-                                  <p>Studied at: <%=gig.institute_name%>, <%=gig.institute_country%>
+                                  <p><b>Studied at: </b><%=gig.institute_name%>, <%=gig.institute_country%>
                                   </p>
                                   <% } %>
                                     <% if(gig.graduation_year){ %>
-                                      <p>Graduated in: <%=gig.graduation_year%>
+                                      <p><b>Graduated in: </b><%=gig.graduation_year%>
                                       </p>
                                       <% } %>
                                         <% if(gig.study_field){ %>
-                                          <p>Field of study: <%=gig.study_field%>
+                                          <p><b>Field of study:</b> <%=gig.study_field%>
                                           </p>
                                           <% } %>
 
@@ -191,7 +191,7 @@
               <div class="row welcome text-sm-start align-items-center">
                 <div class="col-6">
                   <h2 class="display-4 pb-4 text-black-50">
-                    Contact Us
+                    Contact Me
                   </h2>
                 </div>
                 <div class="col-6 d-flex justify-content-center align-items-center">

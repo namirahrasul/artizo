@@ -39,7 +39,7 @@ async function sortByMostCustomers(req, res) {
   try {
     const gigs = await gigModel.sortGigCustomers();
     console.log("most customers gigs", gigs)
-    res.render('browse-campaigns', {
+    res.render('browse-gigs', {
       user: req.session.user,
       gigs: gigs,
     })
@@ -53,7 +53,7 @@ async function sortByHighestRating(req, res) {
   try {
     const gigs = await gigModel.sortGigRating();
     console.log("highest rating gigs", gigs)
-    res.render('browse-campaigns', {
+    res.render('browse-gigs', {
       user: req.session.user,
       gigs: gigs,
       // lastSearch: inputData
@@ -70,44 +70,24 @@ async function filterByCategory(req, res) {
     const inputData = req.query.inputData;
     console.log("inputData", inputData)
     const type = req.query.type;
-    console.log("type", type)
-    var is_business;
-    var is_personal;
-    var is_prelaunch;
-    if (type === 'prelaunch') {
-      is_business = false;
-      is_personal = false;
-      is_prelaunch = true;
-    }
-    else if (type === 'personal') {
-      is_business = false;
-      is_personal = true;
-      is_prelaunch = false;
-    }
-    else if (type === 'business') {
-      is_business = true;
-      is_personal = false;
-      is_prelaunch = false;
-    }
-    else {
-      is_business = true;
-      is_personal = true;
-      is_prelaunch = true;
-    }
+    console.log("type", type);
 
+    var category = req.query.category;
 
-    // Convert radio button values to variables
     var minFollowers = parseInt(req.query.followers);
-    var minAmountRaised = parseInt(req.query.amount);
-    var minBackers = parseInt(req.query.backers);
+    var minHourlyRate = parseInt(req.query.hourlyrate);
+    var minCustomers = parseInt(req.query.customers);
+    var minRating = parseFloat(req.query.rating);
+
     var maxFollowers;
-    var maxAmountRaised;
-    var maxBackers;
+    var maxHourlyRate;
+    var maxCustomers;
+    var maxRating;
+
     const maxFollowersResult = await gigModel.getMaxFollowers();
-    const maxAmountRaisedResult = await gigModel.getMaxAmountRaised();
-    const maxBackersResult = await gigModel.getMaxBackers();
-    // console.log("maxFollowerResult ", maxFollowersResult, " maxAmountRaisedResult ",maxAmountRaisedResult," maxBackersResult ",maxBackersResult)
-    // Handle "Below 500" and "Above 1000" options differently
+    const maxHourlyRateResult = await gigModel.getMaxHourlyRate();
+    const maxCustomersResult = await gigModel.getMaxCustomers();
+    
     if (minFollowers === 0) {
       maxFollowers = 99;
     } else if (minFollowers === 100) {
@@ -120,37 +100,46 @@ async function filterByCategory(req, res) {
       maxFollowers = maxFollowersResult[0][0]['MAX(no_followers)']// No maximum for "Below 100"
     }
 
-    if (minAmountRaised === 0) {
-      maxAmountRaised = 4999;
-    } else if (minAmountRaised === 5000) {
-      maxAmountRaised = 10000; // No maximum for "Above 10000"
-    } else if (minAmountRaised === 10001) {
-      maxAmountRaised = maxAmountRaisedResult[0][0]['MAX(amount_raised)']// No maximum for "Above 10000"
+    if (minHourlyRate === 0) {
+      maxHourlyRate = 499;
+    } else if (minHourlyRate === 500) {
+      maxHourlyRate = 1000; 
+    } else if (minHourlyRate === 1001) {
+      maxHourlyRate = maxHourlyRateResult[0][0]['MAX(hourly_rate)']
     } else {
-      minAmountRaised = 0; // Adjust minimum for "Below 5000"
-      maxAmountRaised = maxAmountRaisedResult[0][0]['MAX(amount_raised)'] // No maximum for "Below 5000"
+      minHourlyRate = 0; 
+      maxHourlyRate = maxHourlyRateResult[0][0]['MAX(hourly_rate)']
     }
 
-    if (minBackers === 0) {
-      maxBackers = 499;
-    } else if (minBackers === 500) {
-      maxBackers = 1000; // No maximum for "Above 1000"
-    } else if (minBackers === 1001) {
-      maxBackers = maxBackersResult[0][0]['MAX(no_donors)']// No maximum for "Above 1000"
+    if (minCustomers === 0) {
+      maxCustomers = 49;
+    } else if (minCustomers === 50) {
+      maxCustomers = 100; 
+    } else if (minCustomers === 101) {
+      maxCustomers = maxCustomersResult[0][0]['MAX(no_customers)']
     } else {
-      minBackers = 0; // Adjust minimum for "Below 500"
-      maxBackers = maxBackersResult[0][0]['MAX(no_donors)'] // No maximum for "Below 500"
+      minCustomers = 0; 
+      maxCustomers = maxCustomersResult[0][0]['MAX(no_customers)'] 
     }
-    console.log("minFollowers:", minFollowers, "maxFollowers:", maxFollowers, "minAmountRaised:", minAmountRaised, "maxAmountRaised:", maxAmountRaised, "minBackers:", minBackers, "maxBackers:", maxBackers);
-    // var campaigns;
-    // if (is_business && is_personal && is_prelaunch)
-    //   campaigns = await gigModel.filterAllCategory(minFollowers, maxFollowers, minAmountRaised, maxAmountRaised, minBackers, maxBackers)
-    // else
-    const campaigns = await gigModel.filterCampaignCategory(is_prelaunch, is_personal, is_business, minFollowers, maxFollowers, minAmountRaised, maxAmountRaised, minBackers, maxBackers);
-    console.log("campaigns", campaigns)
-    res.render('browse-campaigns', {
+
+    if (minRating === 0) {
+      maxRating = 4.09;
+    } else if (minRating === 4.1) {
+      maxRating = 4.5; 
+    } else if (minRating === 4.51) {
+      maxRating = 5;
+    } else {
+      minRating = 0; 
+      maxRating = 5;
+    }
+
+    console.log("category:", category, "minFollowers:", minFollowers, "maxFollowers:", maxFollowers, "minHourlyRate:", minHourlyRate, "maxHourlyRate:", maxHourlyRate, "minCustomers:", minCustomers, "maxCustomers:", maxCustomers, "minRating:", minRating, "maxRating:", maxRating);
+    
+    const gigs = await gigModel.filterGigCategory(category, minFollowers, maxFollowers, minHourlyRate, maxHourlyRate, minCustomers, maxCustomers, minRating, maxRating);
+    console.log("gigs", gigs)
+    res.render('browse-gigs', {
       user: req.session.user,
-      campaigns: campaigns,
+      gigs: gigs,
       // lastSearch: inputData
     })
     // console.log("campaigns", campaigns)
@@ -159,6 +148,29 @@ async function filterByCategory(req, res) {
     res.status(500).send('Internal Server Error')
   }
 }
+async function getAboutPage(req, res) {
+
+  try {
+
+    res.render('about', { user: req.session.user });
+
+  } catch (error) {
+    console.error('Error fetching campaign data:', error);
+    res.status(500).send('Internal Server Error');
+  }
+}
+async function getServicesPage(req, res) {
+
+  try {
+
+    res.render('services', { user: req.session.user });
+
+  } catch (error) {
+    console.error('Error fetching campaign data:', error);
+    res.status(500).send('Internal Server Error');
+  }
+}
+
 
 module.exports = {
   sortByHighestRating,
@@ -166,4 +178,6 @@ module.exports = {
   sortByMostFollowers,
   sortByLowestHourlyRate,
   filterByCategory,
+  getAboutPage,
+  getServicesPage
 }

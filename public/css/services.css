@@ -1,0 +1,126 @@
+@import 'home.css';
+body {
+    height: 100vh;
+    position: relative;
+    background: white;
+    color: white;
+}
+
+/* .container{
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+} */
+
+.containerforServices hed2{
+    color: #000000;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 35px;
+    margin-bottom: 25px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.containerforServices .services{
+    justify-content: space-around;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+
+
+.containerforServices .services .cardforServices {
+    height: 400px;
+    width: 330px;
+    text-align: center;
+    background: #000000; /* Updated background color */
+    padding: 30px 15px;
+    margin-bottom: 30px;
+    border-radius: 15px; /* Slightly increased border-radius */
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added box-shadow for depth */
+}
+
+.containerforServices .services .cardforServices:hover {
+    background: #b30000; /* Updated background color on hover */
+    color: white; /* Text color on hover */
+}
+
+.containerforServices .services .cardforServices .titleforServices {
+    font-size: 24px; /* Increased titleforServices font size */
+    margin-bottom: 10px;
+}
+
+.containerforServices .services .cardforServices p {
+    font-size: 16px; /* Adjusted paragraph font size */
+    line-height: 1.6; /* Improved readability with increased line height */
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
+.containerforServices .services .cardforServices .contentforServices{
+    transition: 0.3s;
+}
+
+.containerforServices .services .cardforServices:hover .contentforServices{
+    transform: scale(1.07);
+}
+
+.containerforServices .services .cardforServices .contentforServices .icon{
+    padding: 5px 0;
+    color: white;
+}
+
+.containerforServices .services .cardforServices .contentforServices .icon i{
+    font-size: 40px;
+}
+
+.containerforServices .services .cardforServices:hover .contentforServices .titleforServices{
+    color: white;
+}
+
+.containerforServices .services .cardforServices .contentforServices .titleforServices{
+    padding: 5px 0;
+    font-size: 24px;
+    font-weight: 500;
+    color: chocolate;
+    transition: 0.3s;
+}
+
+
+
+.containerforServices .services .cardforServices .contentforServices .icon {
+    padding: 20px 0;
+    color: chocolate;
+    font-size: 50px;
+}
+
+.containerforServices .services .cardforServices .contentforServices .icon i {
+    font-size: inherit;
+}
+
+/* Adjustments for specific icons */
+.containerforServices .services .cardforServices .contentforServices .icon i.fa-mobile-alt {
+    font-size: 48px;
+}
+
+.containerforServices .services .cardforServices .contentforServices .icon i.fa-paint-brush {
+    font-size: 48px;
+}
+
+/* Adjustments for specific titleforServices */
+.containerforServices .services .cardforServices .contentforServices .titleforServices {
+    padding: 10px 0;
+    font-size: 24px;
+    font-weight: 500;
+    color: chocolate;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

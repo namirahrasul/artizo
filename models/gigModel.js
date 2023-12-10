@@ -17,7 +17,7 @@ const pool = mysql.createPool({
 async function getGigById(gigId) {
   try {
     const sql = `SELECT * FROM gigs  g INNER JOIN users u  ON g.email = u.email
-    INNER JOIN docs d ON g.id = d.gig_id WHERE g.id = ?`
+     WHERE g.id = ?`
     const [rows, fields] = await pool.execute(
       sql,
       [gigId]
@@ -59,7 +59,7 @@ async function searchGig(search) {
 }
 async function sortGigHourlyRate() {
   try {
-    const sql = 'SELECT * FROM gigs INNER JOIN users ON gigs.email = users.email ORDER BY hourly_rate DESC'
+    const sql = 'SELECT * FROM gigs INNER JOIN users ON gigs.email = users.email ORDER BY hourly_rate '
     const [rows, fields] = await pool.execute(sql)
     return rows
   }
@@ -116,7 +116,7 @@ async function getMaxFollowers() {
 async function getMaxHourlyRate() {
   try {
     const res = await pool.execute(
-      'SELECT MAX(hourly_rate) from campaigns'
+      'SELECT MAX(hourly_rate) from gigs'
     )
     return res
   }
@@ -128,7 +128,7 @@ async function getMaxHourlyRate() {
 async function getMaxCustomers() {
   try {
     const res = await pool.execute(
-      'SELECT MAX(no_customers) from campaigns'
+      'SELECT MAX(no_customers) from gigs'
     )
     return res
   }
@@ -137,26 +137,35 @@ async function getMaxCustomers() {
   }
 }
 
-async function getMaxRating() {
+
+
+async function filterGigCategory(category, minFollowers, maxFollowers, minHourlyRate, maxHourlyRate, minCustomers, maxCustomers, minRating, maxRating) {
   try {
-    const res = await pool.execute(
-      'SELECT MAX(rating) from campaigns'
+    var sql1 = `SELECT * FROM gigs INNER JOIN users ON gigs.email = users.email WHERE `;
+    var sql2 = 'category = ? AND '
+    var sql3 = `no_followers >= ? AND no_followers <= (?) AND hourly_rate >= ? AND hourly_rate <= (?) AND no_customers >= ?  AND no_customers <= (?) AND rating >= ? AND rating <= ?`
+    var stmt;
+    var params = []
+    if ((category)) {
+      stmt = sql1 + sql2 + sql3;
+      params = [category, minFollowers, maxFollowers, minHourlyRate, maxHourlyRate, minCustomers, maxCustomers, minRating, maxRating]
+    }
+    else {
+      stmt = sql1 + sql3;
+      params = [minFollowers, maxFollowers, minHourlyRate, maxHourlyRate, minCustomers, maxCustomers, minRating, maxRating]
+    }
+    const [rows, fields] = await pool.execute(
+      stmt,
+      params
     )
-    return res
+    return rows
   }
   catch (error) {
     throw error
   }
 }
 
-async function filterCampaignCategory(is_prelaunch, is_personal, is_business, minFollowers, maxFollowers, minAmountRaised, maxAmountRaised, minBackers, maxBackers) {
-  try {
 
-  }
-  catch (error) {
-    throw error
-  }
-}
 
 
 module.exports = {
@@ -170,6 +179,5 @@ module.exports = {
   getMaxFollowers,
   getMaxHourlyRate,
   getMaxCustomers,
-  getMaxRating,
-  filterCampaignCategory
+  filterGigCategory
 }

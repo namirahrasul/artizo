@@ -55,7 +55,45 @@ async function insertUser(req, name, email, password, profile_img, callback) {
   })
 }
 
+async function insertAdmin(req, name, email, password, profile_img, callback) {
+  console.log("req.file inside userModel.insertUser", req.file)
+  console.log("req.bosy inside userModel.insertUser", req.body)
 
+  // Get a connection from the pool
+  pool.getConnection(async (connectionErr, connection) => {
+    if (connectionErr) {
+      callback(connectionErr)
+      return
+    }
+    hashedPassword = await bcrypt.hash(password, 10)
+
+    // SQL query to insert user information and unique image path
+    const sql =
+      `INSERT INTO users (name, email, password, profile_img,is_admin) VALUES (?, ?, ?, ?,1)`
+
+    // Execute the query with user information and unique image path
+    connection.query(
+      sql,
+      [
+        name,
+        email,
+        hashedPassword,
+        profile_img,
+      ],
+      (queryErr, result) => {
+        // Release the connection whether there was an error or not
+        connection.release()
+
+        if (queryErr) {
+          callback(queryErr)
+          return
+        }
+
+        callback(null, result)
+      }
+    )
+  })
+}
 async function storeVerificationToken(email, token) {
   try {
     const expirationTimestamp = calculateExpirationTimestamp()
@@ -206,4 +244,5 @@ module.exports = {
   authenticateUser,
   changePassword,
   insertUser,
+  insertAdmin,
 }

@@ -9,6 +9,10 @@ body, button, div, a {
     padding: 0;
 }
 
+.stats{
+  color:  rgb(13, 87, 89);
+}
+
 /* Style the dropdown container */
 .dropdown {
     position: relative;
@@ -69,12 +73,12 @@ body, h1, h2, h3, p, ul, li {
 /* Apply a background color and font styles */
 body {
     
-    background-color: #ffffff;
+    background-color:#DFEDDC;
 }
 
 /* Style the header and navigation */
 header {
-    background-color: #333;
+    background-color: #3F6263;
     color: white;
     padding: 10px 0;
 }
@@ -96,34 +100,48 @@ nav a {
 } */
 
 /* Style the search section */
+/* Style for the search section */
 .search-section {
-    background-image: url('background.jpg'); /* Replace with your image */
-    background-size: cover;
-    padding: 100px 0;
-    text-align: center;
+  background-image: url('background.jpg');
+  background-size: cover;
+  padding: 100px 0;
+  text-align: center;
+  color: white; /* Text color for better contrast with the background */
+  font-family: Arial, sans-serif; /* Choose an appropriate font */
 }
 
+/* Style for the search container */
 .search-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center vertically */
+  margin-bottom: 20px; /* Increase margin for better spacing */
 }
 
+/* Style for the search input */
 #search-input {
-    padding: 10px;
-    width: 300px;
-    border: none;
-    border-radius: 5px;
+  padding: 10px; /* Reduce padding for a more compact look */
+  width: 300px;
+  border: 3px solid rgb(13, 87, 89); /* Specify border style */
+  border-radius: 5px;
+  font-size: 16px; /* Adjust the font size */
 }
 
+/* Style for the search button */
 #search-button {
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 5px 5px; /* Decreased the top and bottom padding to reduce the button height */
+  background-color: rgb(13, 87, 89);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 10px; /* Adjust the font size */
+  transition: background-color 0.3s;
+}
+
+
+#search-button:hover {
+  background-color: #000000;
 }
 
 /* Style the filter section */
@@ -151,7 +169,10 @@ nav a {
     margin: 20px;
     padding: 20px;
     background-color: #fff;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    margin-top: 101px;
+    ;
+    
 }
 
 
@@ -166,14 +187,15 @@ nav a {
 }
 
 .card {
-    height: 500px;
+    height: 550px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between; /* Vertically space contents evenly */
     width: 340px;
-   
+    background-color: #FCFAEB;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 3px 8px 3px 8px; /* Top padding reduced to create space above the button */
 }
 
@@ -208,8 +230,13 @@ nav a {
     flex-direction: column;
     gap: 10px; /* Increased space between tagline and button */
 }
-.card button {
-     /* Increased margin above the button */
+.card a {
+    background-color:  rgb(13, 87, 89);
+    color:white;
+}
+.card a:hover{
+    background-color: #000000;
+    color:white;
 }
 
 
@@ -265,20 +292,22 @@ nav a {
 
       /* Target the button by its class */
        .button-class {
+        width: 200px;
+        
          /* Define your desired styles */
-         background-color: #1a5e7b; /* Change to your preferred background color */
+         background-color: rgb(13, 87, 89); /* Change to your preferred background color */
          color: #fff; /* Change to your preferred text color */
          padding: 15px 50px; /* Adjust padding as needed */
          border: none; /* Remove the button border if desired */
          border-radius: 5px; /* Add rounded corners if desired */
          cursor: pointer; /* Show a pointer cursor on hover */
          /* Add more styles as needed */
-         font-weight: bold;
+         font-weight: 100;
        }
        
        /* Optional: Add styles for hover and active states */
        .button-class:hover {
-         background-color: #16585f; /* Change to a different color on hover */
+         background-color: #000000; /* Change to a different color on hover */
        }
        
        .button-class:active {
@@ -286,8 +315,9 @@ nav a {
        }
 
       .hed3{
-        color: #24446e;
-        font-size:25px ;
+        color: rgb(36, 110, 93);
+        font-size:30px ;
+        font-weight: bolder;
         
       }
       .filter-container {
@@ -409,3 +439,17 @@ nav a {
 
    
   }
+
+
+  
+.betImage {
+  width: 80px; 
+  height: 30px;
+  border-radius: 50%; 
+  float: left; 
+ 
+}
+
+.leftAlign{
+  text-align: left;
+}

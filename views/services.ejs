@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head.ejs', { title: 'Services' , stylesheet: '/css/services.css' }) %>
+
+ <body>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+   integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+   integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+  <%-include('navbar.ejs', { user: user }) %>
+  <br>
+  <br>
+   <div class="container">
+    <div class="containerforServices">
+     <h2 class="hed2">Our Services</h2>
+
+     <br>
+
+
+
+
+
+
+     <section class="services">
+      <div class="cardforServices">
+       <div class="contentforServices">
+        <div class="icon"><i class="fa fa-edit"></i></div>
+        <div class="titleforServices">Fund Posting</div>
+        <p>Enable users to post their funding campaigns effortlessly. Our platform provides a seamless process for
+         creating
+         and sharing fundraising campaigns.</p>
+       </div>
+      </div>
+      <!-- Add similar cards for other services -->
+
+      <div class="cardforServices">
+       <div class="contentforServices">
+        <div class="icon"><i class="fa fa-bullhorn"></i></div>
+        <div class="titleforServices">Campaign Creation</div>
+        <p>Empower users to create compelling campaigns for diverse causes. Whether it's for personal needs, social
+         causes,
+         or entrepreneurial ventures, our platform supports various campaign types</p>
+       </div>
+      </div>
+      <div class="cardforServices">
+       <div class="contentforServices">
+        <div class="icon"><i class="fa fa-tasks"></i></div>
+        <div class="titleforServices">Campaign Management</div>
+        <p>Streamline campaign management with tools for monitoring progress, updating supporters, and managing funds.
+         Our
+         intuitive dashboard makes it easy to track and optimize campaigns.</p>
+       </div>
+      </div>
+      <div class="cardforServices">
+       <div class="contentforServices">
+        <div class="icon"><i class="fa fa-money-bill"></i></div>
+        <div class="titleforServices">Donation Payments</div>
+        <p>Facilitate secure and easy payment options for donations. Users can contribute to campaigns using various
+         payment
+         methods, ensuring a hassle-free donation experience.</p>
+       </div>
+      </div>
+      <div class="cardforServices">
+       <div class="contentforServices">
+        <div class="icon"><i class="fa fa-lock"></i></div>
+        <div class="titleforServices">Secure Transactions</div>
+        <p>Prioritize security with encrypted transactions and a robust system that safeguards sensitive financial
+         information, fostering trust among donors and campaigners.</p>
+       </div>
+      </div>
+      <div class="cardforServices">
+       <div class="contentforServices">
+        <div class="icon"><i class="fa fa-cogs"></i></div>
+        <div class="titleforServices">Customization Options</div>
+        <p>Provide flexibility for campaigners to customize their campaigns with images, videos, and compelling
+         storytelling
+         to attract more supporters.</p>
+       </div>
+      </div>
+     </section>
+
+    </div>
+
+   </div>
+   <%-include('footer.ejs') %>
+ </body>
+
+</html>

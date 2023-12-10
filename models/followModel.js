@@ -78,15 +78,7 @@ async function getNotifById(notif) {
   }
 }
 
-async function getMyGigs(email){
-  try {
-     const sql=`SELECT * FROM gigs INNER JOIN users  ON gigs.email = users.email where gigs.email=(?)`
-    const [rows, fields] = await pool.execute(sql,[email]) 
-    return rows
-  } catch (error) {
-    throw error
-  }
-}
+
 
 async function getMyFollow(email){
   try {
@@ -103,7 +95,6 @@ async function getMyFollow(email){
 module.exports = {
   insertFollowData,
   getNotifById,
-  getMyGigs,
   getMyFollow, 
   updateGigFollowersById,
 }

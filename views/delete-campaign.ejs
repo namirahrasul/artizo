@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Donate</title>
+ <link rel="stylesheet" href="donate.css">
+ <%- include('head.ejs', { title: 'Delete Campaign' , stylesheet: '/css/donation.css' }) %>
+</head>
+
+<body>
+
+ <%- include('navbar.ejs', { user: user }) %>
+  <form id="delete-form" action="/campaign/confirm-delete" method="POST">
+   <div class="paybcontainer">
+    <div class="popup">
+     <h3></h3>
+     <input name="campaignId" type="hidden" class="d-none" value="<%=campaignId%>"><br>
+      <p>Are you sure you want to delete your campaign?</p>
+     <button type="submit" class="paybtn" >Delete</button>
+     <button type="button" class="dangerbtn"><a href="/campaign/personal/<%= campaignId %>">Cancel</a></button>
+ 
+    </div>
+   </div>
+  </form>
