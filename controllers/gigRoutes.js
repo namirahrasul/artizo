@@ -105,6 +105,11 @@ router.post(
   }
 )
 
+router.get('/accept-offer/:gigId', async (req, res) => {
+})
+
+router.get('/decline-offer/:gigId', async (req, res) => {
+})
 
 
 

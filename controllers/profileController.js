@@ -40,14 +40,14 @@ async function getHiredGigsProfile(req, res) {
  console.log(client);
  try {
   // Get notification details by email using your model function
-  const gigs = await profileModel.getHiredGigsClient(client);
-  console.log(gigs);
-  if (gigs === null) {
+  const offers = await profileModel.getHiredGigsClient(client);
+  console.log(offers);
+  if (offers === null) {
    // Handle the case where no notification data is found
    // You can render the page without that information or show a message
-   res.render('HiredGigs', { user: user, gigs: null, profile: profile });
+   res.render('HiredGigs', { user: user, offers: null, profile: profile });
   } else {
-   res.render('HiredGigs', { user: user, gigs: gigs, profile: profile });
+   res.render('HiredGigs', { user: user, offers:offers, profile: profile });
   }
 
  } catch (error) {
@@ -63,14 +63,14 @@ async function getRunningGigsProfile(req, res) {
  const profile = await profileModel.getProfileImg(req.session.user.email);
  try {
   // Get notification details by email using your model function
-  const gigs = await profileModel.getHiredGigsFreelancer(client);
-  console.log(gigs);
-  if (gigs === null) {
+  const offers = await profileModel.getHiredGigsFreelancer(client);
+  console.log(offers);
+  if (offers === null) {
    // Handle the case where no notification data is found
    // You can render the page without that information or show a message
-   res.render('running-gigs', { user:user, gigs: null, profile: profile});
+   res.render('running-gigs', { user:user, offers: null, profile: profile});
   } else {
-   res.render('running-gigs', { user: user, gigs: gigs, profile: profile });
+   res.render('running-gigs', { user: user, offers: offers, profile: profile });
   }
 
  } catch (error) {

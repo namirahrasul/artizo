@@ -32,13 +32,19 @@ async function getSingleGig(req, res) {
 
 async function acceptOffer(id) {
     try {
-        const affectedRows = await gigModel.acceptOffer(id);
-        console.log(affectedRows);
+        
     } catch (error) {
         console.error('Error accepting offer:', error);
     }
 }
 
+async function declineOffer(id) {
+    try {
+        
+    } catch (error) {
+        console.error('Error declining offer:', error);
+    }
+}
 
 module.exports = {
 

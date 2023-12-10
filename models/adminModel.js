@@ -290,10 +290,6 @@ async function selectEditRequests() {
     gigs.rocket AS o_rocket,
     gigs.nagad AS o_nagad,
     gigs.upay AS o_upay,
-    gigs.fb_url AS o_fb_url,
-    gigs.twitter_url AS o_twitter_url,
-    gigs.yt_url AS o_yt_url,
-    gigs.website_url AS o_website_url,
     gigs.no_followers AS o_no_followers,
     gigs.no_customers AS o_no_customers,
     gigs.rating AS o_rating,
@@ -303,7 +299,7 @@ async function selectEditRequests() {
     edit_gigs.id AS n_id,
     edit_gigs.email AS n_email,
     edit_gigs.title AS n_title,
-    edit_gigs.type AS n_type,
+    edit_gigs.category AS n_category,
     edit_gigs.description AS n_description,
     edit_gigs.gig_img AS n_gig_img,
     edit_gigs.gig_video AS n_gig_video,
@@ -313,23 +309,18 @@ async function selectEditRequests() {
     edit_gigs.rocket AS n_rocket,
     edit_gigs.nagad AS n_nagad,
     edit_gigs.upay AS n_upay,
-    edit_gigs.fb_url AS n_fb_url,
-    edit_gigs.twitter_url AS n_twitter_url,
-    edit_gigs.yt_url AS n_yt_url,
-    edit_gigs.website_url AS n_website_url,
     edit_gigs.hourly_rate AS n_hourly_rate,
     edit_gigs.no_followers AS n_no_followers,
     edit_gigs.no_customers AS n_no_customers,
     edit_gigs.rating AS n_rating,
-    edit_gigs.nid_back AS n_nid_back,
-    edit_gigs.certificates_achievements AS n_certificates_achievements,
+    edit_gigs.certifications_achievements AS n_certifications_achievements,
     edit_gigs.testimonials AS n_testimonials,
     edit_gigs.previous_work AS n_previous_work
 FROM
     gigs
 INNER JOIN
     edit_gigs ON gigs.id = edit_gigs.old_id
-    where edit_gigs.is_approved=0 and edit_gigs,is_deleted=0
+    where edit_gigs.is_approved=0 and edit_gigs.is_deleted=0
     `
 
     const [rows, fields] = await pool.execute(sql)

@@ -69,6 +69,11 @@ body{
   text-decoration: none;
 }
 
+.boldforName{
+     font-weight: bold;
+  color: #005571;
+}
+
 .notifa-active{
 
   color: rgb(16, 103, 103);

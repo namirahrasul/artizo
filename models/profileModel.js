@@ -132,7 +132,7 @@ async function getHiredGigsClient(email) {
 
 async function getHiredGigsFreelancer(email) {
  try {
-  const sql = `SELECT * FROM hired INNER JOIN gigs ON gig_id=gigs.id where gigs.email=(?) ORDER BY hired_date DESC`
+  const sql = `SELECT users.name as client_name, gigs.title as gig_title, hired.status,offers.id as offer_id offers.gig_id, offers.client, offers.description, offers.hours,offers.material,offers.comments,offers.time FROM hired  INNER JOIN gigs ON gig_id=gigs.id INNER JOIN users ON users.email=hired.client    INNER JOIN offers on offers.id=hired.offer_id where gigs.email=(?) order by hired_date DESC`
   const [rows, fields] = await pool.execute(sql, [email])
   return rows
  } catch (error) {

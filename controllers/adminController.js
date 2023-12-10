@@ -29,9 +29,11 @@ async function getNotApprovedGigsAdmin(req, res) {
   try {
     // Get notification details by email using your model function
     const gigs = await adminModel.getNotApprovedGigs();
+    const user = await profileModel.getProfile(req.session.user.email)
     const profile = await profileModel.getProfileImg(req.session.user.email);
     
-    res.render('unapproved-gigs', { user: req.session.user, gigs: gigs, profile });
+    
+    res.render('unapproved-gigs', { user: user, gigs: gigs, profile });
   }
 
   catch (error) {
