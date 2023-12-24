@@ -17,17 +17,17 @@ const pool = mysql.createPool({
 })
 
 
-async function getNotApprovedGigsById(campaignId) {
+async function getNotApprovedGigsById(gigId) {
   try {
-    const sql = `SELECT * FROM gigs INNER JOIN users ON gigs.email=users.email WHERE id = ? and is_reviewed=0 and is_deleted=0 and users.is_blocked=0`
+    const sql = `SELECT * FROM gigs INNER JOIN users ON gigs.email=users.email WHERE id = ? and is_reviewed=0 and is_deleted=0 and is_approved=0 and users.is_blocked=0`
     const [rows, fields] = await pool.execute(
       sql,
-      [campaignId]
+      [gigId]
     )
     if (rows.length === 1) {
       return rows[0]
     } else {
-      throw new Error('Campaign not found')
+      throw new Error('gig not found')
     }
   } catch (error) {
     throw error
@@ -37,7 +37,7 @@ async function getNotApprovedGigsById(campaignId) {
 
 async function getNotApprovedGigs() {
   try {
-    const sql = `SELECT * from gigs INNER JOIN users ON gigs.email=users.email WHERE is_reviewed=0 and is_deleted=0 and users.is_blocked=0`
+    const sql = `SELECT * from gigs INNER JOIN users ON gigs.email=users.email WHERE gigs.is_reviewed=0 and gigs.is_deleted=0 and  gigs.is_approved=0 and users.is_blocked=0`
 
     const [rows, fields] = await pool.execute(sql) // Replace 'Gigs' with your table name
     return rows
@@ -89,15 +89,15 @@ async function blockUser(email, reason) {
 async function declineGig(id) {
   try {
     const sql =
-      'UPDATE gigs set is_reviewd=1 and is_deleted=1 WHERE id = ?'
+      'UPDATE gigs set is_reviewed=1,is_deleted=1 WHERE id = ?'
     const [rows, fields] = await pool.execute(sql, [id]);
-    const [rows2,fields2] = await getGigInfoById(id);
+    const rows2 = await getGigInfoById(id);
     const sql2 = 'INSERT INTO notifs (gig_id,email,type,description) VALUES  (?,?,?,?)'
-    const [rows3, fields3] = await pool.execute(sql2, [id, rows2[0].email, 'create', `Your gig ${rows2[0].title} has been declined`]);
+    const [rows3, fields3] = await pool.execute(sql2, [id, rows2[0].email, 'create', `Your gig <a class="notifcontent" href="/browse-gigs/${id}">${rows2[0].title}</a> has been declined`]);
 
-    return rows.affectedRows; // Return the number of affected rows (1 if successful, 0 if no rows were updated)
+    return rows3.affectedRows; // Return the number of affected rows (1 if successful, 0 if no rows were updated)
   } catch (error) {
-    console.error('Error declining campaign', error);
+    console.error('Error declining gig', error);
     throw error;
   }
 }
@@ -105,28 +105,29 @@ async function declineGig(id) {
 async function approveGig(id) {
   try {
     const sql =
-      'UPDATE gigs set is_reviewed=1 and is_approved=1 WHERE id = ?'
+      'UPDATE gigs set is_reviewed=1,is_approved=1 WHERE id = ?'
     const [rows, fields] = await pool.execute(sql, [id]);
-    const [rows2, fields2] = await getGigInfoById(id);
+    console.log("id ", id)
+    const rows2 = await getGigInfoById(id);
     const sql2 = 'INSERT INTO notifs (gig_id,email,type,description) VALUES  (?,?,?,?)'
-    const [rows3, fields3] = await pool.execute(sql2, [id, rows2[0].email, 'create', `Your gig ${rows2[0].title} has been approved`]);
-    return rows.affectedRows; // Return the number of affected rows (1 if successful, 0 if no rows were updated)
+    const [rows3, fields3] = await pool.execute(sql2, [id, rows2[0].email, 'create', `Your gig <a class="notifcontent" href="/browse-gigs/${id}">${rows2[0].title}</a> has been approved`]);
+    return rows3.affectedRows; // Return the number of affected rows (1 if successful, 0 if no rows were updated)
   } catch (error) {
-    console.error('Error declining campaign', error);
+    console.error('Error declining gig', error);
     throw error;
   }
 }
 
-async function requestDelete(id, reason, email) {
+async function requestDelete(id, email, reason) {
   try {
     console.log("id ", id)
     console.log("reason ", reason)
     const sql = `INSERT INTO delete_gigs (gig_id,reason) VALUES (?,?)`
     const [rows, fields] = await pool.execute(sql, [id, reason]);
-    const sql2 = `INSERT INTO notifs (gig_id,email,type,description) VALUES (?,?,?)`
-    const getGigTitle = `SELECT title FROM Gigs WHERE id = ?`
+    const sql2 = `INSERT INTO notifs (gig_id,email,type,description) VALUES (?,?,?,?)`
+    const getGigTitle = `SELECT title FROM gigs WHERE id = ?`
     const [rows3, fields3] = await pool.execute(getGigTitle, [id]);
-    const [rows2, fields2] = await pool.execute(sql2, [id, email , 'delete', `Your request to delete the gig ${rows3[0].title} has been submitted`]);
+    const [rows2, fields2] = await pool.execute(sql2, [id, email, 'delete', `Your request to delete the gig <a class="notifcontent" href="/browse-gigs/${id}">${rows3[0].title}</a> has been submitted`]);
     return rows2.affectedRows; // Return the number of affected rows (1 if successful, 0 if no rows were updated)
   } catch (error) {
     console.error('Error inserting into delete', error);
@@ -150,88 +151,76 @@ async function declineEdit(id) {
     const [rows2, fields2] = await pool.execute(sql2, [id]);
     const old_id = rows2[0].old_id;
     const sql =
-      'UPDATE edit_gigs set is_reviewed=1 and is_declined=1 WHERE id = ?'
+      'UPDATE edit_gigs set is_reviewed=1,is_declined=1 WHERE id = ?'
     const [rows, fields] = await pool.execute(sql, [id]);
     const sql3 = 'UPDATE gigs set is_reviewed=1 WHERE id = ?'
     const [rows3, fields3] = await pool.execute(sql3, [old_id]);
-    // const getEmail = `SELECT email FROM edit_Gigs WHERE id = ?`
-    // const sql2 = 'INSERT INTO admin_notifs (cid,email,is_delete,is_edit,is_approved) VALUES  (?,?,?,?,?)'
-    // const [rows2, fields2] = await pool.execute(sql2, [id, getEmail[0].email, 0, 1, 0]);
-
-    return rows3.affectedRows; // Return the number of affected rows (1 if successful, 0 if no rows were updated)
+    const sql4 = 'INSERT INTO notifs (gig_id,email,type,description) VALUES  (?,?,?,?)'
+    const [rows4, fields4] = await pool.execute(sql4, [old_id, email, 'edit', `Your request to edit the gig <a class="notifcontent" href="/browse-gigs/${old_id}">${rows3[0].title}</a> has been declined`]);
+    return rows4.affectedRows; // Return the number of affected rows (1 if successful, 0 if no rows were updated)
   } catch (error) {
-    console.error('Error declining campaign', error);
+    console.error('Error declining gig', error);
     throw error;
   }
 }
 async function approveEdit(id) {
   console.log("id ", id)
   try {
+    
     const sql =
-      'UPDATE edit_gigs set is_approved=1 and is_reviewed=1 WHERE id = ?'
+      'UPDATE edit_gigs set is_approved=1,is_reviewed=1 WHERE id = ?'
 
     const [rows, fields] = await pool.execute(sql, [id]);
     const newGig = `SELECT * FROM edit_gigs WHERE id = ?`
     const updateOldGig =
-      'UPDATE gigs set title=?,city=?,state=?,type=?,tagline=?,description=?,campaign_img=?, campaign_video=?, feature=?, feature_img=?, goal_date=?,goal_amount=?,bsb=?,account=?,bkash=?,rocket=?,nagad=?,upay=?,perk_title=?,perk_description=?,perk_img=?,perk_price=?,perk_retail_price=?,perk_date=?,nid_front=?,nid_back=?,passport=?,fb_url=? , twitter_url=?,yt_url=?, website_url=?, certificates_achievements=?,testimonials=?,previous_work=? ,is_approved=1, is_reviewed=1  WHERE id = ?'
+      'UPDATE gigs set title=?,category=?,description=?,gig_img=?, gig_video=?, hourly_rate=?,bsb=?,account=?,bkash=?,rocket=?,nagad=?,upay=?,certifications_achievements=?,testimonials=?,previous_work=? ,is_approved=1, is_reviewed=1  WHERE id = ?'
     const [rows2, fields2] = await pool.execute(newGig, [id]);
     console.log("SELECT * FROM edit_gigs WHERE id = ? ", rows2);
-    const [rows4, fields4] = await pool.execute(updateOldGig, [rows2[0].title, rows2[0].city, rows2[0].state, rows2[0].type, rows2[0].tagline, rows2[0].description, rows2[0].campaign_img, rows2[0].campaign_video, rows2[0].feature, rows2[0].feature_img, rows2[0].goal_date, rows2[0].goal_amount, rows2[0].bsb, rows2[0].account, rows2[0].bkash, rows2[0].rocket, rows2[0].nagad, rows2[0].upay, rows2[0].perk_title, rows2[0].perk_description, rows2[0].perk_img, rows2[0].perk_price, rows2[0].perk_retail_price, rows2[0].perk_date, rows2[0].nid_front, rows2[0].nid_back, rows2[0].passport, rows2[0].fb_url, rows2[0].twitter_url, rows2[0].yt_url, rows2[0].website_url, rows2[0].certificates_achievements, rows2[0].testimonials, rows2[0],previous_work, rows2[0].old_id]);
-    
+    const [rows4, fields4] = await pool.execute(updateOldGig, [rows2[0].title, rows2[0].category, rows2[0].description, rows2[0].gig_img, rows2[0].gig_video, rows2[0].hourly_rate, rows2[0].bsb, rows2[0].account, rows2[0].bkash, rows2[0].rocket, rows2[0].nagad, rows2[0].upay,rows2[0].certifications_achievements, rows2[0].testimonials, rows2[0].previous_work, rows2[0].old_id]);
+
     console.log("rows2[0].old_id ", rows2[0].old_id)
     console.log("rows2[0].email ", rows2[0].email)
-    
+
     const insert = 'INSERT INTO notifs (gig_id,email,type,description) VALUES  (?,?,?,?)'
-    const [rows6, fields6] = await pool.execute(insert, [rows2[0].old_id, rows2[0].email, 'edit', `Your request to edit the gig ${rows2[0].title} has been approved`]);
+    const [rows6, fields6] = await pool.execute(insert, [rows2[0].old_id, rows2[0].email, 'edit', `Your request to edit the gig <a class="notifcontent" href="/browse-gigs/${rows2[0].old_id}">${rows2[0].title}</a> has been approved`]);
     return rows6.affectedRows; // Return the number of affected rows (1 if successful, 0 if no rows were updated)
   } catch (error) {
-    console.error('Error declining campaign', error);
+    console.error('Error declining gig', error);
     throw error;
   }
 }
 async function declineDelete(id) {
   try {
-    const sql = 'UPDATE delete_gigs set is_approved=1 and is_reviewed=1 WHERE gig_id = ?'
+    const sql = 'UPDATE delete_gigs set is_approved=1,is_reviewed=1 WHERE gig_id = ?'
     const [rows, fields] = await pool.execute(sql, [id])
     const [rows2, fields2] = await getGigInfoById(id);
     const insert = 'INSERT INTO notifs (gig_id,email,type,description) VALUES  (?,?,?,?)'
-    const [rows6, fields6] = await pool.execute(insert, [id, rows2[0].email, 'delete', `Your request to delete the gig ${rows2[0].title} has been declined`]);
+    const [rows6, fields6] = await pool.execute(insert, [id, rows2[0].email, 'delete', `Your request to delete the gig <a class="notifcontent" href="/browse-gigs/${old_id}">${rows2[0].title}</a> has been declined`]);
     return rows2.affectedRows; // Return the number of affected rows (1 if successful, 0 if no rows were updated)
   } catch (error) {
-    console.error('Error declining campaign', error);
+    console.error('Error declining gig', error);
     throw error;
   }
 }
 async function approveDelete(id) {
   try {
-    const sql = 'UPDATE delete_gigs set is_approved=1 and is_reviewed=1 WHERE gig_id = ?'
+    const sql = 'UPDATE delete_gigs set is_approved=1,is_reviewed=1 WHERE gig_id = ?'
     const [rows, fields] = await pool.execute(sql, [id])
-    const sql2 = 'UPDATE gigs set is_approved=0 and is_deleted=1  and is_reviewed=1 WHERE id = ?'
-    const [rows2, fields2] = await pool.execute(sql, [id])
+    const sql2 = 'UPDATE gigs set is_approved=0,is_deleted=1,is_reviewed=1 WHERE id = ?'
+    const [rows2, fields2] = await pool.execute(sql2, [id])
     const [rows3, fields3] = await getGigInfoById(id);
     const insert = 'INSERT INTO notifs (gig_id,email,type,description) VALUES  (?,?,?,?)'
-    const [rows6, fields6] = await pool.execute(insert, [rows3[0].id, rows3[0].email, 'delete', `Your request to delete the gig ${rows3[0].title} has been approved`]);
+    const [rows6, fields6] = await pool.execute(insert, [id, rows3.email, 'delete', `Your request to delete the gig <a class="notifcontent" href="/browse-gigs/${id}">${rows3.title}</a> has been approved`]);
 
     return rows6.affectedRows; // Return the number of affected rows (1 if successful, 0 if no rows were updated)
 
   } catch (error) {
-    console.error('Error declining campaign', error);
+    console.error('Error declining gig', error);
     throw error;
   }
 }
 
 
-
-
-// async function insertRejectData(email, cid) {
-//   try {
-//     const sql = `INSERT INTO reject (email,cid) VALUES (?,?)`;
-//     const [rows, fields] = await pool.execute(sql, [email, cid]) // Replace 'Gigs' with your table name
-//     return rows
-//   } catch (error) {
-//     throw error
-//   }
-// }
 
 async function getNotApprovedReports() {
   try {
@@ -252,13 +241,13 @@ async function markGigsReviewed(id) {
     const [rows, fields] = await pool.execute(sql, [id]);
     const sql2 = 'SELECT * FROM reports WHERE id = ?'
     const [rows2, fields2] = await pool.execute(sql2, [id]);
-    const sql3 = 'SELECT title FROM gigs WHERE id = ?'
-    const [rows3, fields3] = await pool.execute(sql3, [id]);
+
+    const rows3 = await getGigInfoById(rows2[0].gig_id)
     const insert = 'INSERT INTO notifs (gig_id,email,type,description) VALUES  (?,?,?,?)'
-    const [rows6, fields6] = await pool.execute(insert, [id, rows2[0].email, 'report', `Your report on the gig ${rows3[0].title} has been reviewed`]);
-    return rows.affectedRows; // Return the number of affected rows (1 if successful, 0 if no rows were updated)
+    const [rows6, fields6] = await pool.execute(insert, [rows2[0].gig_id, rows2[0].email, 'report', `Your report on the gig <a class="notifcontent" href="/browse-gigs/${id}">${rows3[0].title}</a> has been reviewed`]);
+    return rows6.affectedRows; // Return the number of affected rows (1 if successful, 0 if no rows were updated)
   } catch (error) {
-    console.error('Error declining campaign', error);
+    console.error('Error declining gig', error);
     throw error;
   }
 }
@@ -330,15 +319,15 @@ INNER JOIN
   }
 
 }
-async function getGigEmailById(campaignId) {
+async function getGigEmailById(gigId) {
   try {
     const sql = `SELECT email FROM gigs WHERE id = ?`;
-    const [rows, fields] = await pool.execute(sql, [campaignId]) // Replace 'Gigs' with your table name
+    const [rows, fields] = await pool.execute(sql, [gigId]) // Replace 'Gigs' with your table name
     //  return rows
     if (rows.length > 0) {
       return rows[0].email;
     } else {
-      return null; // Or handle the case when there is no matching campaign ID
+      return null; // Or handle the case when there is no matching gig ID
     }
   } catch (error) {
     throw error
@@ -349,7 +338,7 @@ async function getGigInfoById(gigId) {
     const sql = `SELECT * FROM gigs WHERE id = ?`;
     const [rows, fields] = await pool.execute(sql, [gigId]) // Replace 'Gigs' with your table name
     return rows
-    
+
   } catch (error) {
     throw error
   }

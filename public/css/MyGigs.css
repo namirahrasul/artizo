@@ -1,0 +1,868 @@
+@import 'home.css';
+
+
+.notifcontainer{
+  margin-top: 90px;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  display: flex;
+  
+}
+
+
+.notifcontent{
+  color:#054d34;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+body{
+  background: linear-gradient(180deg,#3F6263 ,#16A085, #DFEDDC );
+}
+
+/* .notifa:hover{
+  background-color: #ccc;
+} */
+.notifnav{
+  display: flex;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  height: 400vh;
+  left: 0;
+  background: #fff;
+  width: 280px;
+  overflow: none;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+  margin-top: -10px;
+}
+
+/* .navDisplay{
+  position: fixed;
+} */
+
+.prof{
+  margin-left:20px;
+}
+.notiflogo{
+  text-align: center;
+  display: flex;
+  margin: 10px 0 0 10px;
+}
+
+.notiflogo img{
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-right: 60px;
+}
+
+.notiflogo span{
+  font-weight: bold;
+  padding-left: 15px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.notifa{
+  position: relative;
+  color: rgb(85, 83, 83);
+  font-size: 14px;
+  display: block;
+  width: auto;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.boldforName{
+     font-weight: bold;
+  color: #005571;
+}
+
+.notifa-active{
+
+  color: rgb(16, 103, 103);
+}
+
+.notifnav .fas{
+  position: relative;
+  width: 70px;
+  height: 40px;
+  top: 14px;
+  font-size: 20px;
+  text-align: left;
+}
+
+.notifnav-item{
+  position: relative;
+  top: 12px;
+  margin-left:-45px;
+
+}
+
+/* .notifa:hover{
+  background: #eee;
+} */
+.notifnav  ul li{
+  list-style-type: none;
+  margin-left:0px; /* Adjust the margin to add space between list items */
+  color: rgb(0, 0, 0);
+}
+
+.notifnav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column; /* Change to a vertical layout */
+}
+
+.logout{
+  position: absolute;
+  bottom: 0;
+}
+ .profile-card {
+  width: 1200px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.profile-card img {
+  max-width: 100%;
+  height: auto;
+  
+}
+
+.profile-card button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+} */
+
+
+.campaign-card-img-container {
+    flex: 1; /* Allow the image to grow or shrink within the available space */
+    display: flex;
+    align-items: center; /* Center the image vertically */
+    justify-content: center; /* Center the image horizontally */
+}
+
+.card-actions {
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Increased space between tagline and button */
+}
+
+.campaigns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.campaign-card {
+    height: 520px;
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Vertically space contents evenly */
+    width: 360px;
+   
+    padding: 3px 8px 3px 8px; /* Top padding reduced to create space above the button */
+}
+
+
+.campaign-card img {
+    max-width: 100%;
+    height: auto;
+    max-height: 200px;
+}
+
+.campaign-card-title {
+    font-weight: 700;
+}
+
+.campaign-info {
+    flex-grow: 1; /* This allows it to take up available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Vertically space title and tagline */
+}
+
+/* Main Section */
+.main{
+  position: relative;
+  padding: 20px;
+  width: 100%;
+}
+.main-top{
+  display: flex;
+  width: 100%;
+}
+.main-top i{
+  position: absolute;
+  right: 0;
+  margin: 10px 30px;
+  color: rgb(110, 109, 109);
+  cursor: pointer;
+}
+.main-skills{
+  display: flex;
+  margin-top: 20px;
+  margin-left: 60px;
+  align-items: space-between;
+  justify-items: center;
+}
+.main-skills .card{
+  width: 90%;
+  margin: 10px;
+  background: #ffffff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+  display: flex;
+
+}
+
+.notif-card{
+  text-align: justify;
+}
+.main-skills-h3{
+  margin: 10px;
+  font-size: 22px;
+  text-align: lcenter;
+  color: rgb(15, 49, 100);
+}
+
+.main-skills-Heda5{
+  font-size: 22px;
+  text-align: center;
+  color: #197d9f;
+  margin: 10px;
+  font-weight:700;
+
+}
+.main-skills .card button{
+  background: orangered;
+  color: #fff;
+  padding: 7px 15px;
+  border-radius: 10px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+.main-skills .card button:hover{
+  background: rgba(223, 70, 15, 0.856);
+}
+.main-skills .card i{
+  font-size: 22px;
+  padding: 10px;
+}
+
+.markReview{
+  margin-right: 20px;
+}
+/* Courses */
+
+.course {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+.main-course{
+  margin-top:20px ;
+}
+.course-box{
+  width: 1200px;
+  /* padding: 20px; */
+  margin: 20px;
+  background: #ffffff;
+  border-radius: (125, 125, 125)0px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.course-box ul{
+  list-style: none;
+  display: flex;
+}
+.course-box ul li{
+  
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+.course-box ul .active{
+  color: #000;
+  border-bottom: 1px solid #000;
+}
+.course-box .course{
+  display: flex;
+}
+.box{
+  width: 100%;
+  /* width: 33%; */
+  padding: 10px;
+  margin: 60px;
+  border-radius: 10px;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.box p{
+  font-size: 18px;
+  font-weight: 600;
+  
+}
+.box button{
+  background: #000;
+  color: #fff;
+  padding: 7px 10px;
+  border-radius: 10px;
+  margin-top: 3rem;
+  cursor: pointer;
+}
+.box button:hover{
+  background: rgba(25, 25, 25, 0.851);
+}
+.box i{
+  font-size: 7rem;
+  float: right;
+  margin: -20px 20px 20px 0;
+}
+
+
+/* Notification................................................... */
+
+
+
+.dash-content .activity .activity-data{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.activity .activity-data{
+    display: flex;
+}
+.activity-data .data{
+    display: flex;
+    flex-direction: column;
+    margin: 0 15px;
+}
+.activity-data .data-title{
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+.activity-data .data .data-list{
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 20px;
+    white-space: nowrap;
+    color: var(--text-color);
+}
+
+@media (max-width: 1000px) {
+    .activity .activity-data{
+        overflow-X: scroll;
+    }
+}
+
+.boldName{
+    font-size: 30px;
+    color: #1d7fb7;
+}
+
+.dashss{
+    color: red;
+}
+
+/* ...................................................................... */
+
+.boldText{
+  font-size: large;
+  font-weight: bold;
+  color: green;
+}
+.ButtonEdited {
+  background-color: rgb(13, 87, 89);
+  color: white; /* Text color for better contrast */
+  height: 50px; /* Adjust the height as needed */
+  width: 200px; /* Adjust the width as needed */
+  text-align: center;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px; /* Adjust the font size */
+  
+  margin-left: 80%;
+  margin-top: 30px;
+  margin-right: 40px;
+  margin-bottom: 30px;
+
+  padding-top: 10px;
+  
+  
+}
+
+.ButtonEdited:hover{
+  background-color: rgb(0, 0, 0);
+}
+
+
+.leftAlign{
+  text-align: left;
+}
+
+.row.box{
+  border: 1%;
+  width: 90%;
+  align-items: center;
+  
+}
+
+.information{
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.blue{
+  color: rgb(9, 118, 118);
+  font-weight: bold;
+  width: 70%;
+}
+
+
+/* User  */
+
+.buttonHover{
+  background-color: transparent;
+  border: 2px solid rgb(0, 115, 0);
+  color: rgb(0, 115, 0);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.buttonHover:hover{
+  background-color: rgb(0, 115, 0);
+  color: #fff;
+}
+
+.paddingDelete{
+  padding-left: 1%;
+}
+
+.paddingView{
+  padding-right: 0%;
+}
+
+.buttonHoverblock{
+  background-color: transparent;
+  border: 2px solid rgb(0, 115, 0);
+  color: rgb(0, 115, 0);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.buttonHoverblock:hover{
+
+  background-color: rgb(153, 0, 0);
+  color: #fff;
+}
+
+
+/* Delete Request */
+
+.rightVisitCampaign{
+
+  padding-left: 1%;
+  align-items: right;
+}
+
+.viewRequest{
+  margin-left: 2%;
+}
+
+.approve{
+  padding-left: 35%;
+}
+
+.decline{
+  padding-left: 25%;
+}
+
+/* ReportGIGS */
+
+
+/* Button container styles */
+.col-2,
+.col-md-2 {
+  margin-bottom: 10px;
+}
+
+/* Style for buttons */
+.btn.btn-dark.buttonForReport {
+  /* Add general button styles */
+  background-color: #006858;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for buttons */
+.btn.btn-dark.buttonForReport:hover {
+  background-color: #292e31;
+}
+
+/* Anchor (link) inside buttons */
+.btn.btn-dark.buttonForReport .report-btn {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+/* Hover effect for links inside buttons */
+.btn.btn-dark.buttonForReport .report-btn:hover {
+  color: #f8f9fa;
+}
+
+/* Style for the "Mark Reviewed" button */
+.review-btn.buttonForReport button {
+  /* Add specific styles for the "Mark Reviewed" button */
+  background-color: #3C6766;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.review-btn.buttonForReport button:hover {
+  background-color: #333333; /* Slightly lighter than #000000 */
+}
+
+
+/* Additional specific styles for buttons */
+/* Feel free to add more specific styles here */
+
+/* Responsive styles for different screen sizes */
+@media (max-width: 768px) {
+  .col-2,
+  .col-md-2 {
+    margin-bottom: 5px;
+  }
+}
+
+
+
+
+
+
+.viewh4{
+  padding-right: 18%;
+}
+
+.creatorh4{
+  padding-right: 5%;
+}
+
+/* CSS for the "View" link */
+.col-2 a.buttonGameBlack {
+  text-decoration: none; /* Remove underline */
+  display: inline-block;
+  padding: 10px 40px;
+  background-color: #3C6766; /* Button background color */
+  color: #fff; /* Text color */
+  border-radius: 4px; /* Rounded corners */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Smooth transition */
+}
+
+/* Hover effect for the "View" link */
+.col-2 a.buttonGameBlack:hover {
+  background-color: #000000; /* Darker color on hover */
+  color: #fff; /* Change text color on hover */
+}
+
+.leftdropdown{
+  padding-right: 5%;
+}
+
+.leftAprroveGigs{
+  padding-right: 5%;
+}
+
+.viewButtonDecline{
+  margin-left: 30%;
+}
+
+
+.aligntLeftNotifTime{
+  align-items: left;
+  padding-left: 15%;
+}
+
+.emailLeft{
+  padding-right: 40%;
+}
+
+.previousGigs{
+  margin-right: 3%;
+}
+
+
+.reduceGap .col-3,
+.reduceGap .col-2 {
+  padding-right: 5px; /* Adjust as needed */
+}
+
+
+.goDown{
+  margin-bottom: 10%;
+}
+
+.leftAlign{
+  align-items: left;
+  margin-right: 90%;
+
+}
+
+.leftAlignFollowedGigs{
+  align-items: left;
+  margin-right: 80%;
+  
+}
+
+
+
+
+.btn.btn-dark:hover {
+  background-color: #000000; /* Darker color on hover */
+  color: #fff; /* Change text color on hover */
+}
+
+.btn.btn-dark.report-btn {
+  background-color: #000000;
+  color: #FFFFFF;
+  /* Any other styles you want to add */
+}
+
+.btn-custom {
+  display: inline-block;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: #3498db;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.btn-custom:hover {
+  background-color: #3C6766;
+  color: whi;
+}
+
+.btn-custom a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.markReviewButton{
+  background-color: red;
+}
+
+a.viewOffer {
+  /* Your styles here */
+  /* For example: */
+  color: blue;
+  text-decoration: none;
+  font-weight: bold;
+  /* Add any other styles you want */
+}
+
+a.viewOffer:hover {
+  /* Your hover styles here */
+  color: #ffffff; /* For example, changes the color on hover */
+  /* Add any other hover styles you want */
+}
+
+.btn.btn-dark.btn-sm.dropdown-toggle.w-125:hover {
+  /* Your hover styles here */
+  background-color: #3C6766; /* For example, changes the background color on hover */
+  /* Add any other hover styles you want */
+}
+
+.btn.btn-dark.report-btn:hover {
+  /* Your hover styles here */
+  background-color: #3C6766; /* For example, changes the background color on hover */
+  /* Add any other hover styles you want */
+}
+
+a.report-btn {
+  /* Your default styles here */
+  /* For example: */
+  color: blue;
+  text-decoration: none;
+  font-weight: bold;
+  /* Add any other styles you want */
+}
+
+/* Hover effect */
+a.report-btn:hover {
+  /* Your hover styles here */
+  color: rgb(255, 255, 255); /* For example, changes the color on hover */
+  /* Add any other hover styles you want */
+}
+
+.btn.btn-dark.report-btn.decline:hover {
+  /* Your hover styles here */
+  background-color: red; /* For example, changes the background color on hover */
+  /* Add any other hover styles you want */
+}
+
+.btn.btn-dark.dropdown-toggle.unapproved-dropdown:hover {
+  /* Your hover styles here */
+  background-color: #3C6766; /* For example, changes the background color on hover */
+  /* Add any other hover styles you want */
+}
+
+/* Default button styles */
+.btn.btn-dark.buttonHover {
+  /* Your default styles here */
+  /* For example: */
+  background-color: black;
+  color: white;
+  /* Add any other styles you want */
+}
+
+/* Hover effect */
+.btn.btn-dark.buttonHover:hover {
+  /* Your hover styles here */
+  background-color: #3C6766; /* For example, changes the background color on hover */
+  /* Add any other hover styles you want */
+}
+
+.btn.btn-dark.px-3.buttonHoverblock{
+  background-color: black;
+  color: white;
+}
+
+.btn.btn-dark.px-3.buttonHoverblock:hover{
+  background-color: rgb(186, 0, 0);
+}
+
+
+/* Stat  */
+
+/* Icon styles */
+.stats .fas {
+  /* padding-right: 0.2rem; */
+}
+
+/* Rating styles */
+.rating,
+.rate,
+.customers,
+.followers {
+  /* padding-right: 0.8rem; */
+}
+
+/* Icon-specific styles */
+/* .star-icon::before {
+  content: "\f005";
+}
+
+.money-icon::before {
+  content: "\f0d6";
+}
+
+.user-icon::before {
+  content: "\f0c0";
+}
+
+.thumbs-icon::before {
+  content: "\f164";
+} */
+
+/* Button styles */
+.edit-btn {
+  text-decoration: none;
+  color: white;
+}
+
+.delete-btn {
+  text-decoration: none;
+  color: white;
+}
+
+
+.btn.btn-warning.edit-btn{
+  margin-top: 12%;
+  background-color: #006858;
+ border: #006858;
+}
+
+.btn.btn-warning.edit-btn:hover {
+  /* Styles on hover */
+  background-color: #004d44; /* Change the background color on hover */
+  border-color: #004d44; /* Change the border color on hover */
+  /* Add any other hover styles you want */
+}
+
+.fas.fa-pencil-alt{
+  color:#000000
+}
+
+.fas.fa-pencil-alt:hover{
+  color: white;
+}
+
+
+.btn.btn-danger.delete-btn{
+  background-color:  red;
+  border: black;
+}
+
+.btn.btn-danger.delete-btn:hover{
+  background-color: red;
+  color: white;
+}
+
+.fas.fa-trash-alt{
+  color:rgb(0, 0, 0);
+
+}
+
+.fas.fa-trash-alt:hover{
+  color: rgb(255, 255, 255);
+}

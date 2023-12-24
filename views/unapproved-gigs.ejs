@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('head.ejs', { title: 'Notifications' , stylesheet: '/css/unapproved-campaigns.css' }) %>
+<%- include('head.ejs', { title: 'Notifications' , stylesheet: '/css/users.css' }) %>
 
   <body>
     <%- include('navbar.ejs', { user: user }) %>
-      <div class="notifcontainer">
-        <div class="notifnav">
+    <div class="notifcontainer">
+      <div class="notifnav ">
         <ul>
           <li><a href="#" class="notiflogo notifa">
               <% if (profile.profile_img){ %>
@@ -18,11 +18,11 @@
           </li>
           <li>
             <a href="/profile" class="notifa">
-              <i class="fas fa-bell"></i>
+              <i class="fas fa-id-card"></i>
               <span class="notifnav-item">Profile</span>
             </a>
           </li>
-        
+ 
           <li>
             <a href="/notification" class="notifa">
               <i class="fas fa-bell"></i>
@@ -30,119 +30,113 @@
             </a>
           </li>
           <li><a href="/MyGigs" class="notifa">
-              <i class="fas fa-thumbs-up"></i>
+              <i class="fas fa-briefcase"></i>
               <span class="notifnav-item">My Gigs</span>
             </a></li>
           <li><a href="/FollowedGigs" class="notifa">
-              <i class="fas fa-thumbs-up"></i>
+              <i class="fas fa-heart"></i>
               <span class="notifnav-item">Followed Gigs</span>
             </a></li>
-        
-          <li><a href="/client-offers" class="notifa">
-              <i class="fas fa-user"></i>
+ 
+          <li><a href="/client-offers" class="notifa notifa-active">
+              <i class="fas fa-handshake"></i>
               <span class="notifnav-item">Offered Gigs</span>
             </a></li>
-        
+ 
           <li><a href="/running-gigs" class="notifa">
-              <i class="fas fa-user"></i>
+              <i class="fas fa-running"></i>
               <span class="notifnav-item">Running Gigs</span>
             </a></li>
-        
+ 
           <li><a href="/HiredGigs" class="notifa">
-              <i class="fas fa-user"></i>
+              <i class="fas fa-check-circle"></i>
               <span class="notifnav-item">Hired Gigs</span>
             </a></li>
-          <% if(user.is_admin) { %>
-            <li><a href="/unapproved-gigs" class="notifa notifa-active">
-                <i class="fas fa-users"></i>
+          <% if(user.is_admin==true) { %>
+            <li><a href="/unapproved-gigs" class="notifa">
+                <i class="fas fa-check-square"></i>
                 <span class="notifnav-item">Approve Gigs</span>
               </a></li>
             <li><a href="/reported-gigs" class="notifa">
-                <i class="fas fa-users"></i>
+                <i class="fas fa-exclamation-triangle"></i>
                 <span class="notifnav-item">Reported Gigs</span>
               </a></li>
             <li><a href="/delete-requests" class="notifa">
-                <i class="fas fa-users"></i>
+                <i class="fas fa-trash-alt"></i>
                 <span class="notifnav-item">Delete Requests</span>
               </a></li>
             <li><a href="/edit-requests" class="notifa">
-                <i class="fas fa-users"></i>
+                <i class="fas fa-pencil-alt"></i>
                 <span class="notifnav-item">Edit Requests</span>
               </a></li>
             <li><a href="/users" class="notifa">
-                <i class="fas fa-users"></i>
+                <i class="fas fa-users-cog"></i>
                 <span class="notifnav-item">Users</span>
               </a></li>
             <li><a href="/register-admin" class="notifa">
-                <i class="fas fa-users"></i>
+                <i class="fas fa-user-plus"></i>
                 <span class="notifnav-item">Add Admin</span>
               </a></li>
             <% } %>
         </ul>
-        </div>
-
-        <section class="main">
+      </div>
 
 
 
 
 
+          <div class="main-skills">
 
-          <section class="main-course">
-            <!-- <h1><b>My Story</b></h1> -->
-            <div class="course-box">
-              <ul>
-              </ul>
-              <div class="course">
-
-                <div class="activity-data">
-                  <div class="data names">
-                    <span class="data-title"><b class="boldName"><u></u>Approve Gigs</b></span>
-                    <div class="col-md-12">
+            <div class="profile-card">
+  
+              <span class="data-title boldName" >Approve Gigs</span>
+              <br>
                       <% if(gigs.length==0) { %>
                         <p>No gigs need approval</p>
                         <% } else {%>
                           <br>
                           <div class="row justify-content-between  ">
-                            <div class="col-1 padID">
-                              <h4 class="hedsUp">ID</h4>
+                           
+                            <div class="col-1 ">
+                              <h4 class="boldforName">ID</h4>
                             </div>
-                            <div class="col-2 padTitle">
-                              <h4 class="hedsUp">Title</h4>
+                            <div class="col-2 ">
+                              <h4 class="boldforName">Title</h4>
                             </div>
-                            <div class="col-3 padCreator">
-                              <h4 class="creatorh4 hedsUp">Creator</h4>
+                            <div class="col-3 ">
+                              <h4 class="creatorh4 boldforName">Creator</h4>
                             </div>
-                            <div class="col-2 padView">
-                              <h4 class="viewh4 hedsUp">View</h4>
+                            <div class="col-1 padView">
+                              <h4 class="viewh4 boldforName">View</h4>
                             </div>
-                            <div class="col-2 padDocuments">
-                              <h4 class="hedsUp">Documents</h4>
+                            <div class="col-2 ">
+                              <h4 class="boldforName">Documents</h4>
                             </div>
-                            <div class="col-1 padApprove">
-                              <h4 class="hedsUp">Approve</h4>
+                            <div class="col-1 ">
+                              <h4 class="boldforName leftAprroveGigs">Approve</h4>
                             </div>
-                            <div class="col-1 padDecline">
-                              <h4 class="hedsUp">Decline</h4>
+                            <div class="col-1 ">
+                              <h4 class="boldforName">Decline</h4>
                             </div>
 
-
-
+                            
+                            
                             <% for (let i=0; i!=gigs.length; i++) { %>
                               <div class="row justify-content-between borderInfo ">
+                                <hr>
                                 <div class="col-1">
                                   <%=gigs[i].id%>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-2">
                                   <%=gigs[i].title%>
                                 </div>
-                                <div class="col-2 emailLeft">
+                                <div class="col-3 ">
                                   <%=gigs[i].email%>
                                 </div>
 
-                                <div class="col-2">
+                                <div class="col-2 ">
                                   <a href="/browse-gigs/<%=gigs[i].id%>" target="_blank"
-                                    class="btn btn-sm btn-dark me-1 viewButton buttonGameBlack">View</a>
+                                    class="  buttonGameBlack">View</a>
                                 </div>
                                 <div class="col-2 checkDoc">
                                   <div class="btn-group">
@@ -153,7 +147,7 @@
                                     </button>
                                     <ul class="unapproved-dropdown-menu dropdown-menu">
                                       <% if (gigs[i].resume) { %>
-                                        <li><a class="dropdown-item" href="/uploads/<%= gigs[i].resume%>"
+                                        <li><a class="dropdown-item leftdropdown" href="/uploads/<%= gigs[i].resume%>"
                                             target="_blank">Resume</a></li>
                                         <% } %>
                                           <% if (gigs[i].institute_cerificate) { %>
@@ -182,16 +176,17 @@
 
                                     </ul>
                                   </div>
-
                                 </div>
+                                
+                        
                                
 
-                                  <form id="approve-form-<%= gigs[i].id %>" class="col-1"
+                                  <form id="approve-form-<%= gigs[i].id %>" class="col-1 me-0"
                                     action="/admin/approveGig/<%=gigs[i].id%>" method="post">
                                     <button form="approve-form-<%= gigs[i].id %>" type="submit"
                                       class="btn btn-sm btn-success approveButtonCheck viewButtonApprove">Approve</button>
                                   </form>
-                                  <form id="decline-form-<%= gigs[i].id %>" class="col-1"
+                                  <form id="decline-form-<%= gigs[i].id %>" class="col-1 me-0"
                                     action="/admin/declineGig/<%=gigs[i].id%>" method="post">
                                     <button type="submit" form="decline-form-<%= gigs[i].id %>"
                                       class="btn btn-sm btn-danger viewButtonDecline">Decline</button>
@@ -206,6 +201,7 @@
 
                           </div>
                           <% } %>
+                          
                     </div>
                   </div>
                 </div>

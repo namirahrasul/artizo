@@ -1,4 +1,5 @@
 // models/campaignModel.js
+const adminModel = require('./adminModel')
 const mysql = require('mysql2/promise') // Use 'mysql2' with promises
 
 // Configure your MySQL connection
@@ -17,7 +18,7 @@ const pool = mysql.createPool({
 async function getGigById(gigId) {
   try {
     const sql = `SELECT * FROM gigs  g INNER JOIN users u  ON g.email = u.email
-     WHERE g.id = ?`
+     WHERE g.id = ? and g.is_approved = 1 and g.is_deleted = 0 and g.is_reviewed = 1 and u.is_blocked = 0`
     const [rows, fields] = await pool.execute(
       sql,
       [gigId]
@@ -32,10 +33,67 @@ async function getGigById(gigId) {
   }
 }
 
+async function getApprovedGigById(gigId) {
+  try {
+    console.log(gigId)
+    const sql = `SELECT * FROM gigs  g INNER JOIN users u  ON g.email = u.email
+     WHERE g.id = ? and g.is_approved = 1 and g.is_deleted = 0 and g.is_reviewed = 1 and u.is_blocked = 0`
+    const [rows, fields] = await pool.execute(
+      sql,
+      [gigId]
+    )
+    if (rows.length === 1) {
+      return rows[0]
+    } else {
+      throw new Error('Gig not found')
+    }
+  } catch (error) {
+    throw error
+  }
+}
+
+async function getPreviousGigById(gigId) {
+  try {
+    console.log(gigId)
+    const sql = `SELECT * FROM gigs  g INNER JOIN users u  ON g.email = u.email
+     WHERE g.id = ? and g.is_approved = 0 and g.is_deleted = 0 and g.is_reviewed = 1 and u.is_blocked = 0`
+    const [rows, fields] = await pool.execute(
+      sql,
+      [gigId]
+    )
+    if (rows.length === 1) {
+      return rows[0]
+    } else {
+      throw new Error('Gig not found')
+    }
+  } catch (error) {
+    throw error
+  }
+}
+
+async function getEditedGigById(gigId) {
+  try {
+    const sql = `SELECT * FROM edit_gigs  g INNER JOIN users u  ON g.email = u.email
+     WHERE g.id = ? and g.is_approved = 0 and g.is_deleted = 0 and g.is_reviewed = 0 and u.is_blocked = 0`
+    const [rows, fields] = await pool.execute(
+      sql,
+      [gigId]
+    )
+    if (rows.length === 1) {
+      return rows[0]
+    } else {
+      throw new Error('Gig not found')
+    }
+  }
+  catch (error) {
+    throw error
+  }
+}
+
 
 async function getGigs() {
   try {
-    const sql = `SELECT * FROM gigs g INNER JOIN users u  ON g.email = u.email `
+    const sql = `SELECT * FROM gigs g INNER JOIN users u  ON g.email = u.email  where g.is_reviewed = 1 and g.is_deleted = 0 and g.is_approved = 1 and u.is_blocked = 0`
 
     const [rows, fields] = await pool.execute(sql) // Replace 'campaigns' with your table name
     return rows
@@ -165,7 +223,23 @@ async function filterGigCategory(category, minFollowers, maxFollowers, minHourly
   }
 }
 
+async function InsertReport(gigId, email, title, description, evidence) {
 
+  try {
+    console.log(gigId, email, title, description, evidence);
+    const sql = `INSERT INTO reports (gig_id, email, title, description, evidence) VALUES (?, ?, ?, ?, ?)`;
+    const [rows, fields] = await pool.execute(sql, [gigId, email, title, description, evidence]);
+    const [rows2, fields2] = await adminModel.getGigInfoById(gigId);
+    console.log(rows2.email)
+    const sql2 = 'INSERT INTO notifs (gig_id,email,type,description) VALUES (?, ?, ?, ?)';
+
+    const [rows3, fields3] = await pool.execute(sql2, [gigId, rows2.email, 'report', `Your gig <a class="notifcontent" href="/browse-gigs/${gigId}">${rows2.title}</a> has been reported. We will contact you after further investigation.`]);
+    const [rows4, fields4] = await pool.execute(sql2, [gigId, email, 'report', `Your report about the gig <a class="notifcontent" href="/browse-gigs/${gigId}">${rows2.title}</a> has been submitted.`]);
+    return rows4.affectedRows; // This will contain information about the affected rows
+  } catch (error) {
+    throw error;
+  }
+}
 
 
 module.exports = {
@@ -179,5 +253,10 @@ module.exports = {
   getMaxFollowers,
   getMaxHourlyRate,
   getMaxCustomers,
-  filterGigCategory
+  filterGigCategory,
+  InsertReport,
+  getPreviousGigById,
+  getEditedGigById,
+  getApprovedGigById
+
 }

@@ -1,29 +1,38 @@
+
+/* Import external styles */
 @import 'home.css';
+
+
 body {
     height: 100vh;
     position: relative;
-    background: white;
-    color: white;
+    background:  #DFEDDC;
+
 }
 
-/* .container{
+.containerforServices{
     width: 80%;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-} */
+    
+}
 
-.containerforServices hed2{
-    color: #000000;
+.hed2 {
+    padding-top: 20%;
+    margin-top: 20%;
+    margin-bottom: 5%;
+    color: rgb(0, 48, 37);
+    font-weight: 800; /* Increase the font weight for more boldness */
     text-align: center;
     text-transform: uppercase;
-    font-size: 35px;
-    margin-bottom: 25px;
+    font-size: 60px; /* Increase the font size */
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.containerforServices .services{
+
+.services{
     justify-content: space-around;
     display: flex;
     flex-wrap: wrap;
@@ -31,96 +40,70 @@ body {
 }
 
 
-
-.containerforServices .services .cardforServices {
-    height: 400px;
-    width: 330px;
+.cardforServices {
+    height: 370px;
+    width: 350px;
     text-align: center;
-    background: #000000; /* Updated background color */
-    padding: 30px 15px;
+    background: #ffffff; /* Updated background color */
+    padding: 20px 15px;
+    /* margin-top: 10%; */
     margin-bottom: 30px;
     border-radius: 15px; /* Slightly increased border-radius */
     cursor: pointer;
     transition: 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added box-shadow for depth */
+    box-shadow: 0 4px 12px rgba(51, 89, 58, 0.5); /* Darker box shadow for increased depth */
+
+   
+    
 }
 
-.containerforServices .services .cardforServices:hover {
-    background: #b30000; /* Updated background color on hover */
-    color: white; /* Text color on hover */
-}
 
-.containerforServices .services .cardforServices .titleforServices {
-    font-size: 24px; /* Increased titleforServices font size */
+ .titleforServices {
+    font-size: 32px; /* Slightly increased font size for emphasis */
+    color: rgb(2, 82, 63);
     margin-bottom: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Updated font family */
+    font-weight: bold;
+    letter-spacing: 1px; /* Increased letter spacing for readability and style */
 }
 
-.containerforServices .services .cardforServices p {
+
+
+.titleforServices + p{
     font-size: 16px; /* Adjusted paragraph font size */
     line-height: 1.6; /* Improved readability with increased line height */
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: normal;
+}
+
+.cardforServices:hover {
+   background-color: rgb(216, 240, 172)
 }
 
 
-.containerforServices .services .cardforServices .contentforServices{
-    transition: 0.3s;
-}
-
-.containerforServices .services .cardforServices:hover .contentforServices{
-    transform: scale(1.07);
-}
-
-.containerforServices .services .cardforServices .contentforServices .icon{
+ .icon{
     padding: 5px 0;
     color: white;
 }
 
-.containerforServices .services .cardforServices .contentforServices .icon i{
+ .icon i{
     font-size: 40px;
-}
-
-.containerforServices .services .cardforServices:hover .contentforServices .titleforServices{
-    color: white;
-}
-
-.containerforServices .services .cardforServices .contentforServices .titleforServices{
-    padding: 5px 0;
-    font-size: 24px;
-    font-weight: 500;
-    color: chocolate;
-    transition: 0.3s;
+    color: rgb(0, 116, 89);
 }
 
 
 
-.containerforServices .services .cardforServices .contentforServices .icon {
-    padding: 20px 0;
-    color: chocolate;
-    font-size: 50px;
-}
 
-.containerforServices .services .cardforServices .contentforServices .icon i {
-    font-size: inherit;
-}
+
+
+
 
 /* Adjustments for specific icons */
-.containerforServices .services .cardforServices .contentforServices .icon i.fa-mobile-alt {
+ .icon i.fa-mobile-alt {
     font-size: 48px;
 }
 
-.containerforServices .services .cardforServices .contentforServices .icon i.fa-paint-brush {
+ .icon i.fa-paint-brush {
     font-size: 48px;
-}
-
-/* Adjustments for specific titleforServices */
-.containerforServices .services .cardforServices .contentforServices .titleforServices {
-    padding: 10px 0;
-    font-size: 24px;
-    font-weight: 500;
-    color: chocolate;
-    transition: 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 

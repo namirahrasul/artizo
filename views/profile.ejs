@@ -17,7 +17,7 @@
               </a>
             </li>
             <li>
-              <a href="/profile" class="notifa notifa-active"  >
+              <a href="/profile" class="notifa notifa-active">
                 <i class="fas fa-bell"></i>
                 <span class="notifnav-item">Profile</span>
               </a>
@@ -52,7 +52,7 @@
                 <i class="fas fa-user"></i>
                 <span class="notifnav-item">Hired Gigs</span>
               </a></li>
-            <% if(user.is_admin==true) { %>
+            <% if(user.is_admin) { %>
               <li><a href="/unapproved-gigs" class="notifa">
                   <i class="fas fa-users"></i>
                   <span class="notifnav-item">Approve Gigs</span>
@@ -101,6 +101,14 @@
                 <%=user.email%>
               </p>
             </div>
+
+            <div class="row box">
+              <h4 class="col-3 leftAlign blue">Phone: </h4>
+              <p class="col-9 leftAlign information">
+                <%=user.phone%>
+              </p>
+            </div>
+
             <div class="row box">
               <h4 class="col-3 leftAlign blue">Bio: </h4>
               <p class="col-9 leftAlign information">
@@ -165,12 +173,13 @@
                   <% if (user.resume) { %>
                     <div class="row box">
                       <h4 class="col-3 leftAlign blue">Resume: </h4>
-                      <p class="information"><a href="/uploads/<%= user.resume %>" target="_blank">Resume</a></p>
+                      <p class="col-9 leftAlign information"><a href="/uploads/<%= user.resume %>"
+                          target="_blank">Resume</a></p>
                     </div>
                     <% } else { %>
                       <div class="row box">
-                        <h4 class="col-3 leftAlign leftAlign ">Resume: </h4>
-                        <p class="information leftAlign">No resumes added</p>
+                        <h4 class="col-3 leftAlign blue ">Resume: </h4>
+                        <p class="col-9 information leftAlign">No resumes added</p>
                       </div>
                       <% } %>
                         <div class="row box">

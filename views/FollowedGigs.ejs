@@ -1,95 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('head.ejs', { title: 'Notifications' , stylesheet: '/css/notif.css' }) %>
+<%- include('head.ejs', { title: 'Notifications' , stylesheet: '/css/MyGigs.css' }) %>
 
   <body>
     <%- include('navbar.ejs', { user: user }) %>
-      <div class="notifcontainer">
-        <div class="notifnav ">
-          <ul>
-            <li><a href="#" class="notiflogo notifa">
-                <% if (profile.profile_img){ %>
-                  <img src="/uploads/<%=profile.profile_img%>" alt="Profile">
-                  <% } else { %>
-                    <img src="/images/default.jpg" alt="Profile">
-                    <% } %>
-                      <span class="notifnav-item">DashBoard</span>
-              </a>
-            </li>
-            <li>
-              <a href="/profile" class="notifa">
-                <i class="fas fa-bell"></i>
-                <span class="notifnav-item">Profile</span>
-              </a>
-            </li>
-          
-            <li>
-              <a href="/notification" class="notifa">
-                <i class="fas fa-bell"></i>
-                <span class="notifnav-item">Notifications</span>
-              </a>
-            </li>
-            <li><a href="/MyGigs" class="notifa">
-                <i class="fas fa-thumbs-up"></i>
-                <span class="notifnav-item">My Gigs</span>
+    <div class="notifcontainer">
+      <div class="notifnav ">
+        <ul>
+          <li><a href="#" class="notiflogo notifa">
+              <% if (profile.profile_img){ %>
+                <img src="/uploads/<%=profile.profile_img%>" alt="Profile">
+                <% } else { %>
+                  <img src="/images/default.jpg" alt="Profile">
+                  <% } %>
+                    <span class="notifnav-item">DashBoard</span>
+            </a>
+          </li>
+          <li>
+            <a href="/profile" class="notifa">
+              <i class="fas fa-id-card"></i>
+              <span class="notifnav-item">Profile</span>
+            </a>
+          </li>
+ 
+          <li>
+            <a href="/notification" class="notifa">
+              <i class="fas fa-bell"></i>
+              <span class="notifnav-item">Notifications</span>
+            </a>
+          </li>
+          <li><a href="/MyGigs" class="notifa">
+              <i class="fas fa-briefcase"></i>
+              <span class="notifnav-item">My Gigs</span>
+            </a></li>
+          <li><a href="/FollowedGigs" class="notifa">
+              <i class="fas fa-heart"></i>
+              <span class="notifnav-item">Followed Gigs</span>
+            </a></li>
+ 
+          <li><a href="/client-offers" class="notifa notifa-active">
+              <i class="fas fa-handshake"></i>
+              <span class="notifnav-item">Offered Gigs</span>
+            </a></li>
+ 
+          <li><a href="/running-gigs" class="notifa">
+              <i class="fas fa-running"></i>
+              <span class="notifnav-item">Running Gigs</span>
+            </a></li>
+ 
+          <li><a href="/HiredGigs" class="notifa">
+              <i class="fas fa-check-circle"></i>
+              <span class="notifnav-item">Hired Gigs</span>
+            </a></li>
+          <% if(user.is_admin==true) { %>
+            <li><a href="/unapproved-gigs" class="notifa">
+                <i class="fas fa-check-square"></i>
+                <span class="notifnav-item">Approve Gigs</span>
               </a></li>
-            <li><a href="/FollowedGigs" class="notifa notifa-active">
-                <i class="fas fa-thumbs-up"></i>
-                <span class="notifnav-item">Followed Gigs</span>
+            <li><a href="/reported-gigs" class="notifa">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span class="notifnav-item">Reported Gigs</span>
               </a></li>
-          
-            <li><a href="/client-offers" class="notifa">
-                <i class="fas fa-user"></i>
-                <span class="notifnav-item">Offered Gigs</span>
+            <li><a href="/delete-requests" class="notifa">
+                <i class="fas fa-trash-alt"></i>
+                <span class="notifnav-item">Delete Requests</span>
               </a></li>
-          
-            <li><a href="/running-gigs" class="notifa">
-                <i class="fas fa-user"></i>
-                <span class="notifnav-item">Running Gigs</span>
+            <li><a href="/edit-requests" class="notifa">
+                <i class="fas fa-pencil-alt"></i>
+                <span class="notifnav-item">Edit Requests</span>
               </a></li>
-          
-            <li><a href="/HiredGigs" class="notifa">
-                <i class="fas fa-user"></i>
-                <span class="notifnav-item">Hired Gigs</span>
+            <li><a href="/users" class="notifa">
+                <i class="fas fa-users-cog"></i>
+                <span class="notifnav-item">Users</span>
               </a></li>
-            <% if(user.is_admin==true) { %>
-              <li><a href="/unapproved-gigs" class="notifa">
-                  <i class="fas fa-users"></i>
-                  <span class="notifnav-item">Approve Gigs</span>
-                </a></li>
-              <li><a href="/reported-gigs" class="notifa">
-                  <i class="fas fa-users"></i>
-                  <span class="notifnav-item">Reported Gigs</span>
-                </a></li>
-              <li><a href="/delete-requests" class="notifa">
-                  <i class="fas fa-users"></i>
-                  <span class="notifnav-item">Delete Requests</span>
-                </a></li>
-              <li><a href="/edit-requests" class="notifa">
-                  <i class="fas fa-users"></i>
-                  <span class="notifnav-item">Edit Requests</span>
-                </a></li>
-              <li><a href="/users" class="notifa">
-                  <i class="fas fa-users"></i>
-                  <span class="notifnav-item">Users</span>
-                </a></li>
-              <li><a href="/register-admin" class="notifa">
-                  <i class="fas fa-users"></i>
-                  <span class="notifnav-item">Add Admin</span>
-                </a></li>
-              <% } %>
-          </ul>
-        </div>
+            <li><a href="/register-admin" class="notifa">
+                <i class="fas fa-user-plus"></i>
+                <span class="notifnav-item">Add Admin</span>
+              </a></li>
+            <% } %>
+        </ul>
+      </div>
+ 
 
         <div class="main-skills">
 
           <div class="profile-card">
 
-            <span class="data-title"><b class="boldName"><u></u>Followed Gigs</b></span>
+            <span class="data-title"><b class="boldName leftAlignFollowedGigs"><u></u>Followed Gigs</b></span>
+            
             <% if(gigs.length==0) { %>
               <p>No gigs followed</p>
               <% } else {%>
-
+<br><br>
                 <% for (let i=0; i < gigs.length; i +=3) { %>
                   <div class="row mb-3 g-5">
                     <% for (let j=i; j < i + 3 && j < gigs.length; j++) { %>

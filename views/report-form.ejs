@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('head.ejs', { title: 'Edit Prelaunch' , stylesheet: '/css/prelaunch.css' }) %>
+<%- include('head.ejs', { title: 'Report Gig' , stylesheet: '/css/prelaunch.css' }) %>
 
   <body>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -13,7 +13,7 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-6">
-            <form id="user" action="/profile/report/<%=campaignId%>" method="post" enctype="multipart/form-data">
+            <form id="user" action="/gig/report/<%=gigId%>" method="post" enctype="multipart/form-data">
               <hr />
               <p class="base"><b>Report Campaign</b></p>
               <hr />
@@ -22,7 +22,7 @@
                 <label class="hed" for="campaignTitle">Report Title</label><label class="star hed">*</label>
 
                 <input type="text" class="form-control" id="title" name="title"
-                  placeholder="Give a consise title of report" required />
+                  placeholder="Give a concise title of report" required />
 
                 <br />
               </div>

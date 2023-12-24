@@ -1,4 +1,19 @@
 @import 'home.css';
+
+.star-rating {
+  display: inline-block;
+}
+
+.star-rating i {
+  font-size: 1rem; /* Adjust the size of the stars */
+  color: #ffc107; /* Star color */
+  margin-right: 2px; /* Adjust the spacing between stars */
+}
+
+.star-rating .far {
+  color: #ddd; /* Empty star color */
+}
+
  .gap{
   padding-top:80px;
  }
@@ -12,6 +27,18 @@ body, button, div, a {
 .stats{
   color:  rgb(13, 87, 89);
 }
+.linkProfile{
+  text-decoration: none;
+  cursor: pointer;
+
+}
+
+.linkProfile:hover{
+  text-decoration: none;
+  cursor: pointer;
+  color: #036509;
+}
+
 
 /* Style the dropdown container */
 .dropdown {
@@ -187,7 +214,7 @@ nav a {
 }
 
 .card {
-    height: 550px;
+    height: 750px;
     text-align: center;
     display: flex;
     flex-direction: column;

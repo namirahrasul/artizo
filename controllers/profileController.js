@@ -19,13 +19,8 @@ async function getMyGigsProfile(req, res) {
   // Get notification details by email using your model function
   const gigs = await profileModel.getMyGigs(myCamp);
   console.log(gigs);
-  if (gigs === null) {
-   // Handle the case where no notification data is found
-   // You can render the page without that information or show a message
-   res.render('MyGigs', { user: user, gigs: null , profile: profile });
-  } else {
    res.render('MyGigs', { user: user, gigs: gigs, profile: profile });
-  }
+  
 
  } catch (error) {
   console.error('Error fetching gig data:', error);
@@ -86,18 +81,15 @@ async function getNotifications(req, res) {
  const notif = req.session.user.email;
  const user = await profileModel.getProfile(req.session.user.email)
  const profile = await profileModel.getProfileImg(req.session.user.email);
- console.log(notif);
+ console.log("email", notif);
+ 
  try {
   // Get notification details by email using your model function
   const notification = await profileModel.getNotif(notif);
   console.log(notification);
-  if (notification === null) {
-   // Handle the case where no notification data is found
-   // You can render the page without that information or show a message
-   res.render('notification', { user: user, notification: null , profile: profile });
-  } else {
-   res.render('notification', { user: user, notification , profile: profile });
-  }
+  
+   res.render('notification', { user: user, notification: notification , profile: profile });
+ 
  } catch (error) {
   console.error('Error fetching notification data:', error);
   res.status(500).send('Internal Server Error');
@@ -106,14 +98,11 @@ async function getNotifications(req, res) {
 
 async function getOutsideProfile(req, res) {
  const email = req.params.email;
- console.log(req.params)
- console.log(req.query)
- console.log(req.body)
  try {
-  const profile = await profileModel.getProfile(email);
+  const profile = await profileModel.getOutsideProfile(email);
   const count_followed = await profileModel.getCountOfFollowedGigs(email);
   const count_created = await profileModel.getCountOfCreatedGigs(email);
-  const count_backed = await profileModel.getCountOfHiredGigs(email);
+  const count_backed = await profileModel.getCountOfCustomer(email);
   res.render('outside-profile', { user: req.session.user, profile: profile, followed: count_followed, created: count_created, backed: count_backed })
  }
  catch (error) {
@@ -178,6 +167,18 @@ async function getAllGigOfferOfFreelancer(req, res) {
   res.status(500).send('Internal Server Error');
  }
 }
+async function viewClientOffer(req, res) {
+  try {
+    const gigId = req.params.gigId;
+    const offer = await profileModel.getCompletedClientOffer(gigId);
+    console.log(offer);
+     res.render('completed-client-offer', { user: req.session.user, offer: offer });
+
+  } catch (error) {
+    console.error('Error fetching followed gig data:', error);
+    res.status(500).send('Internal Server Error');
+  }
+}
 
 
 
@@ -191,5 +192,6 @@ module.exports = {
  getOutsideProfile,
  getEditGigForm,
  getFollowedGigsProfile,
- getAllGigOfferOfFreelancer
+  getAllGigOfferOfFreelancer,
+  viewClientOffer
 }

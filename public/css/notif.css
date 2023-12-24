@@ -11,6 +11,19 @@
   
 }
 
+.notifcontent{
+  color:#054d34;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+}
+ .notifcontent-submit{
+  color:#054d34;
+  font-weight: bold;
+  cursor: default;
+  text-decoration: none;
+}
+
 body{
   background: #9aaba9;;
 }
@@ -115,7 +128,7 @@ body{
   bottom: 0;
 }
  .profile-card {
-  width: 800px;
+  width: 1100px;
   background-color: rgb(255, 255, 255);
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -165,12 +178,12 @@ body{
 
 .campaign-card {
     height: 520px;
-    text-align: center;
+    text-align: justify;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between; /* Vertically space contents evenly */
-    width: 360px;
+    width: 300px;
    
     padding: 3px 8px 3px 8px; /* Top padding reduced to create space above the button */
 }
@@ -227,6 +240,10 @@ body{
   box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
   display: flex;
 
+}
+
+.notif-card{
+  text-align: justify;
 }
 .main-skills-h3{
   margin: 10px;

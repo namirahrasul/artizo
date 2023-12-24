@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head.ejs', { title: 'Notifications' , stylesheet: '/css/unapproved-campaigns.css' }) %>
+
+  <body>
+    <%- include('navbar.ejs', { user: user }) %>
+      <div class="notifcontainer">
+        <div class="notifnav">
+        <ul>
+          <li><a href="#" class="notiflogo notifa">
+              <% if (profile.profile_img){ %>
+                <img src="/uploads/<%=profile.profile_img%>" alt="Profile">
+                <% } else { %>
+                  <img src="/images/default.jpg" alt="Profile">
+                  <% } %>
+                    <span class="notifnav-item">DashBoard</span>
+            </a>
+          </li>
+          <li>
+            <a href="/profile" class="notifa">
+              <i class="fas fa-bell"></i>
+              <span class="notifnav-item">Profile</span>
+            </a>
+          </li>
+        
+          <li>
+            <a href="/notification" class="notifa">
+              <i class="fas fa-bell"></i>
+              <span class="notifnav-item">Notifications</span>
+            </a>
+          </li>
+          <li><a href="/MyGigs" class="notifa">
+              <i class="fas fa-thumbs-up"></i>
+              <span class="notifnav-item">My Gigs</span>
+            </a></li>
+          <li><a href="/FollowedGigs" class="notifa">
+              <i class="fas fa-thumbs-up"></i>
+              <span class="notifnav-item">Followed Gigs</span>
+            </a></li>
+        
+          <li><a href="/client-offers" class="notifa">
+              <i class="fas fa-user"></i>
+              <span class="notifnav-item">Offered Gigs</span>
+            </a></li>
+        
+          <li><a href="/running-gigs" class="notifa">
+              <i class="fas fa-user"></i>
+              <span class="notifnav-item">Running Gigs</span>
+            </a></li>
+        
+          <li><a href="/HiredGigs" class="notifa">
+              <i class="fas fa-user"></i>
+              <span class="notifnav-item">Hired Gigs</span>
+            </a></li>
+          <% if(user.is_admin) { %>
+            <li><a href="/unapproved-gigs" class="notifa notifa-active">
+                <i class="fas fa-users"></i>
+                <span class="notifnav-item">Approve Gigs</span>
+              </a></li>
+            <li><a href="/reported-gigs" class="notifa">
+                <i class="fas fa-users"></i>
+                <span class="notifnav-item">Reported Gigs</span>
+              </a></li>
+            <li><a href="/delete-requests" class="notifa">
+                <i class="fas fa-users"></i>
+                <span class="notifnav-item">Delete Requests</span>
+              </a></li>
+            <li><a href="/edit-requests" class="notifa">
+                <i class="fas fa-users"></i>
+                <span class="notifnav-item">Edit Requests</span>
+              </a></li>
+            <li><a href="/users" class="notifa">
+                <i class="fas fa-users"></i>
+                <span class="notifnav-item">Users</span>
+              </a></li>
+            <li><a href="/register-admin" class="notifa">
+                <i class="fas fa-users"></i>
+                <span class="notifnav-item">Add Admin</span>
+              </a></li>
+            <% } %>
+        </ul>
+        </div>
+
+        <section class="main">
+
+
+
+
+
+
+          <section class="main-course">
+            <!-- <h1><b>My Story</b></h1> -->
+            <div class="course-box">
+              <ul>
+              </ul>
+              <div class="course">
+
+                <div class="activity-data">
+                  <div class="data names">
+                    <span class="data-title"><b class="boldName"><u></u>Approve Gigs</b></span>
+                    <div class="col-md-12">
+                      <% if(gigs.length==0) { %>
+                        <p>No gigs need approval</p>
+                        <% } else {%>
+                          <br>
+                          <div class="row justify-content-between  ">
+                            <div class="col-1 padID">
+                              <h4 class="hedsUp">ID</h4>
+                            </div>
+                            <div class="col-2 padTitle">
+                              <h4 class="hedsUp">Title</h4>
+                            </div>
+                            <div class="col-3 padCreator">
+                              <h4 class="creatorh4 hedsUp">Creator</h4>
+                            </div>
+                            <div class="col-2 padView">
+                              <h4 class="viewh4 hedsUp">View</h4>
+                            </div>
+                            <div class="col-2 padDocuments">
+                              <h4 class="hedsUp">Documents</h4>
+                            </div>
+                            <div class="col-1 padApprove">
+                              <h4 class="hedsUp">Approve</h4>
+                            </div>
+                            <div class="col-1 padDecline">
+                              <h4 class="hedsUp">Decline</h4>
+                            </div>
+
+
+
+                            <% for (let i=0; i!=gigs.length; i++) { %>
+                              <div class="row justify-content-between borderInfo ">
+                                <div class="col-1">
+                                  <%=gigs[i].id%>
+                                </div>
+                                <div class="col-3">
+                                  <%=gigs[i].title%>
+                                </div>
+                                <div class="col-2 emailLeft">
+                                  <%=gigs[i].email%>
+                                </div>
+
+                                <div class="col-2">
+                                  <a href="/browse-gigs/<%=gigs[i].id%>" target="_blank"
+                                    class="btn btn-sm btn-dark me-1 viewButton buttonGameBlack">View</a>
+                                </div>
+                                <div class="col-2 checkDoc">
+                                  <div class="btn-group">
+                                    <button
+                                      class="btn btn-dark btn-sm dropdown-toggle unapproved-dropdown docButton buttonGameBlack w-125"
+                                      type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                      Documents
+                                    </button>
+                                    <ul class="unapproved-dropdown-menu dropdown-menu">
+                                      <% if (gigs[i].resume) { %>
+                                        <li><a class="dropdown-item" href="/uploads/<%= gigs[i].resume%>"
+                                            target="_blank">Resume</a></li>
+                                        <% } %>
+                                          <% if (gigs[i].institute_cerificate) { %>
+                                            <li><a class="dropdown-item"
+                                                href="/uploads/<%= gigs[i].institute_certificate%>" target="_blank">NID
+                                                Backside</a></li>
+                                            <% } %>
+                                              <% if (gigs[i].achievements_certificates) { %>
+                                                <li><a class="dropdown-item"
+                                                    href="/uploads/<%=gigs[i].achievements_certificates%>"
+                                                    target="_blank">Achievements</a></li>
+                                                <% } %>
+                                                  <% if (gigs[i].testimonials) { %>
+                                                    <li><a class="dropdown-item"
+                                                        href="/uploads/<%=gigs[i].testimonials%>"
+                                                        target="_blank">Business
+                                                        Plan</a>
+                                                    </li>
+                                                    <% } %>
+                                                      <% if (gigs[i].previous_work) { %>
+                                                        <li><a class="dropdown-item"
+                                                            href="/uploads/<%=gigs[i].previous_work%>"
+                                                            target="_blank">Previous_Work</a>
+                                                        </li>
+                                                        <% } %>
+
+                                    </ul>
+                                  </div>
+
+                                </div>
+                               
+
+                                  <form id="approve-form-<%= gigs[i].id %>" class="col-1"
+                                    action="/admin/approveGig/<%=gigs[i].id%>" method="post">
+                                    <button form="approve-form-<%= gigs[i].id %>" type="submit"
+                                      class="btn btn-sm btn-success approveButtonCheck viewButtonApprove">Approve</button>
+                                  </form>
+                                  <form id="decline-form-<%= gigs[i].id %>" class="col-1"
+                                    action="/admin/declineGig/<%=gigs[i].id%>" method="post">
+                                    <button type="submit" form="decline-form-<%= gigs[i].id %>"
+                                      class="btn btn-sm btn-danger viewButtonDecline">Decline</button>
+                                  </form>
+                              </div>
+                              <div class="row">
+                                <div class="col-12">
+                                  <br>
+                                </div>
+                              </div>
+                              <% } %>
+
+                          </div>
+                          <% } %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </section>
+        </section>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+  </body>
+
+</html>

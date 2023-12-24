@@ -40,15 +40,17 @@ router.post('/approveGig/:gigId', async (req, res) => {
  }
 })
 
-router.post('/review-report/:rId', async (req, res) => {
- const id = req.params.rId
+router.post('/review-report/:rid', async (req, res) => {
+  console.log('reviewing report')
+  console.log(req.params)
+ const id = req.params.rid
  console.log(id)
  try {
   const email = req.session.user.email;
    const affectedRows = await adminModel.markGigsReviewed(id);
   console.log(affectedRows);
   // const campaigns = await adminModel.getNotApprovedCampaigns();
-  res.redirect('/reported-campaigns');
+   res.redirect('/reported-gigs');
 
 
  } catch (error) {
@@ -56,8 +58,8 @@ router.post('/review-report/:rId', async (req, res) => {
  }
 })
 
-router.post('/decline-delete/:campaignId', async (req, res) => {
- const id = req.params.campaignId
+router.post('/decline-delete/:gigId', async (req, res) => {
+ const id = req.params.gigId
  console.log(id)
  try {
   const affectedRows = await adminModel.declineDelete(id);
@@ -72,7 +74,7 @@ router.post('/decline-delete/:campaignId', async (req, res) => {
 })
 
 router.post('/approve-delete/:gigId', async (req, res) => {
- const id = req.params.campaignId
+ const id = req.params.gigId
  console.log(id)
  try {
   const affectedRows = await adminModel.approveDelete(id);
@@ -86,7 +88,7 @@ router.post('/approve-delete/:gigId', async (req, res) => {
 })
 
 router.post('/decline-edit/:gigId', async (req, res) => {
- const id = req.params.campaignId
+ const id = req.params.gigId
  console.log(id)
  try {
   const affectedRows = await adminModel.declineEdit(id);
@@ -101,7 +103,7 @@ router.post('/decline-edit/:gigId', async (req, res) => {
 })
 
 router.post('/approve-edit/:gigId', async (req, res) => {
- const id = req.params.campaignId
+ const id = req.params.gigId
  console.log(id)
  try {
   const affectedRows = await adminModel.approveEdit(id);

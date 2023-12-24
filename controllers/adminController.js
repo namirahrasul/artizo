@@ -31,8 +31,6 @@ async function getNotApprovedGigsAdmin(req, res) {
     const gigs = await adminModel.getNotApprovedGigs();
     const user = await profileModel.getProfile(req.session.user.email)
     const profile = await profileModel.getProfileImg(req.session.user.email);
-    
-    
     res.render('unapproved-gigs', { user: user, gigs: gigs, profile });
   }
 
@@ -112,8 +110,8 @@ async function viewGigReport(req, res) {
 }
 async function getDeleteForm(req, res) {
   try {
-    const campaignId = req.params.campaignId;
-    res.render('delete-form', { user: req.session.user, campaignId });
+    const gigId = req.params.gigId;
+    res.render('delete-form', { user: req.session.user, gigId });
   }catch (error) {
     console.error('Error fetching campaign data:', error);
     res.status(500).send('Internal Server Error');

@@ -139,13 +139,13 @@
 
                  <button  class="btn btn-dark" style="margin-left:1px; margin-right:5px">
                  
-                    <a class="report-btn" href="/browse-gigs/<%=gig[i].gig_id%>">View
+                    <a class="report-btn" href="/browse-gigs/<%=reports[i].gig_id%>">View
                      Gig</a>
                     
                  </button>
                 </div>
                 <div class="col-md-2 review-btn" style="margin-left:5px;margin-right:0px">
-                 <form class="" action="admin/review/<%=reports[i].rid%>" method="post">
+                 <form class="" action="/admin/review-report/<%=reports[i].rid%>" method="post">
                   <button type="submit" class="btn btn-dark report-btn">Mark Reviewed</button>
                  </form>
                 </div>

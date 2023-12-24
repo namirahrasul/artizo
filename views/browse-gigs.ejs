@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('head.ejs', { title: 'Browse Campaigns' , stylesheet: '/css/browse-campaigns.css' }) %>
+<%- include('head.ejs', { title: 'Browse Gigs' , stylesheet: '/css/browse-campaigns.css' }) %>
 
   <body>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -184,33 +184,57 @@
                               <div class="card-actions">
                                 <hr />
                                 <div class="row align-items-center">
-                                  <img src="/uploads/<%=gigs[j].profile_img%>" alt="Campaign 1"
-                                    class="betImage col-4" />
-                                  <p class="col-8 leftAlign"><b>
-                                      <%= gigs[j].name %>
-                                    </b></p>
+                                  <% if (gigs[j].profile_img){%>
+                                    <img src="/uploads/<%=gigs[j].profile_img%>" alt="Campaign 1"
+                                      class="betImage col-4" />
+                                    <%}else {%>
+                                      <img src="/images/default.jpg" alt="Campaign 1" class="betImage col-4" />
+                                      <%}%>
+                                        <p class="col-8 leftAlign"><a class="linkProfile"
+                                            href="/user/<%=gigs[j].email%>"><b>
+                                              <%= gigs[j].name %>
+                                            </b></a></p>
                                 </div>
-
+                                
                                 <a href="/browse-gigs/<%= gigs[j].id %>" class="btn btn-dark mb-2 mt-2 ">Learn More</a>
-                                <div class="stats">
-                                  <p class="text-center fs-sm-5">
-                                    <i class="fas fa-star" style="padding-right: 0.2rem"></i>
-                                    <span style="padding-right: 0.8rem">
-                                      <%= gigs[j].rating %>/5
-                                    </span>
+                                <div class="stats d-flex">
+                                  <div class="row">
+                                    
+                                  
+                                  <div class="text-center fs-sm-5 col-12">
+                                  
                                     <i class="fas fa-money-bill" style="padding-right: 0.2rem"></i>
                                     <span style="padding-right: 0.8rem">Tk <%= gigs[j].hourly_rate %>/hr</span>
-                                  </p>
+                                  </div>
+                                  </div>
+                                  <div class="row">
+                                  <div class="col-8">
+                                  <div class="text-center fs-sm-5 star-rating" data-rating="<%= gigs[j].rating %>">
+                                    
+                                      <!-- This element will be used by the star rating script -->
+                                  </div>
+                                  </div>
+                                  <div class="col-4">
+                                 <%= gigs[j].rating %>/5
+                                    </div>
+                                  </div>
+                                  <div class="row">
                                   <p class="text-center fs-sm-5">
                                     <i class="fas fa-users" style="padding-right: 0.2rem"></i>
                                     <span style="padding-right: 0.8rem">
                                       <%= gigs[j].no_customers %> customers
                                     </span>
+                                    </p>
+                                  </div>
+                                  <div class="row">
+                                  <p class="text-center fs-sm-5">
                                     <i class="fas fa-thumbs-up" style="padding-right: 0.2rem"></i>
                                     <span style="padding-right: 0.8rem">
                                       <%= gigs[j].no_followers %> followers
                                     </span>
                                   </p>
+                                  </div>
+                                  
                                 </div>
                               </div>
                             </div>
@@ -228,18 +252,31 @@
 
       <!-- Include Vue.js and your custom Vue component -->
       <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
       <script>
-        new Vue({
-          el: "#app",
-          data: {},
-          methods: {},
+        document.addEventListener('DOMContentLoaded', function () {
+          const starRatingContainers = document.querySelectorAll('.star-rating');
+
+          starRatingContainers.forEach(container => {
+            const rating = parseFloat(container.dataset.rating);
+            const roundedRating = Math.round(rating * 2) / 2; // Round to the nearest 0.5
+
+            for (let i = 1; i <= 5; i++) {
+              const star = document.createElement('i');
+              if (i <= roundedRating) {
+                star.classList.add('fas', 'fa-star');
+              } else if (i - 0.5 === roundedRating) {
+                star.classList.add('fas', 'fa-star-half-alt');
+              } else {
+                star.classList.add('far', 'fa-star'); // Empty star
+              }
+              container.appendChild(star);
+            }
+          });
         });
       </script>
 
-      <!-- <footer>
-        <p>&copy; 2023 Your Company. All Rights Reserved.</p>
-    </footer> -->
+
+
   </body>
 
 </html>

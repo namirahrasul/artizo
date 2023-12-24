@@ -114,15 +114,15 @@
                       <% for (let i=0; i < offers.length; i++) { %>
                         <div class="row justify-content-between expand">
                           <div class="col-3 me-5">
-                            <%=offers[i].name%>
+                            <%=offers[i].gig_name%>
                           </div>
                           <div class="col-3 me-5">
                             <%=offers[i].client%>
                           </div>
                           <div class="col-2 me-1">
-                            <a href="/gig-offers/view/<%=offers[i].id%>" class=" text-white mb-1 mt-1"> <button
+                            <a href="/accepted-client-offer/<%=offers[i].id%>" class=" text-white mb-1 mt-1"> <button
                                 class="btn btn-dark">View
-                               Offer</button>
+                                Offer</button>
                             </a>
                           </div>
                           <div class="col-2 ms-5">
@@ -132,7 +132,7 @@
                             </a>
                           </div>
                           <div class="col-2 ms-5">
-                          
+
                             <a href="/gig-offers/decline/<%=offers[i].id%>" class=" text-white mb-1 mt-1"> <button
                                 class="btn btn-dark px-3">Decline</button>
                             </a>

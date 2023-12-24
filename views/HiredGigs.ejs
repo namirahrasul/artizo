@@ -122,12 +122,12 @@
                                   <div class="row justify-content-between expand">
                                     <div class="col-4 ">
                                       <a href="/browse-gigs/<%=offers[i].gig_id%>" class="text-black">
-                                        <%=offers[i].gig_title%>
+                                        <%=offers[i].title%>
                                       </a>
                                     </div>
               
                                     <div class="col-4 ">
-                                      <a href="/browse-gigs/<%=offers[i].freelancer_email%>" class="text-black">
+                                      <a href="/user/<%=offers[i].freelancer_email%>" class="text-black">
                                         <%=offers[i].freelancer_name%>
                                       </a>
                                     </div>
@@ -143,12 +143,13 @@
               
                                     </div>
                                   </div>
-                                  <div class="col-md-2 review-btn">
-                                    <% if(offers[i].status) { %>
-                                      <button type="submit" class="btn btn-dark report-btn"><a href="/browse-gigs/<%=offers[i].gig_id%>">Completed</a></button>
-                                      <% } else { %>
-                                        <button type="submit" class="btn btn-dark report-btn">Running</button>
-                                    <%}%>
+
+                                  <div class="col-md-2 ">
+                                    <% if(offers[i].status==='COMPLETED'){%>
+                                    <a href=""><%=offers[i].status%></a>
+                                    <%} else {%>
+                                    <p><%=offers[i].status%></p>
+                                    <%} %>
                                   </div>
                           </div>
                           <div class="row">
@@ -158,6 +159,7 @@
                           </div>
                           <% } %>
                             <% } %>
+                         
                         </div>
               
                       </div>

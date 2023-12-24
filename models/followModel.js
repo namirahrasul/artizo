@@ -1,5 +1,6 @@
 const mysql = require('mysql2/promise')
 const path = require('path')
+const gigModel = require('../models/gigModel')
 
 const pool = mysql.createPool({
   host: 'localhost',
@@ -12,16 +13,16 @@ const pool = mysql.createPool({
   queueLimit: 0,
 })
 // Async function to insert data into the follow table
-async function insertFollowData(follower, gig_id) {
+async function insertFollowData(follower, cid) {
   try {
     // Define the SQL query
     const sql = 'INSERT INTO follow (follower, gig_id) VALUES (?, ?)';
 
     // Execute the SQL query with the provided data using pool.query
-    const [rows] = await pool.query(sql, [follower, gig_id])
+    const [rows] = await pool.query(sql, [follower, cid])
 
     // Return the inserted row
-    return rows
+    return rows.insertId
   } catch (error) {
     if (error.code === 'ER_DUP_ENTRY') {
       // Handle duplicate key error
@@ -30,10 +31,51 @@ async function insertFollowData(follower, gig_id) {
     }
     console.error('Error inserting data into follow table:', error)
     throw error
+  }
 }
+// Async function to insert data into the follownotif table
+async function insertFollowNotif(follower,gig_id) {
+  try {
+    // Define the SQL query
+    
+    const rows = await gigModel.getGigById(gig_id);
+    
+    const sql3 = 'SELECT * FROM users WHERE email = ?'
+    const [rows3, fields3] = await pool.query(sql3, [follower])
+    
+    const sql = 'INSERT INTO notifs (gig_id,email,type,description) VALUES (?, ?,?,?)';
+    const [row5, fields5] = await pool.query(sql, [gig_id, rows.email, "follow", ` <a class="notifcontent" href="/user/${follower}">${rows3[0].name}</a> followed your gig  <a class="notifcontent" href="/browse-gigs/${gig_id}">${rows.title}</a>`])
+
+    // Return the inserted row
+    return rows.affectedRows
+  } catch (error) {
+    if (error.code === 'ER_DUP_ENTRY') {
+      // Handle duplicate key error
+      console.error(`Duplicate key error: ${follower} already exists.`);
+      return null; // You can return null or some other value to indicate the error
+    }
+    console.error('Error inserting data into follow table:', error)
+    throw error
+  }
 }
 
-async function updateGigFollowersById(gigId) {
+async function deleteFollowData(follower, cid) {
+  try {
+    // Define the SQL query to delete follow data
+    const sql = 'DELETE FROM follow WHERE follower = ? and gig_id = ?';
+
+    // Execute the SQL query with the provided data using pool.query
+    const [rows] = await pool.query(sql, [follower, cid]);
+
+    // Return the result of the deletion operation
+    return rows;
+  } catch (error) {
+    console.error('Error deleting data from follow table:', error);
+    throw error;
+  }
+}
+
+async function InsertGigFollowersById(id) {
   try {
 
 
@@ -41,7 +83,7 @@ async function updateGigFollowersById(gigId) {
     const sql = 'UPDATE gigs SET no_followers = no_followers + 1 WHERE id = ?';
 
     // Execute the update query with the provided uniqueId
-    const [rows, fields] = await pool.query(sql, [gigId]);
+    const [rows, fields] = await pool.query(sql, [id]);
 
     return rows.affectedRows; // Return the number of affected rows (1 if successful, 0 if no rows were updated)
   } catch (error) {
@@ -51,33 +93,40 @@ async function updateGigFollowersById(gigId) {
 }
 
 
-
-
-// Async function to retrieve data from the tables for notification
-async function getNotifById(notif) {
+async function deleteGigFollowersById(id) {
   try {
-    const sql = `SELECT
-    f.fid,
-    u.name,
-    g.title,
-    g.email,
-    TIME(f.ftime) as tt,
-    CONCAT(
-      DATE_FORMAT(f.ftime, '%D'), 
-      DATE_FORMAT(f.ftime, ' %M')
-    ) as dd
-  FROM follow as f
-  JOIN gigs as g ON f.gig_id = g.id
-  JOIN users as u ON f.follower = u.email
-  where g.email=(?)
-  ORDER BY ftime`;
-    const [rows, fields] = await pool.execute(sql,[notif]) 
-    return rows
+
+
+    // Define the SQL update query
+    const sql = 'UPDATE gigs SET no_followers = no_followers - 1 WHERE id = ?';
+
+    // Execute the update query with the provided uniqueId
+    const [rows, fields] = await pool.query(sql, [id]);
+
+    return rows.affectedRows; // Return the number of affected rows (1 if successful, 0 if no rows were updated)
+  } catch (error) {
+    console.error('Error updating data:', error);
+    throw error;
+  }
+}
+
+
+async function checkIfFollowing(followerId, gigId) {
+  try {
+    const sql = `select count(*) as count from follow where follower = ? and gig_id = ? `
+    const [rows, fields] = await pool.execute(
+      sql,
+      [followerId, gigId]
+    )
+    // Assuming rows[0].count is the count value returned by the query
+    return rows;
+
+    // Return true if count is 1, false otherwise
+
   } catch (error) {
     throw error
   }
 }
-
 
 
 async function getMyFollow(email){
@@ -94,7 +143,11 @@ async function getMyFollow(email){
 
 module.exports = {
   insertFollowData,
-  getNotifById,
+  insertFollowNotif,
   getMyFollow, 
-  updateGigFollowersById,
+  InsertGigFollowersById,
+  deleteFollowData,
+  checkIfFollowing,
+  deleteGigFollowersById
+
 }

@@ -13,7 +13,7 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-6">
-            <form id="user" action="/profile/submit" method="post" enctype="multipart/form-data">
+            <form id="user" action="/profile/edit" method="post" enctype="multipart/form-data">
               <hr />
               <p class="base">Profile</p>
               <hr />
@@ -23,14 +23,11 @@
               <hr />
               <p class="para"></p>
               <div class="col-md-50 position-relative">
-                <label class="hed" for="name">Name</label>
-
-                <input type="text" class="form-control" id="name" name="name" />
-
-                <br />
-                <label class="hed" for="new_email">Email</label>
+                <label class="hed" for="phone">Phone</label>
                 <br>
-                <input name="new_email" id="new_email" />
+                <small>Enter an 11-digit phone number</small>
+                <input type="text" name="phone" id="phone" pattern="\d{11}" />
+                
                 <br />
                 <br />
 

@@ -113,6 +113,19 @@ nav{
     font-weight: 500;
     font-style: italic;
 }
+.team-card .card-body{
+    background-color: rgba(44, 103, 119, 0.6);
+}
+
+.team-card .card-body:hover{
+    background-color: rgba(255, 255, 255, 0.786);
+
+}
+.team-card{
+ box-shadow: 0 0 10px 0 rgb(22, 53, 61, 0.2);
+
+}
+
 
 .card{
     background-color: rgb(181, 21, 69);
@@ -159,12 +172,17 @@ nav{
 }
 
 .bi{
-    color: #f23548;
+    color: #DFEDDC;
 }
 body, html {
   margin: 0;
   padding: 0;
 }
-footer{
+footer div{
     width:100%;
+    background-color: #163A1E;
+}
+.artizo-footer, #button-addon2{
+    background-color: #163A1E;
+    color: #DFEDDC;
 }

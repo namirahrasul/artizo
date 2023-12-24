@@ -1,25 +1,27 @@
 const express = require('express')
 const fs = require('fs')
 const router = express.Router()
+
 const authController = require('./authController') // Import the authentication controller
 const gigRoutes = require('./gigRoutes')
 const gigController = require('./gigController') // Import the file controller
 const browseRoutes = require('./browseRoutes') 
 const browseController = require('./browseController') 
 const userModel = require('../models/userModel') // Import userModel functions
-
-const followController = require('./followController')
 const followRoutes = require('./followRoutes')
 const profileRoutes = require('./profileRoutes')
 const profileController = require('./profileController')
-
 const adminController = require('./adminController')
+const adminRoutes = require('./adminRoutes')
 
 const path = require('path')
 // router.use("/uploads", express.static(path.join(__dirname, "../uploads")))
 
 // Home page route
 router.get('/', (req, res) => {
+  res.render('home', { user: req.session.user }) // Assuming you have a "home.ejs" view file
+})
+router.get('/home', (req, res) => {
   res.render('home', { user: req.session.user }) // Assuming you have a "home.ejs" view file
 })
 router.get('/register', (req, res) => {
@@ -88,6 +90,7 @@ router.use('/gig', gigRoutes)
 router.use('/browse', browseRoutes)
 router.use('/follow', followRoutes)
 router.use('/profile', profileRoutes)
+router.use('/admin', adminRoutes)
 
 
 
@@ -125,11 +128,16 @@ router.get('/register-admin', adminController.AddAdmin)
 router.get('/report/:gigId', adminController.getReportForm)
 router.get('/reported-gigs', adminController.getReportedGigs)
 router.get('/view-report/:rid', adminController.viewGigReport)
-router.get('/edit-gig/:gigId', profileController.getEditGigForm)
-router.get('/delete-form/:gigId', adminController.getDeleteForm)
+router.get('/edit-gig-form/:gigId', profileController.getEditGigForm)
+router.get('/delete-gig-form/:gigId', adminController.getDeleteForm)
 router.get('/delete-requests', adminController.getAllDeleteRequests)
 router.get('/edit-requests', adminController.getAllEditRequests)
+router.get('/preview-gig/:gigId', gigController.previewSingleGig)
 router.get('/delete-request/:did', adminController.viewDeleteRequest)
 router.get('/block-user/:email', adminController.getUserBlockForm)
+
+
+router.get('/client-offer/view/:gigId', gigController.getClientOfferForm)
+router.get('/accepted-client-offer/:gigId', profileController.viewClientOffer)
 
 module.exports = router

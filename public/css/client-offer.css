@@ -1,0 +1,124 @@
+/* General styles */
+
+@import 'home.css';
+
+.container {
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 10px rgba(0, 0, 1, 0.1);
+    width: 50%;
+    padding: 80px; /* Adjust padding as needed */
+    border: 1px solid #ccc; /* Just for visualization */
+    margin-top: 90px; /* Adjust this value to create space between navbar and container */
+    margin-bottom: 50px; /* Adjust this value to create space between container and footer */
+  }
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding-top: 10px;
+     background-color: #167b71 /* Optional: Adding a background color to the margin area */
+    }
+
+
+
+.dash-content {
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.main-skills {
+    margin-top: 20px;
+}
+
+/* Input styles */
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+input[type="number"]{
+    width: 100px;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #676767;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    /* border: 1px solid #676767; */
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+input[type="number"] {
+    width: calc(100% - 18px); /* Adjusting for number input spinner */
+}
+
+/* Specific styles */
+.Label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.required-indicator {
+    color: red; /* Set the color of the indicator */
+    margin-left: 2px; /* Adjust the space between the label and the indicator */
+    font-size: 20px;
+}
+
+/* Button styling */
+.ButtonPressed {
+    width: 20rem;
+    background-color: rgb(15, 141, 107);
+    color: white; 
+    text-align: center;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; 
+    height: 50px;
+    
+    margin-left: 24%;
+    margin-top: 10%;
+    
+            
+}
+
+.ButtonPressed:hover{
+     background-color: rgb(7, 17, 106);
+}
+
+
+.TextSize{
+    text-align: left;
+    color: rgba(19, 128, 138, 0.89);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.Clienttext{
+    color: rgb(30, 127, 103);
+    text-align: center;
+    font-size: 55px;
+    font-weight: bold;
+}
+
+#fixedTextarea {
+    resize: none; /* Prevents resizing */
+    width: 100%; /* Fixed width */
+    height: 100%; /* Fixed height */
+  }
+  

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head.ejs', { title: 'About' , stylesheet: '/css/about.css' }) %>
+
+  <body>
+    <%- include('navbar.ejs', { user: user }) %>
+
+
+      <div class="container">
+        <h1
+          style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #006f6a; text-align: center; letter-spacing: 2px;">
+          About ARTIZO</h1>
+
+        <br />
+        <div class="content">
+          <img src="/images/freel.jpg" alt="" class="pic">
+          <div class="text">
+            <!-- Your existing content -->
+            <p class="hedfirst">
+              Welcome to ARTIZO, where <span class="green">talent</span> meets <span class="green">opportunity</span>!
+            </p>
+            <p class="textss">
+
+
+              We bridge the gap between talented freelancers and clients seeking top-notch expertise.
+              Our platform serves as a vibrant marketplace, connecting skilled professionals from
+              diverse fields with businesses, entrepreneurs, and individuals in need of specialized services.
+            </p>
+            <p class="hedLast">
+              Discover the possibilities with <span class="green">ARTIZO</span> today!
+            </p>
+          </div>
+        </div>
+        <div class="social-icons">
+          <a href="#" class="icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="icon"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <%- include('footer.ejs') %>
+
+  </body>
+
+</html>
+

@@ -11,3 +11,30 @@
 .ratio{
  padding: 15%;
 }
+.star-rating {
+  display: inline-block;
+  font-size: 1.2em;
+  color: #ffd700; /* Default star color */
+  padding:4px 15px;
+}
+
+.star-rating .fa-star {
+  color: #ffd700; /* Filled star color */
+}
+
+.linkProfile{
+  text-decoration: none;
+  cursor: pointer;
+
+}
+
+.linkProfile:hover{
+  text-decoration: none;
+  cursor: pointer;
+  color: #036509;
+}
+
+.view-gig-btn a{
+  text-decoration: none;
+
+}

@@ -85,17 +85,27 @@
 
           <div class="profile-card">
 
-            <span class="data-title"><b class="boldName"><u></u>Notifications</b></span>
+            <span class="data-title"><b class="boldName "><u></u>Notifications</b></span>
+            
             <% if(notification.length==0) { %>
               <p>No notifications yet</p>
               <% } else {%>
+                <div class="notif-card">
                 <% for (let i=0; i < notification.length; i++) { %>
-                  <p>
-                    <%=notification[i].description%>
-                        <%=notification[i].time%>
-                  </p>
+                  <div class="d-flex row">
+                  <div class="col-8">
+                    <p>
+                    <%-notification[i].description%>
+                    </p>
+                  </div>
+                  <div class="col-4 align-content-end text-success">
+                        <%=notification[i].formatted_time%>
+                    </div>
+                  </row>
                   <% } %>
+                  </div>
                     <% } %>
+            
           </div>
 
         </div>
