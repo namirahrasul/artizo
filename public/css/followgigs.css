@@ -1,0 +1,281 @@
+/* Import external stylesheet */
+@import 'home.css';
+
+/* General Styles */
+body {
+  background: linear-gradient(180deg, #3F6263, #16A085, #DFEDDC);
+}
+
+.notifcontainer {
+  margin-top: 90px;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.notifcontent {
+  color: #054d34;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.notifnav {
+  display: flex;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  height: 400vh;
+  left: 0;
+  background: #fff;
+  width: 280px;
+  overflow: none;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+  margin-top: -10px;
+}
+
+/* Profile */
+.prof {
+  margin-left: 20px;
+}
+
+.notiflogo {
+  text-align: center;
+  display: flex;
+  margin: 10px 0 0 10px;
+}
+
+.notiflogo img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-right: 60px;
+}
+
+.notiflogo span {
+  font-weight: bold;
+  padding-left: 15px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.notifa {
+  position: relative;
+  color: rgb(85, 83, 83);
+  font-size: 14px;
+  display: block;
+  width: auto;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.boldName{
+    font-size: 30px;
+    color: #1d7fb7;
+}
+
+.leftAlignFollowedGigs{
+    align-items: left;
+    margin-right: 80%;
+    
+  }
+  
+
+.notifa-active {
+  color: rgb(16, 103, 103);
+}
+
+.notifnav .fas {
+  position: relative;
+  width: 70px;
+  height: 40px;
+  top: 14px;
+  font-size: 20px;
+  text-align: left;
+}
+
+.notifnav-item {
+  position: relative;
+  top: 12px;
+  margin-left: -45px;
+}
+
+.notifnav ul li {
+  list-style-type: none;
+  margin-left: 0px;
+  color: rgb(0, 0, 0);
+}
+
+.notifnav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.logout {
+  position: absolute;
+  bottom: 0;
+}
+
+/* Profile Card */
+.profile-card {
+  width: 1200px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Campaign Card */
+.campaign-card-img-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-actions {
+  flex-grow: 0;
+  display: flex;
+  max-width: fit-content;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Main Section */
+.main {
+  position: relative;
+  padding: 20px;
+  width: 100%;
+}
+
+.main-top {
+  display: flex;
+  width: 100%;
+}
+
+.main-top i {
+  position: absolute;
+  right: 0;
+  margin: 10px 30px;
+  color: rgb(110, 109, 109);
+  cursor: pointer;
+}
+
+.main-skills {
+  display: flex;
+  margin-top: 20px;
+  margin-left: 60px;
+  align-items: space-between;
+  justify-items: center;
+}
+
+.main-skills-h3 {
+  margin: 10px;
+  font-size: 22px;
+  text-align: lcenter;
+  color: rgb(15, 49, 100);
+}
+
+.main-skills-Heda5 {
+  font-size: 22px;
+  text-align: center;
+  color: #197d9f;
+  margin: 10px;
+  font-weight: 700;
+}
+
+.main-skills .card {
+  max-width: fit-content;
+  width: 90%;
+  margin: 10px;
+  background: #ffffff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+  display: flex;
+}
+
+.main-skills .card button {
+  background: #3C6766;
+  color: #fff;
+  padding: 7px 15px;
+  border-radius: 10px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.main-skills .card button:hover {
+  background: #3C6766;
+}
+
+.main-skills .card i {
+  font-size: 22px;
+  padding: 10px;
+}
+
+/* Card */
+.card {
+  width: 250px;
+  height: 700px;
+  max-width: 100%;
+  max-height: 100%;
+  position: static;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.btn.btn-dark.mb-2.mt-2.followedGigs{
+    width: 250%;
+}
+
+.betImage {
+  width: 50px; 
+  height: 50px;
+  border-radius: 50%; 
+  float: left; 
+ 
+}
+
+
+
+.linkProfile{
+  text-decoration: none;
+  cursor: pointer;
+
+}
+
+.linkProfile:hover{
+  text-decoration: none;
+  cursor: pointer;
+  color: #036509;
+}
+.leftAlign{
+  align-items: left;
+  margin-right: 90%;
+
+}
+.star-rating {
+  display: inline-block;
+}
+
+.star-rating i {
+  font-size: 2px; /* Adjust the size of the stars */
+  color: #ffc107; /* Star color */
+  margin-right: .5px; /* Adjust the spacing between stars */
+}
+
+.star-rating .far {
+  color: #ddd; /* Empty star color */
+}
+
+  
+  /* Optional: To style the number or icon individually, you can use specific selectors */

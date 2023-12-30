@@ -25,16 +25,35 @@ async function getSingleGig(req, res) {
         // Get campaign details by campaignId using your model function
         const gig = await gigModel.getApprovedGigById(gigId);
         console.log(gig)
-        
-        const followState = await followModel.checkIfFollowing(req.session.user.email, gigId);
-        console.log(gig);
-        // Render the campaign prelaunch page with campaign data
-        res.render('view-gig', { user: req.session.user, gig: gig,followState })
+        if (req.session && req.session.user) {
+            const followState = await followModel.checkIfFollowing(req.session.user.email, gigId);
+            console.log(gig);
+            // Render the campaign prelaunch page with campaign data
+            res.render('view-gig', { user: req.session.user, gig: gig, followState })
+        }
+        else {
+            res.render('preview-gig', { user: null, gig: gig })
+        }
     } catch (error) {
         console.error('Error fetching gig data:', error);
         res.status(500).send('Internal Server Error');
     }
 }
+
+async function previewUnapprovedSingleGig(req, res) {
+    const { gigId } = req.params;
+    try {
+        // Get campaign details by campaignId using your model function
+        const gig = await gigModel.getSingleNotApprovedGigById(gigId);
+        console.log(gig);
+        // Render the campaign prelaunch page with campaign data
+        res.render('view-unapproved-gig', { user: req.session.user, gig })
+    } catch (error) {
+        console.error('Error fetching prelaunch campaign data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
 
 async function previewSingleGig(req, res) {
     const { gigId } = req.params;
@@ -49,6 +68,7 @@ async function previewSingleGig(req, res) {
         res.status(500).send('Internal Server Error');
     }
 }
+
 
 
 async function getClientOfferForm(req, res) {
@@ -84,6 +104,7 @@ module.exports = {
     getClientOfferForm,
     acceptOffer,
     declineOffer,
-    previewSingleGig
+    previewSingleGig,
+    previewUnapprovedSingleGig
 }
 

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('head.ejs', { title: 'Failure' , stylesheet: '/css/failure.css' }) %>
+
+<body>
+    <%- include('navbar.ejs', { user: user }) %>
+
+    <div class="container">
+
+        <div class="popup">
+            <img src="/images/fail.jpg">
+            <h2>FAILED!</h2>
+            <p class="bolded">Your Payment has not been accepted.</p>
+            <button type="button">TRY AGAIN</button>
+        </div>
+    </div>
+
+    <%- include('footer.ejs') %>
+</body>
+
+</html>

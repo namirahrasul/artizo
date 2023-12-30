@@ -265,6 +265,7 @@ async function getReportById(id) {
 async function selectEditRequests() {
   try {
     const sql = `SELECT
+    users.name as user_name,
     gigs.id AS o_id,
     gigs.email AS o_email,
     gigs.title AS o_title,
@@ -309,7 +310,9 @@ FROM
     gigs
 INNER JOIN
     edit_gigs ON gigs.id = edit_gigs.old_id
-    where edit_gigs.is_approved=0 and edit_gigs.is_deleted=0
+    
+INNER JOIN users ON gigs.email=users.email
+where edit_gigs.is_approved=0 and edit_gigs.is_deleted=0
     `
 
     const [rows, fields] = await pool.execute(sql)
@@ -348,7 +351,7 @@ async function getGigInfoById(gigId) {
 
 async function selectDeleteRequests() {
   try {
-    const sql = `SELECT  delete_gigs.id as did, gig_id, reason, gigs.email from delete_gigs INNER JOIN gigs ON delete_gigs.gig_id=gigs.id where delete_gigs.is_reviewed=0 order by time desc`;
+    const sql = `SELECT  delete_gigs.id as did, users.name as name, gig_id, reason, gigs.email,gigs.title as gig_title from delete_gigs INNER JOIN gigs ON delete_gigs.gig_id=gigs.id INNER JOIN users ON gigs.email=users.email where delete_gigs.is_reviewed=0 order by time desc`;
     const [rows, fields] = await pool.execute(sql);
     return rows;
   } catch (error) {

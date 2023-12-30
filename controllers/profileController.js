@@ -147,20 +147,17 @@ async function getFollowedGigsProfile(req, res) {
 
 async function getAllGigOfferOfFreelancer(req, res) {
  const freelancer = req.session.user.email;
- console.log(freelancer);
+ console.log("freelancer",freelancer);
  try {
   // Get follow details by email using your model function
-  const offers = await profileModel.getAllClientOffersByEmail(freelancer);
+   const offers = await profileModel.getAllClientOffersByEmail(freelancer);
+   console.log("offers")
+   console.log(offers);
   const user = await profileModel.getProfile(req.session.user.email)
   const profile = await profileModel.getProfileImg(req.session.user.email);
-  console.log(offers);
-  if (offers === null) {
-   // Handle the case where no notification data is found
-   // You can render the page without that information or show a message
-   res.render('gig-offers', { user: user, offers: null, profile });
-  } else {
+  
    res.render('gig-offers', { user: user, offers: offers, profile });
-  }
+  
 
  } catch (error) {
   console.error('Error fetching followed gig data:', error);
@@ -172,7 +169,7 @@ async function viewClientOffer(req, res) {
     const gigId = req.params.gigId;
     const offer = await profileModel.getCompletedClientOffer(gigId);
     console.log(offer);
-     res.render('completed-client-offer', { user: req.session.user, offer: offer });
+     res.render('completed-client-offer', { user: req.session.user,  offer });
 
   } catch (error) {
     console.error('Error fetching followed gig data:', error);

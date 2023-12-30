@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('head.ejs', { title: 'Rating' , stylesheet: '/css/RatingFreelancer.css' }) %>
+
+<body>
+    <%- include('navbar.ejs', { user: user }) %>
+    <div class="container">
+        <!-- <button type="submit" class="btn">Submit</button> -->
+        <div class="popup">
+
+            <!-- <img src="/donation/right.png"> -->
+            <br>
+            <h3 >Rate The Freelancer</h3>
+            <br><br>
+            <p class="bolded">How much do you rate your overall experience with me?</p>
+            <br>
+            <label for="number_input" class="bolded">Enter the rate:</label>
+            <form action="/feedback-submit" method="post" class="text-white mb-1 mt-1">
+            <input type="number" id="number_input" name="score" class="InputType" placeholder="5"  min="1" max="5" required>
+            <br>
+            <input type="hidden" name="gig_id" value="<%=gig_id%>">
+            <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <%- include('footer.ejs') %>
+</body>
+
+</html>

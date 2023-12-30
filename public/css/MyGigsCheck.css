@@ -1,0 +1,312 @@
+@import 'home.css';
+
+
+
+.notifcontainer{
+  margin-top: 90px;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  display: flex;
+  
+}
+
+.leftAlign{
+  margin-top:12px;
+}
+
+
+body{
+  background: linear-gradient(180deg,#3F6263 ,#16A085, #DFEDDC );
+}
+
+
+.notifnav{
+  display: flex;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  height: 400vh;
+  left: 0;
+  background: #fff;
+  width: 280px;
+  overflow: none;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+  margin-top: -10px;
+}
+
+
+.prof{
+  margin-left:20px;
+}
+.notiflogo{
+  text-align: center;
+  display: flex;
+  margin: 10px 0 0 10px;
+}
+
+.notiflogo img{
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-right: 60px;
+}
+
+.notiflogo span{
+  font-weight: bold;
+  padding-left: 15px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.notifa{
+  position: relative;
+  color: rgb(85, 83, 83);
+  font-size: 14px;
+  display: block;
+  width: auto;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.boldforName{
+     font-weight: bold;
+  color: #005571;
+}
+
+.notifa-active{
+
+  color: rgb(16, 103, 103);
+}
+
+.notifnav .fas{
+  position: relative;
+  width: 70px;
+  height: 40px;
+  top: 14px;
+  font-size: 20px;
+  text-align: left;
+}
+
+.notifnav-item{
+  position: relative;
+  top: 12px;
+  margin-left:-45px;
+
+}
+
+.notifnav  ul li{
+  list-style-type: none;
+  margin-left:0px; /* Adjust the margin to add space between list items */
+  color: rgb(0, 0, 0);
+}
+
+.notifnav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column; /* Change to a vertical layout */
+}
+
+.logout{
+  position: absolute;
+  bottom: 0;
+}
+
+
+
+
+
+/* Important to fit the size----------------------------------- */
+/* Important to fit the size----------------------------------- */
+/* Important to fit the size----------------------------------- */
+/* Important to fit the size----------------------------------- */
+/* Important to fit the size----------------------------------- */
+/* Important to fit the size----------------------------------- */
+/* Important to fit the size----------------------------------- */
+/* Important to fit the size----------------- */
+/* Important to fit the size----------------- */
+/* Important to fit the size----------------- */
+/* Important to fit the size----------------- */
+
+.profile-card {
+ width: 1200px;
+ background-color: rgb(255, 255, 255);
+ border: 1px solid #ccc;
+ border-radius: 5px;
+ margin: 20px;
+ padding: 20px;
+ box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+ text-align: center;
+}
+
+.main-skills{
+  display: flex;
+  margin-top: 20px;
+  margin-left: 60px;
+  align-items: space-between;
+  justify-items: center;
+}
+
+
+
+.boldName{
+  font-size: 30px;
+  color: #1d7fb7;
+}
+
+
+.leftAlignFollowedGigs{
+  align-items: left;
+  margin-right: 80%;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+}
+
+
+
+
+
+
+
+
+.rating{
+  margin-left: -70px;
+}
+
+/* Adjust margins as needed */
+.star-rating  {
+  margin-left: 50px; /* Adjust margin between star rating and numerical rating */
+}
+
+
+.star-rating i {
+  font-size: 1rem; /* Adjust the size of the stars */
+  color: #ffc107; /* Star color */
+  margin-right: 2px; /* Adjust the spacing between stars */
+}
+
+.star-rating .far {
+  color: #ddd; /* Empty star color */
+}
+
+ .gap{
+  padding-top:80px;
+ }
+ 
+
+ .row.col-12 {
+  display: flex; /* Use flexbox for the row */
+  align-items: center; /* Align items vertically */
+}
+
+.row.col-12 i {
+  margin-right: 5px; /* Adjust margin between the icon and the text */
+}
+
+
+.stats{
+  color:  rgb(13, 87, 89);
+}
+.linkProfile{
+  text-decoration: none;
+  cursor: pointer;
+  font-style: normal;
+  background-color: transparent;
+  color: rgb(36, 110, 93);
+
+}
+
+.linkProfile:hover{
+  text-decoration: none;
+  cursor: pointer;
+  color: #012a04;
+}
+
+
+
+
+
+
+
+.campaigns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card {
+    height: 610px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Vertically space contents evenly */
+    width: 340px;
+    background-color: #FCFAEB;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 3px 8px 3px 8px; /* Top padding reduced to create space above the button */
+}
+
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    max-height: 200px;
+}
+
+.card-title {
+    font-weight: bold;
+    margin: 0px 0px;
+}
+
+.campaign-info {
+    flex-grow: 1; /* This allows it to take up available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Vertically space title and tagline */
+}
+
+.card-img-container {
+    flex: 1; /* Allow the image to grow or shrink within the available space */
+    display: flex;
+    align-items: center; /* Center the image vertically */
+    justify-content: center; /* Center the image horizontally */
+}
+
+.card-actions {
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Increased space between tagline and button */
+}
+.learn-more {
+    background-color:  rgb(13, 87, 89);
+    color:white;
+}
+.learn-more:hover{
+    background-color: #000000;
+    color:white;
+}
+
+
+
+.betImage {
+  width: 60px; 
+  height: 30px;
+  border-radius: 50%; 
+  float: left; 
+ 
+}
+.delete-btn,.edit-btn{
+  color:#FCFAEB;
+}
+
+.delete-btn a,.edit-btn a, .delete-btn i, .edit-btn i{
+  color:#FCFAEB;
+}
+
+.delete-btn:hover,.edit-btn:hover{
+  background-color: #005571;
+}

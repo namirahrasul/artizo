@@ -54,7 +54,7 @@ async function getMyGigs(email) {
 
 async function getHiredGigsClient(email) {
   try {
-    const sql = `SELECT users.name as freelancer_name, users.email  as freelancer_email, gigs.title, gigs.category,gigs.description,gigs.email, gigs.gig_img, gigs.gig_video,gigs.hourly_rate,gigs.bsb,gigs.account,gigs.bkash,gigs.upay,gigs.rocket,gigs.nagad,gigs.certifications_achievements,gigs.previous_work,gigs.testimonials,gigs.is_approved,gigs.is_reviewed,gigs.is_deleted,gigs.rating,gigs.no_followers,gigs.no_customers, hired.client, hired.gig_id,hired.status,hired.hired_date,hired.offer_id FROM hired  inner join gigs on hired.gig_id=gigs.id inner join users on users.email=gigs.email where client=? ORDER BY hired_date DESC`
+    const sql = `SELECT users.name as freelancer_name, users.email  as freelancer_email, gigs.title, gigs.category,gigs.description,gigs.email, gigs.gig_img, gigs.gig_video,gigs.hourly_rate,gigs.bsb,gigs.account,gigs.bkash,gigs.upay,gigs.rocket,gigs.nagad,gigs.certifications_achievements,gigs.previous_work,gigs.testimonials,gigs.is_approved,gigs.is_reviewed,gigs.is_deleted,gigs.rating,gigs.no_followers,gigs.no_customers, hired.client, hired.gig_id,hired.status,hired.hired_date,hired.offer_id,hired.amount FROM hired  inner join gigs on hired.gig_id=gigs.id inner join users on users.email=gigs.email where client=? ORDER BY hired_date DESC`
     const [rows, fields] = await pool.execute(sql, [email])
     return rows
   } catch (error) {
@@ -64,7 +64,7 @@ async function getHiredGigsClient(email) {
 
 async function getHiredGigsFreelancer(email) {
   try {
-    const sql = `SELECT users.name as client_name, gigs.title as gig_title, offers.id as offer_id, offers.is_accepted,  offers.gig_id, offers.client, offers.description, offers.hours,offers.material,offers.comments,offers.time FROM hired  INNER JOIN gigs ON hired.gig_id=gigs.id INNER JOIN users ON users.email=hired.client  INNER JOIN offers on offers.id=hired.offer_id where gigs.email=(?) and hired.status="ACCEPTED" order by hired_date DESC`
+    const sql = `SELECT users.name as client_name, gigs.title as gig_title, offers.id as offer_id, offers.is_accepted,  offers.gig_id, offers.client, offers.description, offers.hours,offers.material,offers.comments,offers.time FROM hired  INNER JOIN gigs ON hired.gig_id=gigs.id INNER JOIN users ON users.email=hired.client  INNER JOIN offers on offers.id=hired.offer_id where gigs.email=? and hired.status="ACCEPTED" order by hired_date DESC`
     const [rows, fields] = await pool.execute(sql, [email])
     return rows
   } catch (error) {
@@ -139,9 +139,10 @@ async function getCountOfCustomer(email) {
 }
 
 async function getAllClientOffersByEmail(email) {
+  console.log("email ",email)
   try {
-    const sql = `SELECT offers.id,users.name as client_name,gigs.title as gig_name , offers.description, offers.hours,offers.client, offers.material,offers.comments,offers.time FROM  users INNER JOIN offers ON users.email=offers.client INNER JOIN gigs 
-ON offers.gig_id=gigs.id   where gigs.email='n.rsl.136@gmail.com' and offers.is_reviewed=0  ORDER BY offers.time DESC`
+    const sql = `SELECT offers.gig_id,offers.id,users.name as client_name,gigs.title as gig_name , offers.description, offers.hours,offers.client, offers.material,offers.comments,offers.time FROM  users INNER JOIN offers ON users.email=offers.client INNER JOIN gigs 
+ON offers.gig_id=gigs.id   where gigs.email=? and offers.is_reviewed=0  ORDER BY offers.time DESC;`
     const [rows, fields] = await pool.execute(sql, [email])
     return rows
   } catch (error) {
@@ -149,11 +150,12 @@ ON offers.gig_id=gigs.id   where gigs.email='n.rsl.136@gmail.com' and offers.is_
   }
 }
 
-async function getCompletedClientOffer(gigId) {
+async function getCompletedClientOffer(offerId) {
+  console.log("offerId ",offerId)
   try {
-    const sql = `select * from offers where gig_id=? ` 
-    const [rows, fields] = await pool.execute(sql, [gigId])
-    return rows
+    const sql = `select * from offers where id=? ` 
+    const [rows, fields] = await pool.execute(sql, [offerId])
+    return rows[0]
   } catch (error) {
     throw error
   }

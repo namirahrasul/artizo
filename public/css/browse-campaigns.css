@@ -2,7 +2,12 @@
 
 .star-rating {
   display: inline-block;
+  margin-right:-90px;
 }
+.rating{
+  margin-left:-35px;
+}
+
 
 .star-rating i {
   font-size: 1rem; /* Adjust the size of the stars */
@@ -30,13 +35,16 @@ body, button, div, a {
 .linkProfile{
   text-decoration: none;
   cursor: pointer;
+  font-style: normal;
+  background-color: transparent;
+  color: rgb(36, 110, 93);
 
 }
 
 .linkProfile:hover{
   text-decoration: none;
   cursor: pointer;
-  color: #036509;
+  color: #012a04;
 }
 
 
@@ -214,7 +222,7 @@ nav a {
 }
 
 .card {
-    height: 750px;
+    height: 575px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -235,6 +243,7 @@ nav a {
 
 .card-title {
     font-weight: bold;
+    margin: 0px 0px;
 }
 
 .campaign-info {
@@ -257,38 +266,17 @@ nav a {
     flex-direction: column;
     gap: 10px; /* Increased space between tagline and button */
 }
-.card a {
+.learn-more {
     background-color:  rgb(13, 87, 89);
     color:white;
 }
-.card a:hover{
+.learn-more:hover{
     background-color: #000000;
     color:white;
 }
 
 
-/* .card{
- height: 500px;
-   text-align: center; 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width:350px;
-  padding:40px 20px;
- 
-}
-.card img{
-  max-width: 100%;
-    height: auto;
-    width:auto;
-    max-height: 200px;
-    
-}
-.card-title{
- font-weight: bold;
-} */
-/* Increase the size of the search input */
+
 #search-input {
     width: 500px; /* Adjust the width as needed */
     height: 40px; /* Adjust the height as needed */

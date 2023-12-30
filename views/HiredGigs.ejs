@@ -1,174 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('head.ejs', { title: 'Notifications' , stylesheet: '/css/notif.css' }) %>
+<%- include('head.ejs', { title: 'Hired Gigs' , stylesheet: '/css/edit_request_kiran2.css' }) %>
 
   <body>
     <%- include('navbar.ejs', { user: user }) %>
       <div class="notifcontainer">
         <div class="notifnav ">
-        <ul>
-          <li><a href="#" class="notiflogo notifa">
-              <% if (profile.profile_img){ %>
-                <img src="/uploads/<%=profile.profile_img%>" alt="Profile">
-                <% } else { %>
-                  <img src="/images/default.jpg" alt="Profile">
-                  <% } %>
-                    <span class="notifnav-item">DashBoard</span>
-            </a>
-          </li>
-          <li>
-            <a href="/profile" class="notifa">
-              <i class="fas fa-bell"></i>
-              <span class="notifnav-item">Profile</span>
-            </a>
-          </li>
-        
-          <li>
-            <a href="/notification" class="notifa">
-              <i class="fas fa-bell"></i>
-              <span class="notifnav-item">Notifications</span>
-            </a>
-          </li>
-          <li><a href="/MyGigs" class="notifa">
-              <i class="fas fa-thumbs-up"></i>
-              <span class="notifnav-item">My Gigs</span>
-            </a></li>
-          <li><a href="/FollowedGigs" class="notifa">
-              <i class="fas fa-thumbs-up"></i>
-              <span class="notifnav-item">Followed Gigs</span>
-            </a></li>
-        
-          <li><a href="/client-offers" class="notifa">
-              <i class="fas fa-user"></i>
-              <span class="notifnav-item">Offered Gigs</span>
-            </a></li>
-        
-          <li><a href="/running-gigs" class="notifa">
-              <i class="fas fa-user"></i>
-              <span class="notifnav-item">Running Gigs</span>
-            </a></li>
-        
-          <li><a href="/HiredGigs" class="notifa notifa-active">
-              <i class="fas fa-user"></i>
-              <span class="notifnav-item">Hired Gigs</span>
-            </a></li>
-          <% if(user.is_admin==true) { %>
-            <li><a href="/unapproved-gigs" class="notifa">
-                <i class="fas fa-users"></i>
-                <span class="notifnav-item">Approve Gigs</span>
+          <ul>
+            <li><a href="#" class="notiflogo notifa">
+                <% if (profile.profile_img){ %>
+                  <img src="/uploads/<%=profile.profile_img%>" alt="Profile">
+                  <% } else { %>
+                    <img src="/images/default.jpg" alt="Profile">
+                    <% } %>
+                      <span class="notifnav-item">DashBoard</span>
+              </a>
+            </li>
+            <li>
+              <a href="/profile" class="notifa">
+                <i class="fas fa-id-card"></i>
+                <span class="notifnav-item">Profile</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="/notification" class="notifa">
+                <i class="fas fa-bell"></i>
+                <span class="notifnav-item">Notifications</span>
+              </a>
+            </li>
+            <li><a href="/MyGigs" class="notifa">
+                <i class="fas fa-briefcase"></i>
+                <span class="notifnav-item">My Gigs</span>
               </a></li>
-            <li><a href="/reported-gigs" class="notifa">
-                <i class="fas fa-users"></i>
-                <span class="notifnav-item">Reported Gigs</span>
+            <li><a href="/FollowedGigs" class="notifa">
+                <i class="fas fa-heart"></i>
+                <span class="notifnav-item">Followed Gigs</span>
               </a></li>
-            <li><a href="/delete-requests" class="notifa">
-                <i class="fas fa-users"></i>
-                <span class="notifnav-item">Delete Requests</span>
+
+            <li><a href="/client-offers" class="notifa ">
+                <i class="fas fa-handshake"></i>
+                <span class="notifnav-item">Offered Gigs</span>
               </a></li>
-            <li><a href="/edit-requests" class="notifa">
-                <i class="fas fa-users"></i>
-                <span class="notifnav-item">Edit Requests</span>
+
+            <li><a href="/running-gigs" class="notifa">
+                <i class="fas fa-running"></i>
+                <span class="notifnav-item">Running Gigs</span>
               </a></li>
-            <li><a href="/users" class="notifa">
-                <i class="fas fa-users"></i>
-                <span class="notifnav-item">Users</span>
+
+            <li><a href="/HiredGigs" class="notifa notifa-active">
+                <i class="fas fa-check-circle"></i>
+                <span class="notifnav-item">Hired Gigs</span>
               </a></li>
-            <li><a href="/register-admin" class="notifa">
-                <i class="fas fa-users"></i>
-                <span class="notifnav-item">Add Admin</span>
-              </a></li>
-            <% } %>
-        </ul>
+            <% if(user.is_admin==true) { %>
+              <li><a href="/unapproved-gigs" class="notifa">
+                  <i class="fas fa-check-square"></i>
+                  <span class="notifnav-item">Approve Gigs</span>
+                </a></li>
+              <li><a href="/reported-gigs" class="notifa">
+                  <i class="fas fa-exclamation-triangle"></i>
+                  <span class="notifnav-item">Reported Gigs</span>
+                </a></li>
+              <li><a href="/delete-requests" class="notifa">
+                  <i class="fas fa-trash-alt"></i>
+                  <span class="notifnav-item">Delete Requests</span>
+                </a></li>
+              <li><a href="/edit-requests" class="notifa">
+                  <i class="fas fa-pencil-alt"></i>
+                  <span class="notifnav-item">Edit Requests</span>
+                </a></li>
+              <li><a href="/users" class="notifa">
+                  <i class="fas fa-users-cog"></i>
+                  <span class="notifnav-item">Users</span>
+                </a></li>
+              <li><a href="/register-admin" class="notifa">
+                  <i class="fas fa-user-plus"></i>
+                  <span class="notifnav-item">Add Admin</span>
+                </a></li>
+              <% } %>
+          </ul>
         </div>
 
-              <section class="main">
-              
-              
-              
-              
-                <section class="main-course">
-                  <!-- <h1><b>My Story</b></h1> -->
-                  <div class="course-box">
-                    <ul>
-              
-                    </ul>
-                    <div class="course">
-              
-                      <div class="activity-data">
-                        <div class="data names">
-                          <span class="data-title"><b class="boldName"><u></u>Hired Gigs</b></span>
-                          <div class="col-md-12">
-              
-                            <div class="row justify-content-between expand">
-              
-                              <div class="col-4 me-4">
-                                <h4 class="boldforName ">Gig Title</h4>
-                              </div>
-                              <div class="ms-5 col-4 ">
-                                <h4 class="boldforName">Freelancer</h4>
-                              </div>
-                              <div class="ms-5 col-2 ">
-                                <h4 class="boldforName">My Offer</h4>
-                              </div>
-                              <div class="col-2">
-                                <h4 class="boldforName">Status</h4>
-                              </div>
-                            </div>
-              
-                            <% if(offers.length==0) { %>
-                              <p>No running gigs</p>
-                              <% } else {%>
-                                <% for (let i=0; i < offers.length; i++) { %>
-                                  <div class="row justify-content-between expand">
-                                    <div class="col-4 ">
-                                      <a href="/browse-gigs/<%=offers[i].gig_id%>" class="text-black">
-                                        <%=offers[i].title%>
-                                      </a>
-                                    </div>
-              
-                                    <div class="col-4 ">
-                                      <a href="/user/<%=offers[i].freelancer_email%>" class="text-black">
-                                        <%=offers[i].freelancer_name%>
-                                      </a>
-                                    </div>
-              
-              
-              
-              
-                                    <div class="col-md-3 review-btn">
-              
-                                      <button type="submit" class="btn btn-dark report-btn"><a
-                                          href="/running-gig/view/<%=offers[i].offer_id%>">View Offer
-                                        </a></button>
-              
-                                    </div>
-                                  </div>
+        <div class="main-skills">
 
-                                  <div class="col-md-2 ">
-                                    <% if(offers[i].status==='COMPLETED'){%>
-                                    <a href=""><%=offers[i].status%></a>
-                                    <%} else {%>
-                                    <p><%=offers[i].status%></p>
-                                    <%} %>
-                                  </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-12">
-                              <hr>
-                            </div>
-                          </div>
-                          <% } %>
-                            <% } %>
-                         
-                        </div>
-              
-                      </div>
+          <div class="profile-card">
+
+            <div class="activity-data">
+              <div class="data names">
+                <span class="data-title"><b class="boldName leftAlignFollowedGigs"><u></u>Hired Gigs</b></span><br>
+                <br>
+                <div class="col-md-12">
+
+                  <div class="row justify-content-between expand">
+                    <div class="col-4">
+                      <h4 class="boldforName">Gig </h4>
+                    </div>
+                    <div class="col-4">
+                      <h4 class="boldforName">Freelancer</h4>
+                    </div>
+                    <div class="col-2">
+                      <h4 class="boldforName">My Offer</h4>
+                    </div>
+                    <div class="col-2">
+                      <h4 class="boldforName">Status</h4>
                     </div>
                   </div>
-                  </div>
-                </section>
-              </section>
+                  <hr>
+
+                  <% if (offers.length===0) { %>
+                    <p>No hired gigs</p>
+                    <% } else { %>
+                      <% for (let i=0; i < offers.length; i++) { %>
+                        <div class="row justify-content-between expand">
+                          <div class="col-4">
+                            <a href="/browse-gigs/<%= offers[i].gig_id %>" class="hoverName">
+                              <%= offers[i].title %>
+                            </a>
+                          </div>
+
+                          <div class="col-4">
+                            <a href="/user/<%= offers[i].freelancer_email %>" class="hoverName">
+                              <%= offers[i].freelancer_name %>
+                            </a>
+                          </div>
+
+                          <div class="col-2">
+
+                            <a class="beautiful-link" href="/accepted-client-offer/<%=offers[i].offer_id%>">
+                              View Offer</a>
+
+                          </div>
+
+                          <div class="col-2">
+                            <% if(offers[i].status==='COMPLETED' ){%>
+
+                              <form action="/gig/payment-prompt" method="post" class="px-4">
+                                <input type="hidden" name="offerAmt" value="<%= offers[i].amount %>">
+                                <input type="hidden" name="offerId" value="<%= offers[i].offer_id %>">
+                                <button type="submit" class="btn btn-danger px-2 text-white"
+                                 > <%=offers[i].status%>    Pay <b>Tk <%=offers[i].amount%></b>
+                                    </button>
+                              </form>
+                              <%} else if(offers[i].status==='PAID' ){%>
+                            
+                                  <p class="text-success px-2">
+                                   <b> <%=offers[i].status%></b>
+                                  </p>
+                                
+                              <%} else {%>
+                                <p>
+                                 <b> <%=offers[i].status%></b>
+                                </p>
+                                <%} %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-12">
+                            <hr>
+                          </div>
+                        </div>
+                        <% } %>
+                          <% } %>
+                </div>
               </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </section>
+      </section>
+      </div>
       <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

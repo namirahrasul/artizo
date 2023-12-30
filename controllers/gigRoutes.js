@@ -212,7 +212,7 @@ router.post(
 
               }
               console.log('Data inserted successfully:', result)
-              res.render('home', { user: req.session.user })
+              res.redirect('/notification')
             })
            
           }
@@ -249,12 +249,214 @@ router.post('/report/:gigId', [
 
 )
 
-router.get('/accept-offer/:gigId', async (req, res) => {
-})
+router.post(
+  '/submit-offer',
+  [
+    upload.fields([
+      { name: 'file1', maxCount: 1 }
+    ]),
+  ],
+  async (req, res) => {
+    // res.send("Hello World");
+    console.log(req.body)
+    console.log(req.files)
 
-router.get('/decline-offer/:gigId', async (req, res) => {
-})
+    const {
+      description,
+      hours,
+      comments,
+    } = req.body
 
+    console.log(req.body)
+    const email = req.session.user.email
+    // Access uploaded files
+    const materials = req.files.file1[0].filename
+    const gigId = req.query.gigId;
+    // const imagePath = req.file.path
+    // Insert the data into the MySQL table
+    await createModel.insertOffer(
+      req,
+      gigId,
+      email,
+      description,
+      hours,
+      materials,
+      comments,
+      async (err, result) => {
+        if (err) {
+          console.error('Error inserting data:', err)
+          return res.status(500).send('Error submitting the form.')
+          console.log('error submitting the form')
+        }
+
+        const offer_id = result.insertId;
+
+        // const gig_id = result.insertId
+        await createModel.insertHired(
+          req,
+          gigId,
+          email,
+          offer_id,
+          (err, result) => {
+            if (err) {
+              console.error('Error inserting data:', err)
+              return res.status(500).send('Error submitting the form.')
+            }
+            console.log('Data inserted successfully:', result)
+            // res.render('home', { user: req.session.user })
+          }
+        )
+
+        const title = await gigModel.getGigTitleId(gigId);
+
+        await createModel.insertOfferNotif(
+          req,
+          email,
+          gigId,
+          title,
+          (err, result) => {
+            if (err) {
+              console.error('Error inserting data:', err)
+              return res.status(500).send('Error submitting the form.')
+            }
+            console.log('Data inserted successfully:', result)
+            // res.render('home', { user: req.session.user })
+          }
+        )
+
+        const freelancerEmail = await gigModel.getFreelancerEmailId(gigId);
+
+        await createModel.insertHiredNotif(
+          req,
+          freelancerEmail,
+          gigId,
+          title,
+          (err, result) => {
+            if (err) {
+              console.error('Error inserting data:', err)
+              return res.status(500).send('Error submitting the form.')
+            }
+            console.log('Data inserted successfully:', result)
+            res.redirect('/notification')
+          }
+        )
+      }
+    )
+  }
+)
+
+router.post('/accept-offer', async (req, res) => {
+
+  const offerId = req.query.offerId;
+  console.log(offerId);
+
+  // Get gig_id and client using the offerId
+  const { gig_id, client } = await gigModel.getGigIdByOfferId(offerId);
+  console.log(gig_id, client);  // Log them to the console
+
+  const title = await gigModel.getGigTitleId(gig_id);
+
+
+  await gigModel.acceptOffer(offerId);
+  await gigModel.updateStatusAccept(offerId);
+  await gigModel.updateHiredDate(offerId);
+
+
+  await createModel.insertAcceptNotif(
+    req,
+    client,
+    gig_id,
+    title,
+    (err, result) => {
+      if (err) {
+        console.error('Error inserting data:', err)
+      }
+      console.log('Data inserted successfully:', result)
+    }
+  )
+
+  res.redirect('/client-offers');
+}
+)
+
+
+
+router.post('/decline-offer', async (req, res) => {
+  const offerId = req.query.offerId;
+  console.log(offerId);
+
+  // Get gig_id and client using the offerId
+  const { gig_id, client } = await gigModel.getGigIdByOfferId(offerId);
+  console.log(gig_id, client);  // Log them to the console
+
+  const title = await gigModel.getGigTitleId(gig_id);
+
+  await gigModel.declineOffer(offerId);
+  await gigModel.updateStatusReject(offerId);
+  await gigModel.updateHiredDate(offerId);
+
+  await createModel.insertRejectNotif(
+    req,
+    client,
+    gig_id,
+    title,
+    (err, result) => {
+      if (err) {
+        console.error('Error inserting data:', err)
+      }
+      console.log('Data inserted successfully:', result)
+    }
+  )
+
+  res.redirect('/client-offers');
+}
+)
+
+router.post('/mark-complete', async (req, res) => {
+
+  const offerId = req.query.offerId;
+  console.log(offerId);
+
+  // Get gig_id and client using the offerId
+  const { gig_id, client } = await gigModel.getGigIdByOfferId(offerId);
+  console.log(gig_id, client);  // Log them to the console
+
+  const title = await gigModel.getGigTitleId(gig_id);
+
+  await gigModel.updateStatusCompleted(offerId);
+  await gigModel.calculatePaymentAmt(gig_id);
+
+  await gigModel.updateHiredDate(offerId);
+
+
+  await createModel.insertCompletedNotif(
+    req,
+    client,
+    gig_id,
+    title,
+    (err, result) => {
+      if (err) {
+        console.error('Error inserting data:', err)
+      }
+      console.log('Data inserted successfully:', result)
+    }
+  )
+
+  res.redirect('/running-gigs');
+}
+)
+
+router.post('/payment-prompt', async (req, res) => {
+  const offerAmt = req.body.offerAmt;
+  const offerId = req.body.offerId
+
+  console.log(req.body);
+
+  console.log(offerAmt);
+  console.log(offerId);
+
+  res.render('WantToPay', { user: req.session.user, offerAmt: offerAmt, offerId: offerId });
+})
 
 
 module.exports = router

@@ -13,9 +13,12 @@ const profileRoutes = require('./profileRoutes')
 const profileController = require('./profileController')
 const adminController = require('./adminController')
 const adminRoutes = require('./adminRoutes')
+const paymentController = require('./paymentController')
+const paymentModel = require('../models/paymentModel')
 
 const path = require('path')
-// router.use("/uploads", express.static(path.join(__dirname, "../uploads")))
+router.use('/payment', paymentController);
+
 
 // Home page route
 router.get('/', (req, res) => {
@@ -133,11 +136,99 @@ router.get('/delete-gig-form/:gigId', adminController.getDeleteForm)
 router.get('/delete-requests', adminController.getAllDeleteRequests)
 router.get('/edit-requests', adminController.getAllEditRequests)
 router.get('/preview-gig/:gigId', gigController.previewSingleGig)
+router.get('/unapproved-gig/:gigId', gigController.previewUnapprovedSingleGig)
 router.get('/delete-request/:did', adminController.viewDeleteRequest)
 router.get('/block-user/:email', adminController.getUserBlockForm)
 
 
 router.get('/client-offer/view/:gigId', gigController.getClientOfferForm)
+
 router.get('/accepted-client-offer/:gigId', profileController.viewClientOffer)
+
+router.get('/client-offer', async (req, res) => {
+  console.log("gigId", req.query.gigId);
+  res.render('client-offer', { user: req.session.user, gigId: req.query.gigId });
+})
+
+
+router.post('/goToPayment', async (req, res) => {
+  const offerAmt = req.body.offerAmt;
+  const offerId = req.body.offerId;
+
+  console.log(req.body);
+  console.log(offerAmt)
+  console.log(offerId)
+
+  res.render('donation', { user: req.session.user, offerAmt: offerAmt, offerId: offerId });
+})
+
+router.get('/success', async (req, res) => {
+  res.render('Success', { user: req.session.user });
+})
+
+router.get('/failure', async (req, res) => {
+  res.render('Failure', { user: req.session.user });
+})
+
+router.post('/rating', async (req, res) => {
+  console.log(req.body);
+
+  const gig_id = req.body.gig_id;
+  console.log(gig_id)
+  res.render('RatingFreelancer', { user: req.session.user, gig_id: gig_id });
+})
+
+router.post('/feedback-submit', async (req, res) => {
+  console.log(req.body);
+
+  const gig_id = req.body.gig_id;
+  console.log(gig_id);
+
+  const score = req.body.score;
+  console.log(score);
+
+  const result = await paymentModel.updateRatingById(gig_id, score);
+  console.log(result);
+
+
+  res.redirect('/HiredGigs');
+})
+
+
+
+router.post("/ssl-payment/success/:tranId/:offerId/:offerAmt/:client/:gig_id", async (req, res) => {
+  const tranId = req.params.tranId;
+  console.log(tranId);
+
+  const offerId = req.params.offerId;
+  console.log(offerId);
+
+  const offerAmt = req.params.offerAmt;
+  console.log(offerAmt);
+
+  const client = req.params.client;
+  console.log(client);
+
+  const gig_id = req.params.gig_id;
+  console.log(gig_id);
+
+  if (!client || !offerId) {
+    console.error('Invalid donor or cid value');
+    // Handle the error or return an error response
+  }
+  else {
+    const result = await paymentModel.insertPaymentData(offerId, offerAmt, gig_id);
+    const result2 = await paymentModel.updateNoOfCustomersById(gig_id);
+    console.log("result");
+    console.log(result)
+    console.log("result2", result2);
+    const result3 = await paymentModel.updateHiredStatus(offerId);
+    console.log("result3", result3);
+   
+   
+  }
+  res.render('Success', { user: req.session.user, gig_id: gig_id });
+});
+
 
 module.exports = router

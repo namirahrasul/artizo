@@ -27,7 +27,9 @@
 
 .watch{
     margin-bottom: -50px;
-    background-color: grey;
+    background-color: rgb(169, 168, 168);
+    /* border: 1px solid #a1a0a0; */
+    box-shadow: 0 0 10px 0 rgba(102, 102, 102, 0.2);
 }
 
 .watch:hover{
@@ -100,14 +102,11 @@ nav{
 }
 
 .dropdown-item:hover {
-    background-color: #FFC107;
+    background-color: #79b77c;
     color: black;
 }
 
-.card-body a:hover{
-    background-color: #f23548;
-    color: black;
-}
+
 
 .card-text{
     font-weight: 500;

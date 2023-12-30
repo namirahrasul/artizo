@@ -49,13 +49,7 @@ async function insertFollowNotif(follower,gig_id) {
     // Return the inserted row
     return rows.affectedRows
   } catch (error) {
-    if (error.code === 'ER_DUP_ENTRY') {
-      // Handle duplicate key error
-      console.error(`Duplicate key error: ${follower} already exists.`);
-      return null; // You can return null or some other value to indicate the error
-    }
-    console.error('Error inserting data into follow table:', error)
-    throw error
+   console.error('Error inserting data into notif table:', error)
   }
 }
 
@@ -131,7 +125,7 @@ async function checkIfFollowing(followerId, gigId) {
 
 async function getMyFollow(email){
   try {
-    const sql = `SELECT * FROM gigs INNER JOIN follow  ON gigs.id = follow.gig_id where follow.follower=(?)`
+    const sql = `SELECT * FROM gigs INNER JOIN follow  ON gigs.id = follow.gig_id  INNER JOIN users ON gigs.email = users.email where follow.follower=(?)`
     const [rows, fields] = await pool.execute(sql, [email])
     return rows
   } catch (error) {

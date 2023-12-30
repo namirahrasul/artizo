@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('head.ejs', { title: 'Payment' , stylesheet: '/css/wantToPay.css' }) %>
+<body class="bodyBackground">
+    <%- include('navbar.ejs', { user: user }) %>
+    <div class="container">
+        <div class="popup">
+            <h3>Are you sure you want to pay?</h3>
+
+            <form action="/goToPayment" method="post" class="text-white mb-1 mt-1">
+            <input type="hidden" name="offerAmt" value="<%= offerAmt %>">
+            <input type="hidden" name="offerId" value="<%= offerId %>">
+            <button type="submit" class="yess">Yes</button>
+            </form>
+            <button type="button" class="noo"><a href="/HiredGigs">No</a></button>
+        </div>
+    </div>
+    
+    <%- include('footer.ejs') %>
+</body>
+</html>

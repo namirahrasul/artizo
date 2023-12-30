@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('head.ejs', { title: 'About' , stylesheet: '/css/success.css' }) %>
+
+<body>
+    <%- include('navbar.ejs', { user: user }) %>
+    <div class="container">
+        <!-- <button type="submit" class="btn">Submit</button> -->
+        <div class="popup">
+            <img src="/images/right.png">
+            <h3>Payment Successful</h3>
+            <p class="bolded">Your Payment has been successfully accepted.</p>
+            <form action="/rating" method="post" class="text-white mb-1 mt-1">
+            <input type="hidden" name="gig_id" value="<%=gig_id%>">
+            <button type="submit">OK</button>
+            </form>
+        </div>
+    </div>
+    <%- include('footer.ejs') %>
+</body>
+
+</html>

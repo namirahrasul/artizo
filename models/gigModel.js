@@ -33,6 +33,25 @@ async function getGigById(gigId) {
   }
 }
 
+async function getSingleNotApprovedGigById(gigId) {
+  try {
+    console.log(gigId)
+    const sql = `SELECT * FROM gigs  g INNER JOIN users u  ON g.email = u.email
+     WHERE g.id = ? and g.is_approved = 0 and g.is_deleted = 0 and g.is_reviewed = 0 and u.is_blocked = 0`
+    const [rows, fields] = await pool.execute(
+      sql,
+      [gigId]
+    )
+    if (rows.length === 1) {
+      return rows[0]
+    } else {
+      throw new Error('Gig not found')
+    }
+  } catch (error) {
+    throw error
+  }
+}
+
 async function getApprovedGigById(gigId) {
   try {
     console.log(gigId)
@@ -241,6 +260,198 @@ async function InsertReport(gigId, email, title, description, evidence) {
   }
 }
 
+async function getFreelancerEmailId(gigId) {
+  try {
+    const sql = `SELECT g.email FROM gigs g INNER JOIN users u  ON g.email = u.email
+    WHERE g.id = ?`
+    const [rows, fields] = await pool.execute(
+      sql,
+      [gigId]
+    )
+    if (rows.length === 1) {
+      return rows[0].email;
+    } else {
+      throw new Error('Email not found')
+    }
+  } catch (error) {
+    throw error
+  }
+}
+
+async function getGigTitleId(gigId) {
+  try {
+    const sql = `SELECT g.title FROM gigs g WHERE g.id = ?`
+    const [rows, fields] = await pool.execute(
+      sql,
+      [gigId]
+    )
+    if (rows.length === 1) {
+      return rows[0].title;
+    } else {
+      throw new Error('Title not found')
+    }
+  } catch (error) {
+    throw error
+  }
+}
+
+async function acceptOffer(offerId) {
+  try {
+    console.log(offerId);
+
+    const sql = `UPDATE offers SET is_reviewed=1, is_accepted=1 WHERE id = ?`;
+    const [result] = await pool.execute(sql, [offerId]);
+
+    if (result.affectedRows === 1) {
+      console.log(`Offer with id ${offerId} accepted successfully.`);
+      return result.affectedRows;
+    } else {
+      throw new Error('Gig not found');
+    }
+
+  } catch (error) {
+    console.error(`Error accepting offer with id ${offerId}:`, error.message);
+    throw error; // Re-throwing the error to handle it at a higher level if needed
+  }
+}
+
+
+async function declineOffer(offerId) {
+  try {
+    console.log(offerId)
+    const sql = `UPDATE offers SET is_reviewed=1,is_declined=1 WHERE id = ?`
+    const [result] = await pool.execute(sql, [offerId]);
+
+    if (result.affectedRows === 1) {
+      console.log(`Offer with id ${offerId} accepted successfully.`);
+      return result.affectedRows;
+    } else {
+      throw new Error('Gig not found');
+    }
+
+  } catch (error) {
+    console.error(`Error accepting offer with id ${offerId}:`, error.message);
+    throw error; // Re-throwing the error to handle it at a higher level if needed
+  }
+}
+
+async function updateStatusAccept(offerId) {
+  try {
+    console.log(offerId)
+    const sql = `UPDATE hired SET status='ACCEPTED' WHERE offer_id = ?`
+    const [result] = await pool.execute(sql, [offerId]);
+
+    if (result.affectedRows === 1) {
+      console.log(`Offer with id ${offerId} accepted successfully.`);
+      return result.affectedRows;
+    } else {
+      throw new Error('Gig not found');
+    }
+
+  } catch (error) {
+    console.error(`Error accepting offer with id ${offerId}:`, error.message);
+    throw error; // Re-throwing the error to handle it at a higher level if needed
+  }
+}
+
+async function updateStatusCompleted(offerId) {
+  try {
+    console.log(offerId)
+    const sql = `UPDATE hired SET status='COMPLETED' WHERE offer_id = ?`
+    const [result] = await pool.execute(sql, [offerId]);
+
+    if (result.affectedRows === 1) {
+      console.log(`Offer with id ${offerId} accepted successfully.`);
+      return result.affectedRows;
+    } else {
+      throw new Error('Gig not found');
+    }
+
+  } catch (error) {
+    console.error(`Error accepting offer with id ${offerId}:`, error.message);
+    throw error; // Re-throwing the error to handle it at a higher level if needed
+  }
+}
+
+
+async function updateStatusReject(offerId) {
+  try {
+    console.log(offerId)
+    const sql = `UPDATE hired SET status='REJECTED' WHERE offer_id = ?`
+    const [result] = await pool.execute(sql, [offerId]);
+
+    if (result.affectedRows === 1) {
+      console.log(`Offer with id ${offerId} accepted successfully.`);
+      return result.affectedRows;
+    } else {
+      throw new Error('Gig not found');
+    }
+
+  } catch (error) {
+    console.error(`Error accepting offer with id ${offerId}:`, error.message);
+    throw error; // Re-throwing the error to handle it at a higher level if needed
+  }
+}
+
+
+async function updateHiredDate(offerId) {
+  try {
+    console.log(offerId)
+    const sql = `UPDATE hired SET hired_date=NOW() WHERE offer_id = ?`
+    const [result] = await pool.execute(sql, [offerId]);
+
+    if (result.affectedRows === 1) {
+      console.log(`Offer with id ${offerId} updated successfully.`);
+      return result.affectedRows;
+    } else {
+      throw new Error('Gig not found');
+    }
+
+  } catch (error) {
+    console.error(`Error accepting offer with id ${offerId}:`, error.message);
+    throw error; // Re-throwing the error to handle it at a higher level if needed
+  }
+}
+
+async function calculatePaymentAmt(gig_id) {
+  try {
+    console.log(gig_id)
+    const sql = `UPDATE hired h
+    INNER JOIN gigs g ON h.gig_id = g.id
+    SET h.amount = TIMESTAMPDIFF(HOUR, h.hired_date, NOW()) * g.hourly_rate
+    WHERE h.gig_id = ?`
+    const [result] = await pool.execute(sql, [gig_id]);
+
+    if (result.affectedRows === 1) {
+      console.log(`Offer with id ${gig_id} updated successfully.`);
+      return result.affectedRows;
+    } else {
+      throw new Error('Gig not found');
+    }
+
+  } catch (error) {
+    console.error(`Error accepting offer with id ${gig_id}:`, error.message);
+    throw error; // Re-throwing the error to handle it at a higher level if needed
+  }
+}
+
+async function getGigIdByOfferId(offerId) {
+  try {
+    const sql = `SELECT o.gig_id, o.client FROM offers o WHERE o.id = ?`
+    const [rows, fields] = await pool.execute(
+      sql,
+      [offerId]
+    )
+    if (rows.length === 1) {
+      return rows[0];
+    } else {
+      throw new Error('Title not found')
+    }
+  } catch (error) {
+    throw error
+  }
+}
+
 
 module.exports = {
   getGigById,
@@ -257,6 +468,16 @@ module.exports = {
   InsertReport,
   getPreviousGigById,
   getEditedGigById,
-  getApprovedGigById
-
+  getApprovedGigById,
+  getSingleNotApprovedGigById,
+  getFreelancerEmailId,
+  getGigTitleId,
+  acceptOffer,
+  declineOffer,
+  updateStatusAccept,
+  updateStatusCompleted,
+  updateStatusReject,
+  updateHiredDate,
+  calculatePaymentAmt,
+  getGigIdByOfferId
 }

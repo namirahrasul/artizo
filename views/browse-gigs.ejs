@@ -157,7 +157,7 @@
         <section class="campaigns">
 
           <!-- Page Content -->
-          <div class="container mt-4 vh-100">
+          <div class="container mt-4 ">
             <div>
               <p class="gap"></p>
               <% if(gigs.length==0) { %>
@@ -196,8 +196,19 @@
                                             </b></a></p>
                                 </div>
                                 
-                                <a href="/browse-gigs/<%= gigs[j].id %>" class="btn btn-dark mb-2 mt-2 ">Learn More</a>
-                                <div class="stats d-flex">
+                                <a href="/browse-gigs/<%= gigs[j].id %>" class="btn learn-more mb-2 mt-2 ">Learn More</a>
+                                <div class="stats">
+                                  <div class="row align-items-center ">
+                                    <div class="col-6">
+                                      <div class="text-center fs-sm-5 star-rating" data-rating="<%= gigs[j].rating %>">
+                                  
+                                        <!-- This element will be used by the star rating script -->
+                                      </div>
+                                    </div>
+                                    <div class="col-6 rating">
+                                      <%= gigs[j].rating %>/5
+                                    </div>
+                                  </div>
                                   <div class="row">
                                     
                                   
@@ -207,17 +218,7 @@
                                     <span style="padding-right: 0.8rem">Tk <%= gigs[j].hourly_rate %>/hr</span>
                                   </div>
                                   </div>
-                                  <div class="row">
-                                  <div class="col-8">
-                                  <div class="text-center fs-sm-5 star-rating" data-rating="<%= gigs[j].rating %>">
-                                    
-                                      <!-- This element will be used by the star rating script -->
-                                  </div>
-                                  </div>
-                                  <div class="col-4">
-                                 <%= gigs[j].rating %>/5
-                                    </div>
-                                  </div>
+                                  
                                   <div class="row">
                                   <p class="text-center fs-sm-5">
                                     <i class="fas fa-users" style="padding-right: 0.2rem"></i>

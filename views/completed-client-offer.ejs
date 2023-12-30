@@ -4,47 +4,53 @@
 
 <%- include('head.ejs', { title: 'Client Offer' , stylesheet: '/css/completed-client-offer.css' }) %>
 
-<body>
-  <%-include('navbar.ejs', {user: user})%>
+  <body>
+    <%-include('navbar.ejs', {user: user})%>
 
- <div class="container">
+      <div class="container">
 
-  <div class="dash-content">
-
-
-   <h1 class="Clienttext">CLIENT OFFER</h1>
-   <br><br>
+        <div class="dash-content">
 
 
-   <div class="main-skills">
-    <label for="wordDescription" class="TextSize">Word Description <span class="required-indicator"></span></label>
-    <%=offer.description%>
-    <br>
-    <br>
-
-    <label for="numberOfWork" class="TextSize">Estimate the number of work<span
-      class="required-indicator"></span></label>
-    <%=offer.hours%>
-
-    <br>
-    <br>
-
-    <label for="requiredMaterials" class="TextSize">Required Materials</label>
-    <%=offer.material%>
-
-    <br>
-    <br>
-
-    <label for="additionalComments" class="TextSize">Additional Comments</label>
-      <%=offer.comments%>
-   </div>
+          <h1 class="Clienttext">CLIENT OFFER</h1>
+          <br><br>
 
 
-  </div>
+          <div class="main-skills">
+            <label for="wordDescription" class="TextSize">Word Description <span
+                class="required-indicator"></span></label>
+            <%=offer.description%>
+              <br>
+              <br>
 
 
- </div>
+              <label for="numberOfWork" class="TextSize">Estimate the number of work<span
+                  class="required-indicator"></span></label>
+              <%=offer.hours%>
 
-</body>
+                <br>
+                <br>
+
+
+                <label for="requiredMaterials" class="TextSize">Required Materials</label>
+                <% if(offer.material){ %>
+                  <a href='/uploads/<%=offer.material%>' target="_blank">View Material</a>
+                  <% } else { %>
+                    <p>None</p>
+                    <% } %>
+
+
+
+                      <label for="additionalComments" class="TextSize">Additional Comments</label>
+                      <%=offer.comments%>
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+  </body>
 
 </html>

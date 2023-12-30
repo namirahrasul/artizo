@@ -1,0 +1,96 @@
+@import 'home.css';
+/* Button styles */
+.paybtn {
+    /* padding: 10px 20px; */
+    margin: 0px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: #4caf50; /* Green */
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .paybtn:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
+  .dangerbtn {
+    /* padding: 10px 20px; */
+    margin: 0px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: #f44336; /* Red */
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dangerbtn:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+  }
+  
+  /* Link styles */
+  .dangerbtn a {
+    text-decoration: none;
+    color: white;
+  }
+  
+.paybcontainer{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.856);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.popup{
+    width: auto;
+    height: auto;
+    background-color: rgb(71, 174, 176);
+    border-radius: 6px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: #000000;
+    box-shadow: #000000;
+}
+
+
+
+
+.inputts{
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.popup button{
+    width: 100%;
+    height: 50px;
+    margin-top: 30px;
+    padding: 10px 0;
+    background-color: #031530;
+    color: #fff;
+    border-radius: 4px;
+    border: 0;
+    outline: none;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.10);
+}
+
+.bolded{
+    font-size: large;
+    font-weight: bold;
+}
+

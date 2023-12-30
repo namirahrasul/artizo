@@ -1,19 +1,21 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+@import 'home.css';
+body {
+
+  /* background: linear-gradient(to bottom, #DFEDDC, #163A1E); */
+  background: linear-gradient(180deg, #DFEDDC,#16A085, #3F6263);
 }
 
-.container{
+.container {
     width: 100%;
-    height: 100vh;
-    background-color: rgba(206, 204, 204, 0.836);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
+    height: 80%;
+    margin-top: 35%;
+    margin-bottom: 10%;
+    padding: 20px;
+    border-radius: 8px;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  
 .success-btn{
     padding: 10px 60px;
     background: #0c2f39;
@@ -28,7 +30,7 @@
 
 .popup{
     width: 400px;
-    background-color: rgb(71, 174, 176);
+    background-color: rgb(255, 255, 255);
     border-radius: 6px;
     position: absolute;
     top: 50%;

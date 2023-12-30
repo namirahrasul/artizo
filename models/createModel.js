@@ -1,8 +1,6 @@
 
 const mysql = require('mysql2')
 
-// const upload = multer({ dest: 'uploads/' });
-
 const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
@@ -190,7 +188,7 @@ function insertEditNotif(
 
 
     // SQL query to insert user information and unique image path
-
+    
     const sql2 = 'INSERT INTO notifs (gig_id,email,type,description) VALUES (?, ?,?,?)';
 
 
@@ -198,7 +196,7 @@ function insertEditNotif(
     connection.query(
       sql2,
       [
-        gig_id, email, "edit", `Your edit on gig <span class="notifcontent-submit">${title}</span> has been submitted for review.`
+        gig_id, email, "edit", `Your edit request has been submitted for review.`
       ],
       (queryErr, result) => {
         // Release the connection whether there was an error or not
@@ -253,7 +251,330 @@ function updateExistingGig(
     )
   })
 }
+ function insertOffer(
+  req,
+  gigId,
+  email,
+  description,
+  hours,
+  materials,
+  comments,
+  callback
+) {
+   console.log("gigId", gigId)
+   console.log("email", email)
+   console.log("description", description)
+   console.log("hours", hours)
+   console.log("materials", materials)
+   console.log("comments", comments)
 
+  // Get a connection from the pool
+  pool.getConnection((connectionErr, connection) => {
+    if (connectionErr) {
+      callback(connectionErr)
+      return
+    }
+
+
+    // SQL query to insert user information and unique image path
+    const sql2 =
+      'INSERT INTO offers ( gig_id, client , description, hours, material, comments) VALUES (?, ?, ?, ?, ?, ?)'
+
+    // Execute the query with user information and unique image path
+    connection.query(
+      sql2,
+      [
+        gigId,
+        email,
+        description,
+        hours,
+        materials,
+        comments,
+      ],
+      (queryErr, result) => {
+        // Release the connection whether there was an error or not
+        connection.release()
+
+        if (queryErr) {
+          callback(queryErr)
+          return
+        }
+
+        callback(null, result)
+      }
+    )
+  })
+}
+
+
+function insertHired(
+  req,
+  gigId,
+  email,
+  offer_id,
+  callback
+) {
+  console.log(req.file)
+  console.log(req.body)
+
+  // Get a connection from the pool
+  pool.getConnection((connectionErr, connection) => {
+    if (connectionErr) {
+      callback(connectionErr)
+      return
+    }
+
+
+    // SQL query to insert user information and unique image path
+    const sql2 =
+      'INSERT INTO hired ( gig_id, client , offer_id) VALUES (?, ?, ?)'
+
+    // Execute the query with user information and unique image path
+    connection.query(
+      sql2,
+      [
+        gigId,
+        email,
+        offer_id,
+      ],
+      (queryErr, result) => {
+        // Release the connection whether there was an error or not
+        connection.release()
+
+        if (queryErr) {
+          callback(queryErr)
+          return
+        }
+
+        callback(null, result)
+      }
+    )
+  })
+}
+
+
+function insertOfferNotif(
+  req,
+  email,
+  gig_id,
+  title,
+  callback
+) {
+  console.log(req.file)
+  console.log(req.body)
+
+  // Get a connection from the pool
+  pool.getConnection((connectionErr, connection) => {
+    if (connectionErr) {
+      callback(connectionErr)
+      return
+    }
+
+
+    // SQL query to insert user information and unique image path
+
+    const sql2 = 'INSERT INTO notifs (gig_id,email,type,description) VALUES (?, ?,?,?)';
+
+
+    // Execute the query with user information and unique image path
+    connection.query(
+      sql2,
+      [
+        gig_id, email, "offer", `Your offer to gig <a class="notifcontent" href="/browse-gigs/${gig_id}">${title}</a> has been successfully submitted`
+      ],
+      (queryErr, result) => {
+        // Release the connection whether there was an error or not
+        connection.release()
+
+        if (queryErr) {
+          callback(queryErr)
+          return
+        }
+
+        callback(null, result)
+      }
+    )
+  })
+}
+
+function insertHiredNotif(
+  req,
+  email,
+  gig_id,
+  title,
+  callback
+) {
+  console.log(req.file)
+  console.log(req.body)
+
+  // Get a connection from the pool
+  pool.getConnection((connectionErr, connection) => {
+    if (connectionErr) {
+      callback(connectionErr)
+      return
+    }
+
+
+    // SQL query to insert user information and unique image path
+
+    const sql2 = 'INSERT INTO notifs (gig_id,email,type,description) VALUES (?, ?,?,?)';
+
+
+    // Execute the query with user information and unique image path
+    connection.query(
+      sql2,
+      [
+        gig_id, email, "hired", `Your gig <a class="notifcontent" href="/browse-gigs/${gig_id}">${title}</a> has received an offer`
+      ],
+      (queryErr, result) => {
+        // Release the connection whether there was an error or not
+        connection.release()
+
+        if (queryErr) {
+          callback(queryErr)
+          return
+        }
+
+        callback(null, result)
+      }
+    )
+  })
+}
+
+
+function insertAcceptNotif(
+  req,
+  email,
+  gig_id,
+  title,
+  callback
+) {
+  console.log(req.file)
+  console.log(req.body)
+
+  // Get a connection from the pool
+  pool.getConnection((connectionErr, connection) => {
+    if (connectionErr) {
+      callback(connectionErr)
+      return
+    }
+
+
+    // SQL query to insert user information and unique image path
+
+    const sql2 = 'INSERT INTO notifs (gig_id,email,type,description) VALUES (?,?,?,?)';
+
+
+    // Execute the query with user information and unique image path
+    connection.query(
+      sql2,
+      [
+        gig_id, email, "accepted", `Your offer to gig <a class="notifcontent" href="/browse-gigs/${gig_id}">${title}</a> has been accepted`
+      ],
+      (queryErr, result) => {
+        // Release the connection whether there was an error or not
+        connection.release()
+
+        if (queryErr) {
+          callback(queryErr)
+          return
+        }
+
+        callback(null, result)
+      }
+    )
+  })
+}
+
+
+function insertRejectNotif(
+  req,
+  email,
+  gig_id,
+  title,
+  callback
+) {
+  console.log(req.file)
+  console.log(req.body)
+
+  // Get a connection from the pool
+  pool.getConnection((connectionErr, connection) => {
+    if (connectionErr) {
+      callback(connectionErr)
+      return
+    }
+
+
+    // SQL query to insert user information and unique image path
+
+    const sql2 = 'INSERT INTO notifs (gig_id,email,type,description) VALUES (?,?,?,?)';
+
+
+    // Execute the query with user information and unique image path
+    connection.query(
+      sql2,
+      [
+        gig_id, email, "rejected", `Sorry!! Your offer to gig <a class="notifcontent" href="/browse-gigs/${gig_id}">${title}</a> has been rejected`
+      ],
+      (queryErr, result) => {
+        // Release the connection whether there was an error or not
+        connection.release()
+
+        if (queryErr) {
+          callback(queryErr)
+          return
+        }
+
+        callback(null, result)
+      }
+    )
+  })
+}
+
+
+function insertCompletedNotif(
+  req,
+  email,
+  gig_id,
+  title,
+  callback
+) {
+  console.log(req.file)
+  console.log(req.body)
+
+  // Get a connection from the pool
+  pool.getConnection((connectionErr, connection) => {
+    if (connectionErr) {
+      callback(connectionErr)
+      return
+    }
+
+
+    // SQL query to insert user information and unique image path
+
+    const sql2 = 'INSERT INTO notifs (gig_id,email,type,description) VALUES (?,?,?,?)';
+
+
+    // Execute the query with user information and unique image path
+    connection.query(
+      sql2,
+      [
+        gig_id, email, "completed", `The freelancer for gig <a class="notifcontent" href="/browse-gigs/${gig_id}">${title}</a> has been completed their work`
+      ],
+      (queryErr, result) => {
+        // Release the connection whether there was an error or not
+        connection.release()
+
+        if (queryErr) {
+          callback(queryErr)
+          return
+        }
+
+        callback(null, result)
+      }
+    )
+  })
+}
   
 
 module.exports = {
@@ -261,5 +582,13 @@ module.exports = {
   insertCreateNotif,
   insertEditGig,
   insertEditNotif,
-  updateExistingGig
+  updateExistingGig,
+  insertOffer,
+  insertHired,
+  insertOfferNotif,
+  insertHiredNotif,
+  insertAcceptNotif,
+  insertRejectNotif,
+  insertCompletedNotif
+  
 }
