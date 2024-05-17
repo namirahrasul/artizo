@@ -1,0 +1,199 @@
+delete_gigs
+
+CREATE TABLE `delete_gigs` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `gig_id` int DEFAULT NULL,
+  `reason` varchar(1000) DEFAULT NULL,
+  `is_reviewed` tinyint(1) DEFAULT '0',
+  `is_approved` tinyint(1) DEFAULT '0',
+  `is_declined` tinyint(1) DEFAULT '0',
+  `time` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+edit_gigs
+
+CREATE TABLE `edit_gigs` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `old_id` int DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `title` varchar(200) DEFAULT NULL,
+  `category` varchar(100) DEFAULT NULL,
+  `description` varchar(2000) DEFAULT NULL,
+  `gig_img` varchar(200) DEFAULT NULL,
+  `gig_video` varchar(200) DEFAULT NULL,
+  `hourly_rate` double DEFAULT NULL,
+  `bsb` varchar(45) DEFAULT NULL,
+  `account` varchar(45) DEFAULT NULL,
+  `bkash` varchar(45) DEFAULT NULL,
+  `rocket` varchar(45) DEFAULT NULL,
+  `nagad` varchar(45) DEFAULT NULL,
+  `upay` varchar(45) DEFAULT NULL,
+  `no_followers` int DEFAULT '0',
+  `no_customers` int DEFAULT '0',
+  `rating` double DEFAULT '0',
+  `is_deleted` tinyint(1) DEFAULT '0',
+  `certifications_achievements` varchar(200) DEFAULT NULL,
+  `testimonials` varchar(200) DEFAULT NULL,
+  `previous_work` varchar(200) DEFAULT NULL,
+  `is_reviewed` tinyint(1) DEFAULT '0',
+  `is_approved` tinyint(1) DEFAULT '0',
+  `is_declined` tinyint(1) DEFAULT '0',
+  `time` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+follow
+
+CREATE TABLE `follow` (
+  `fid` int NOT NULL AUTO_INCREMENT,
+  `follower` varchar(100) DEFAULT NULL,
+  `gig_id` int DEFAULT NULL,
+  `ftime` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`fid`)
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+gigs
+
+CREATE TABLE `gigs` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) DEFAULT NULL,
+  `title` varchar(200) DEFAULT NULL,
+  `category` varchar(100) DEFAULT NULL,
+  `description` varchar(2000) DEFAULT NULL,
+  `gig_img` varchar(200) DEFAULT NULL,
+  `gig_video` varchar(200) DEFAULT NULL,
+  `hourly_rate` double DEFAULT NULL,
+  `bsb` varchar(45) DEFAULT NULL,
+  `account` varchar(45) DEFAULT NULL,
+  `bkash` varchar(45) DEFAULT NULL,
+  `rocket` varchar(45) DEFAULT NULL,
+  `nagad` varchar(45) DEFAULT NULL,
+  `upay` varchar(45) DEFAULT NULL,
+  `is_reviewed` tinyint(1) DEFAULT '0',
+  `no_followers` int DEFAULT '0',
+  `no_customers` int DEFAULT '0',
+  `rating` double DEFAULT '0',
+  `is_deleted` tinyint(1) DEFAULT '0',
+  `certifications_achievements` varchar(200) DEFAULT NULL,
+  `testimonials` varchar(200) DEFAULT NULL,
+  `previous_work` varchar(200) DEFAULT NULL,
+  `is_approved` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+hired
+
+CREATE TABLE `hired` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `gig_id` int DEFAULT NULL,
+  `client` varchar(100) DEFAULT NULL,
+  `status` varchar(50) DEFAULT 'PENDING',
+  `hired_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `offer_id` int DEFAULT NULL,
+  `amount` double DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+notifs
+
+CREATE TABLE `notifs` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `email` varchar(100) DEFAULT NULL,
+  `type` varchar(100) DEFAULT NULL,
+  `gig_id` int DEFAULT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+offers
+
+CREATE TABLE `offers` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `gig_id` int DEFAULT NULL,
+  `client` varchar(200) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
+  `hours` int DEFAULT NULL,
+  `material` varchar(200) DEFAULT NULL,
+  `comments` varchar(45) DEFAULT NULL,
+  `time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `is_reviewed` tinyint(1) DEFAULT '0',
+  `is_accepted` tinyint(1) DEFAULT '0',
+  `is_declined` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+reports
+
+CREATE TABLE `reports` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `gig_id` int DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `title` varchar(200) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
+  `evidence` varchar(200) DEFAULT NULL,
+  `time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `is_reviewed` tinyint(1) DEFAULT '0',
+  `is_approved` tinyint(1) DEFAULT '0',
+  `is_declined` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+sessions
+
+CREATE TABLE `sessions` (
+  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `expires` int unsigned NOT NULL,
+  `data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+transaction
+
+CREATE TABLE `transaction` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `offer_id` int DEFAULT NULL,
+  `amount` double DEFAULT NULL,
+  `gig_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+users
+
+CREATE TABLE `users` (
+  `email` varchar(100) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email_verified` tinyint(1) DEFAULT '0',
+  `is_admin` tinyint(1) DEFAULT '0',
+  `profile_img` varchar(200) DEFAULT NULL,
+  `occupation` varchar(100) DEFAULT NULL,
+  `years_of_experience` int DEFAULT NULL,
+  `resume` varchar(200) DEFAULT NULL,
+  `bio_description` varchar(2000) DEFAULT NULL,
+  `work_description` varchar(2000) DEFAULT NULL,
+  `institute_name` varchar(200) DEFAULT NULL,
+  `institute_country` varchar(200) DEFAULT NULL,
+  `graduation_year` varchar(10) DEFAULT NULL,
+  `study_field` varchar(100) DEFAULT NULL,
+  `institute_certificate` varchar(200) DEFAULT NULL,
+  `fb_url` varchar(100) DEFAULT NULL,
+  `twitter_url` varchar(100) DEFAULT NULL,
+  `yt_url` varchar(100) DEFAULT NULL,
+  `website_url` varchar(100) DEFAULT NULL,
+  `is_blocked` tinyint(1) DEFAULT '0',
+  `phone` varchar(11) DEFAULT NULL,
+  PRIMARY KEY (`email`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+verification_tokens
+
+CREATE TABLE `verification_tokens` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(36) NOT NULL,
+  `expiration_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
